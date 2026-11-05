@@ -1,0 +1,1033 @@
+{
+ "RECTS": [
+  {
+   "x": 0,
+   "y": 0,
+   "w": 2720,
+   "h": 28
+  },
+  {
+   "x": 0,
+   "y": 2212,
+   "w": 2720,
+   "h": 28
+  },
+  {
+   "x": 0,
+   "y": 0,
+   "w": 28,
+   "h": 2240
+  },
+  {
+   "x": 2692,
+   "y": 0,
+   "w": 28,
+   "h": 2240
+  },
+  {
+   "x": 520,
+   "y": 1400,
+   "w": 480,
+   "h": 352
+  },
+  {
+   "x": 120,
+   "y": 1460,
+   "w": 300,
+   "h": 240
+  },
+  {
+   "x": 560,
+   "y": 1040,
+   "w": 460,
+   "h": 200
+  },
+  {
+   "x": 28,
+   "y": 1294,
+   "w": 402,
+   "h": 12
+  },
+  {
+   "x": 530,
+   "y": 1294,
+   "w": 656,
+   "h": 12
+  },
+  {
+   "x": 1174,
+   "y": 1300,
+   "w": 12,
+   "h": 580
+  },
+  {
+   "x": 1174,
+   "y": 1980,
+   "w": 12,
+   "h": 232
+  },
+  {
+   "x": 28,
+   "y": 834,
+   "w": 402,
+   "h": 8
+  },
+  {
+   "x": 530,
+   "y": 834,
+   "w": 2162,
+   "h": 8
+  },
+  {
+   "x": 28,
+   "y": 978,
+   "w": 402,
+   "h": 8
+  },
+  {
+   "x": 530,
+   "y": 978,
+   "w": 2162,
+   "h": 8
+  },
+  {
+   "x": 1300,
+   "y": 1480,
+   "w": 340,
+   "h": 250
+  },
+  {
+   "x": 1660,
+   "y": 1640,
+   "w": 108,
+   "h": 56
+  },
+  {
+   "x": 50,
+   "y": 1960,
+   "w": 280,
+   "h": 200
+  },
+  {
+   "x": 1840,
+   "y": 1300,
+   "w": 800,
+   "h": 256
+  },
+  {
+   "x": 1830,
+   "y": 1556,
+   "w": 12,
+   "h": 254
+  },
+  {
+   "x": 2638,
+   "y": 1556,
+   "w": 12,
+   "h": 254
+  },
+  {
+   "x": 1830,
+   "y": 1798,
+   "w": 350,
+   "h": 12
+  },
+  {
+   "x": 2300,
+   "y": 1798,
+   "w": 350,
+   "h": 12
+  },
+  {
+   "x": 2445,
+   "y": 1592,
+   "w": 72,
+   "h": 66
+  },
+  {
+   "x": 700,
+   "y": 130,
+   "w": 176,
+   "h": 96
+  },
+  {
+   "x": 735,
+   "y": 452,
+   "w": 110,
+   "h": 56
+  },
+  {
+   "x": 236,
+   "y": 536,
+   "w": 170,
+   "h": 56
+  },
+  {
+   "x": 1250,
+   "y": 300,
+   "w": 110,
+   "h": 62
+  },
+  {
+   "x": 520,
+   "y": 2030,
+   "w": 140,
+   "h": 20
+  },
+  {
+   "x": 520,
+   "y": 2030,
+   "w": 20,
+   "h": 130
+  },
+  {
+   "x": 520,
+   "y": 2140,
+   "w": 140,
+   "h": 20
+  },
+  {
+   "x": 940,
+   "y": 2160,
+   "w": 112,
+   "h": 26
+  },
+  {
+   "x": 1000,
+   "y": 620,
+   "w": 112,
+   "h": 26
+  }
+ ],
+ "POSTS": [
+  {
+   "x": 1080,
+   "y": 630,
+   "r": 8
+  },
+  {
+   "x": 1220,
+   "y": 630,
+   "r": 8
+  },
+  {
+   "x": 1060,
+   "y": 330,
+   "r": 46
+  },
+  {
+   "x": 560,
+   "y": 380,
+   "r": 12
+  },
+  {
+   "x": 546,
+   "y": 822,
+   "r": 6
+  },
+  {
+   "x": 414,
+   "y": 994,
+   "r": 6
+  }
+ ],
+ "PEDS": [
+  {
+   "x": 546,
+   "y": 822
+  },
+  {
+   "x": 414,
+   "y": 994
+  }
+ ],
+ "ARAU": {
+  "x": 560,
+  "y": 380
+ },
+ "SHOPS": [
+  {
+   "x": 645,
+   "y": 1258,
+   "text": "Miam, des croissants !"
+  },
+  {
+   "x": 791,
+   "y": 1258,
+   "text": "Bip ! Bip !"
+  },
+  {
+   "x": 936,
+   "y": 1258,
+   "text": "La pharmacie soigne les bobos !"
+  }
+ ],
+ "TREES": [
+  {
+   "x": 150,
+   "y": 200,
+   "seed": 0,
+   "bloom": false
+  },
+  {
+   "x": 1250,
+   "y": 170,
+   "seed": 1.7,
+   "bloom": true
+  },
+  {
+   "x": 1450,
+   "y": 500,
+   "seed": 3.4,
+   "bloom": false
+  },
+  {
+   "x": 950,
+   "y": 740,
+   "seed": 5.1,
+   "bloom": false
+  },
+  {
+   "x": 200,
+   "y": 740,
+   "seed": 6.8,
+   "bloom": false
+  },
+  {
+   "x": 1480,
+   "y": 240,
+   "seed": 8.5,
+   "bloom": true
+  },
+  {
+   "x": 100,
+   "y": 1360,
+   "seed": 10.2,
+   "bloom": false
+  },
+  {
+   "x": 1100,
+   "y": 1420,
+   "seed": 11.9,
+   "bloom": false
+  },
+  {
+   "x": 1110,
+   "y": 1700,
+   "seed": 13.6,
+   "bloom": false
+  },
+  {
+   "x": 300,
+   "y": 1860,
+   "seed": 15.299999999999999,
+   "bloom": true
+  },
+  {
+   "x": 1060,
+   "y": 2100,
+   "seed": 17,
+   "bloom": false
+  },
+  {
+   "x": 230,
+   "y": 1790,
+   "seed": 18.7,
+   "bloom": false
+  },
+  {
+   "x": 1110,
+   "y": 2010,
+   "seed": 20.4,
+   "bloom": false
+  },
+  {
+   "x": 1250,
+   "y": 1380,
+   "seed": 22.099999999999998,
+   "bloom": true
+  },
+  {
+   "x": 1720,
+   "y": 1400,
+   "seed": 23.8,
+   "bloom": false
+  },
+  {
+   "x": 2650,
+   "y": 1950,
+   "seed": 25.5,
+   "bloom": false
+  },
+  {
+   "x": 1800,
+   "y": 1100,
+   "seed": 27.2,
+   "bloom": false
+  },
+  {
+   "x": 2200,
+   "y": 1150,
+   "seed": 28.9,
+   "bloom": true
+  },
+  {
+   "x": 2600,
+   "y": 1150,
+   "seed": 30.599999999999998,
+   "bloom": false
+  },
+  {
+   "x": 2000,
+   "y": 520,
+   "seed": 32.3,
+   "bloom": false
+  },
+  {
+   "x": 2400,
+   "y": 400,
+   "seed": 34,
+   "bloom": false
+  },
+  {
+   "x": 1800,
+   "y": 300,
+   "seed": 35.699999999999996,
+   "bloom": true
+  }
+ ],
+ "CARS": [
+  {
+   "x": -87.11663520104611,
+   "lane": 0,
+   "color": "#4f8fd8",
+   "v": 169.82853157643348,
+   "bounce": 0,
+   "siren": 0,
+   "honkT": 0
+  },
+  {
+   "x": 1112.8833647989538,
+   "lane": 0,
+   "color": "#f2b440",
+   "v": 169.82853157643348,
+   "bounce": 0,
+   "siren": 0,
+   "honkT": 0
+  },
+  {
+   "x": 1287.1166352010457,
+   "lane": 1,
+   "color": "#e04a3a",
+   "fire": true,
+   "v": 169.82853157643348,
+   "bounce": 0,
+   "siren": 0,
+   "honkT": 0
+  },
+  {
+   "x": 2587.1166352010455,
+   "lane": 1,
+   "color": "#6cc36a",
+   "v": 169.82853157643348,
+   "bounce": 0,
+   "siren": 0,
+   "honkT": 0
+  }
+ ],
+ "LANES": [
+  882,
+  942
+ ],
+ "METRO": {
+  "x": 788,
+  "y": 262
+ },
+ "RONCES": [
+  {
+   "x": 2210,
+   "y": 1804,
+   "r": 36,
+   "tag": "gate",
+   "burning": 0,
+   "gone": false
+  },
+  {
+   "x": 2272,
+   "y": 1804,
+   "r": 36,
+   "tag": "gate",
+   "burning": 0,
+   "gone": false
+  },
+  {
+   "x": 1350,
+   "y": 250,
+   "r": 28,
+   "tag": "fun",
+   "burning": 0,
+   "gone": false
+  },
+  {
+   "x": 190,
+   "y": 1885,
+   "r": 30,
+   "tag": "fun",
+   "burning": 0,
+   "gone": false
+  },
+  {
+   "x": 1120,
+   "y": 1150,
+   "r": 30,
+   "tag": "fun",
+   "burning": 0,
+   "gone": false
+  }
+ ],
+ "BUSH": {
+  "x": 1714,
+  "y": 1716,
+  "r": 8,
+  "open": false,
+  "rustle": 0
+ },
+ "ITEMS": [
+  {
+   "key": "t1",
+   "x": 2398,
+   "y": 1709,
+   "color": "#a679d8",
+   "owner": "Iris",
+   "ownerId": "iris",
+   "slot": 0,
+   "found": false,
+   "hidden": false
+  },
+  {
+   "key": "t2",
+   "x": 1688,
+   "y": 1746,
+   "color": "#f08a4b",
+   "owner": "Victorine",
+   "ownerId": "victorine",
+   "slot": 1,
+   "found": false,
+   "hidden": true
+  },
+  {
+   "key": "t3",
+   "x": 595,
+   "y": 2095,
+   "color": "#e4567b",
+   "owner": "Léonie",
+   "ownerId": "leonie",
+   "slot": 2,
+   "found": false,
+   "hidden": false
+  }
+ ],
+ "HURT": [
+  {
+   "id": "herisson",
+   "x": 688,
+   "y": 2095,
+   "r": 26,
+   "hurt": true,
+   "healing": false,
+   "face": -1,
+   "noticed": false,
+   "ouch": 0,
+   "walk": null,
+   "phase": 0,
+   "moving": false
+  },
+  {
+   "id": "oiseau",
+   "x": 640,
+   "y": 640,
+   "r": 12,
+   "hurt": true,
+   "healing": false,
+   "face": 1,
+   "noticed": false,
+   "ouch": 0,
+   "fly": null,
+   "perch": {
+    "x": 566,
+    "y": 236
+   },
+   "sing": 3,
+   "phase": 0,
+   "moving": false
+  }
+ ],
+ "NPCS": [
+  {
+   "id": "leonie",
+   "x": 600,
+   "y": 1880,
+   "dir": "down",
+   "first": "Salut Ulysse ! Le dinosaure a pris ma trottinette rose ! Il est parti vers l'aire de jeux, juste derrière nous !",
+   "again": null
+  },
+  {
+   "id": "elisa",
+   "x": 404,
+   "y": 1866,
+   "dir": "down",
+   "first": null,
+   "again": "Moi aussi, un jour, j'irai au Raptor Parc !"
+  },
+  {
+   "id": "lucia",
+   "x": 356,
+   "y": 1878,
+   "dir": "down",
+   "first": "Coucou Sacha ! Coucou Ninou !",
+   "again": "Ninou, elle est toute douce !"
+  },
+  {
+   "id": "helena",
+   "x": 1060,
+   "y": 1880,
+   "dir": "down",
+   "first": "Coucou Ulysse ! Le dinosaure avait un gros sac plein de jouets !",
+   "again": "On se voit demain en classe !"
+  },
+  {
+   "id": "maya",
+   "x": 560,
+   "y": 1990,
+   "dir": "right",
+   "first": "Fais une boule de feu, Ulysse ! Wouah !",
+   "again": "Encore une boule de feu !"
+  },
+  {
+   "id": "iris",
+   "x": 2126,
+   "y": 1844,
+   "dir": "right",
+   "first": "Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
+   "again": null
+  },
+  {
+   "id": "prune",
+   "x": 2120,
+   "y": 1624,
+   "dir": "down",
+   "first": "Coucou Sacha ! Coucou Bibou ! Il est tout doux, Bibou !",
+   "again": "Je peux faire un câlin à Ninou ?"
+  },
+  {
+   "id": "mahe",
+   "x": 2322,
+   "y": 1674,
+   "dir": "down",
+   "first": "Super-héros ! Tu as brûlé les ronces ! Trop fort !",
+   "again": "Tu reviens jouer dans la cour ?"
+  },
+  {
+   "id": "nanou",
+   "x": 1430,
+   "y": 1784,
+   "dir": "down",
+   "first": "Bonjour Ulysse ! Bonjour mon petit Sacha ! Regardez Bibou, il renifle sous le local à vélos !",
+   "again": "Faites attention à vous, les super-héros !"
+  },
+  {
+   "id": "victorine",
+   "x": 1530,
+   "y": 1792,
+   "dir": "down",
+   "first": "Sacha ! Le dinosaure a caché ma trottinette orange près des vélos !",
+   "again": null
+  }
+ ],
+ "LAMPS": [
+  {
+   "x": 200,
+   "y": 812
+  },
+  {
+   "x": 760,
+   "y": 812
+  },
+  {
+   "x": 1150,
+   "y": 812
+  },
+  {
+   "x": 1600,
+   "y": 812
+  },
+  {
+   "x": 2100,
+   "y": 812
+  },
+  {
+   "x": 2550,
+   "y": 812
+  },
+  {
+   "x": 300,
+   "y": 1006
+  },
+  {
+   "x": 800,
+   "y": 1006
+  },
+  {
+   "x": 1300,
+   "y": 1006
+  },
+  {
+   "x": 1900,
+   "y": 1006
+  },
+  {
+   "x": 2400,
+   "y": 1006
+  },
+  {
+   "x": 600,
+   "y": 700
+  },
+  {
+   "x": 900,
+   "y": 700
+  },
+  {
+   "x": 1600,
+   "y": 1990
+  },
+  {
+   "x": 2000,
+   "y": 1990
+  },
+  {
+   "x": 2500,
+   "y": 1990
+  }
+ ],
+ "MAILBOX": {
+  "x": 960,
+  "y": 1790
+ },
+ "BFLY": [
+  {
+   "cx": 300,
+   "cy": 300,
+   "ph": 0,
+   "col": "#ffd25a"
+  },
+  {
+   "cx": 700,
+   "cy": 650,
+   "ph": 1.3,
+   "col": "#ff9ec0"
+  },
+  {
+   "cx": 1100,
+   "cy": 520,
+   "ph": 2.6,
+   "col": "#9fd0f5"
+  },
+  {
+   "cx": 1400,
+   "cy": 700,
+   "ph": 3.9000000000000004,
+   "col": "#ffffff"
+  },
+  {
+   "cx": 300,
+   "cy": 1800,
+   "ph": 5.2,
+   "col": "#ffd25a"
+  },
+  {
+   "cx": 1080,
+   "cy": 1600,
+   "ph": 6.5,
+   "col": "#ff9ec0"
+  },
+  {
+   "cx": 800,
+   "cy": 2050,
+   "ph": 7.800000000000001,
+   "col": "#9fd0f5"
+  },
+  {
+   "cx": 1500,
+   "cy": 1300,
+   "ph": 9.1,
+   "col": "#ffffff"
+  },
+  {
+   "cx": 2000,
+   "cy": 1950,
+   "ph": 10.4,
+   "col": "#ffd25a"
+  }
+ ],
+ "P": {
+  "x": 760,
+  "y": 1810
+ },
+ "F": {
+  "sacha": {
+   "x": 760,
+   "y": 1846,
+   "idx": 16
+  },
+  "didou": {
+   "x": 760,
+   "y": 1876,
+   "idx": 32
+  },
+  "bibou": {
+   "x": 760,
+   "y": 1906,
+   "idx": 48
+  },
+  "ninou": {
+   "x": 760,
+   "y": 1860,
+   "idx": 26
+  },
+  "papa": {
+   "x": 630,
+   "y": 1830,
+   "idx": 70
+  },
+  "maman": {
+   "x": 890,
+   "y": 1830,
+   "idx": 92
+  }
+ },
+ "RAMPS": [
+  {
+   "x": 480,
+   "y": 1500
+  },
+  {
+   "x": 480,
+   "y": 1160
+  },
+  {
+   "x": 480,
+   "y": 720
+  }
+ ],
+ "CH_WP": [
+  [
+   480,
+   1640
+  ],
+  [
+   480,
+   1040
+  ],
+  [
+   480,
+   1004
+  ],
+  [
+   480,
+   822
+  ],
+  [
+   480,
+   640
+  ],
+  [
+   680,
+   560
+  ],
+  [
+   672,
+   486
+  ],
+  [
+   710,
+   418
+  ],
+  [
+   790,
+   394
+  ],
+  [
+   790,
+   300
+  ],
+  [
+   788,
+   262
+  ]
+ ],
+ "CHEER": {
+  "leonie": {
+   "x": 410,
+   "y": 1770,
+   "dir": "right"
+  },
+  "victorine": {
+   "x": 562,
+   "y": 1352,
+   "dir": "down"
+  },
+  "nanou": {
+   "x": 614,
+   "y": 1350,
+   "dir": "down"
+  },
+  "iris": {
+   "x": 384,
+   "y": 722,
+   "dir": "right"
+  }
+ },
+ "WW": 2720,
+ "WH": 2240,
+ "tiles": [
+  {
+   "name": "sol_0_0",
+   "x": 0.0,
+   "y": 0.0,
+   "w": 1024.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_1_0",
+   "x": 1024.0,
+   "y": 0.0,
+   "w": 1024.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_2_0",
+   "x": 2048.0,
+   "y": 0.0,
+   "w": 672.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_0_1",
+   "x": 0.0,
+   "y": 1024.0,
+   "w": 1024.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_1_1",
+   "x": 1024.0,
+   "y": 1024.0,
+   "w": 1024.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_2_1",
+   "x": 2048.0,
+   "y": 1024.0,
+   "w": 672.0,
+   "h": 1024.0
+  },
+  {
+   "name": "sol_0_2",
+   "x": 0.0,
+   "y": 2048.0,
+   "w": 1024.0,
+   "h": 192.0
+  },
+  {
+   "name": "sol_1_2",
+   "x": 1024.0,
+   "y": 2048.0,
+   "w": 1024.0,
+   "h": 192.0
+  },
+  {
+   "name": "sol_2_2",
+   "x": 2048.0,
+   "y": 2048.0,
+   "w": 672.0,
+   "h": 192.0
+  }
+ ],
+ "buildings": [
+  {
+   "name": "immeuble_chez_nous",
+   "x": 507.0,
+   "y": 1381.0,
+   "w": 506.0,
+   "h": 374.0,
+   "base": 1752
+  },
+  {
+   "name": "commerces",
+   "x": 547.0,
+   "y": 1023.0,
+   "w": 486.0,
+   "h": 222.0,
+   "base": 1240
+  },
+  {
+   "name": "immeuble_nanou",
+   "x": 1287.0,
+   "y": 1461.0,
+   "w": 366.0,
+   "h": 272.0,
+   "base": 1730
+  },
+  {
+   "name": "local_velos",
+   "x": 1651.0,
+   "y": 1629.0,
+   "w": 126.0,
+   "h": 70.0,
+   "base": 1696
+  },
+  {
+   "name": "ecole",
+   "x": 1825.0,
+   "y": 1281.0,
+   "w": 830.0,
+   "h": 280.0,
+   "base": 1558
+  },
+  {
+   "name": "immeuble_elisa",
+   "x": 37.0,
+   "y": 1949.0,
+   "w": 306.0,
+   "h": 214.0,
+   "base": 2160
+  },
+  {
+   "name": "bouche_metro",
+   "x": 689.0,
+   "y": 77.0,
+   "w": 198.0,
+   "h": 152.0,
+   "base": 226
+  },
+  {
+   "name": "kiosque",
+   "x": 703.0,
+   "y": 379.0,
+   "w": 174.0,
+   "h": 148.0,
+   "base": 524
+  },
+  {
+   "name": "bateau",
+   "x": 223.0,
+   "y": 417.0,
+   "w": 196.0,
+   "h": 190.0,
+   "base": 604
+  }
+ ],
+ "pxPerUnit": 2
+}
