@@ -39,6 +39,11 @@ public class Ch1SpriteImport : AssetPostprocessor
             s.spriteAlignment = (int)SpriteAlignment.Custom;
             s.spritePivot = BuildingPivot(Path.GetFileNameWithoutExtension(assetPath));
         }
+        else if (assetPath.Contains("/ui/"))
+        {
+            s.spritePixelsPerUnit = 200f;
+            s.spriteAlignment = (int)SpriteAlignment.Center;
+        }
         else if (assetPath.Contains("/portraits/") || assetPath.Contains("/scenes/"))
         {
             s.spritePixelsPerUnit = 100f;

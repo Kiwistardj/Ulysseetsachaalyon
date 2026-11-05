@@ -5,6 +5,9 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Unity.Cinemachine;
+using UnityEngine.InputSystem.UI;
+using UnityEngine.EventSystems;
 
 // Construit la scène du ch1 à partir de Assets/Data/ch1_layout.json.
 // Menu : Ulysse > Reconstruire la scène du ch1
@@ -30,16 +33,16 @@ public static class Ch1SceneBuilder
         // Décor trié par les pieds
         var deco = new GameObject("Decor");
         foreach (var b in L.buildings) Put(deco, b.name, "decors/batiments/" + b.name + ".png", b.x + b.w / 2f, b.@base);
-        foreach (var t in L.TREES) Put(deco, "Arbre", t.bloom ? "objets/arbre_fleuri.png" : "objets/arbre.png", t.x, t.y);
-        foreach (var l in L.LAMPS) Put(deco, "Lampadaire", "objets/lampadaire.png", l.x, l.y);
+        foreach (var t in L.TREES) Obstacle(Put(deco, "Arbre", t.bloom ? "objets/arbre_fleuri.png" : "objets/arbre.png", t.x, t.y), 13);
+        foreach (var l in L.LAMPS) Obstacle(Put(deco, "Lampadaire", "objets/lampadaire.png", l.x, l.y), 6);
         foreach (var p in L.PEDS) Put(deco, "FeuPieton", "objets/feu_pieton_rouge.png", p.x, p.y);
-        Put(deco, "BoiteAuxLettres", "objets/boite_aux_lettres.png", L.MAILBOX.x, L.MAILBOX.y);
+        Obstacle(Put(deco, "BoiteAuxLettres", "objets/boite_aux_lettres.png", L.MAILBOX.x, L.MAILBOX.y), 10);
         Put(deco, "Araucaria", "objets/araucaria.png", L.ARAU.x, L.ARAU.y);
         Put(deco, "Fontaine", "objets/fontaine_jets.png", 1060, 352);
 
         // Quête et objets
         var quest = new GameObject("Quete");
-        foreach (var r in L.RONCES) Put(quest, "Ronce_" + r.tag, "objets/ronce.png", r.x, r.y);
+        foreach (var r in L.RONCES) Obstacle(Put(quest, "Ronce_" + r.tag, "objets/ronce.png", r.x, r.y), r.r - 4);
         Put(quest, "LocalVelos_Fente", "objets/fente_local_velos_avec_trottinette.png", L.BUSH.x, L.BUSH.y);
         var scooterSprite = new Dictionary<string, string> { { "t1", "trottinette_violette_iris" }, { "t2", "trottinette_orange_victorine" }, { "t3", "trottinette_rose_leonie" } };
         foreach (var it in L.ITEMS)
@@ -48,11 +51,14 @@ public static class Ch1SceneBuilder
             if (it.hidden) go.SetActive(false);
         }
         foreach (var h in L.HURT)
-            Put(quest, h.id == "herisson" ? "Herisson" : "RougeGorge", h.id == "herisson" ? "animaux/herisson_blesse.png" : "animaux/rougegorge_blesse.png", h.x, h.y, flip: h.face < 0);
+        {
+            var a = Put(quest, h.id == "herisson" ? "Herisson" : "RougeGorge", h.id == "herisson" ? "animaux/herisson_blesse.png" : "animaux/rougegorge_blesse.png", h.x, h.y, flip: h.face < 0);
+            if (h.id == "herisson") Obstacle(a, h.r);
+        }
 
         // PNJ
         var npcs = new GameObject("PNJ");
-        foreach (var n in L.NPCS) Put(npcs, n.id, "personnages/" + n.id + ".png", n.x, n.y);
+        foreach (var n in L.NPCS) Obstacle(Put(npcs, n.id, "personnages/" + n.id + ".png", n.x, n.y), 13);
 
         // Voitures (voie 0 vers la gauche, voie 1 vers la droite)
         var cars = new GameObject("Voitures");
@@ -62,7 +68,18 @@ public static class Ch1SceneBuilder
 
         // Famille au départ
         var fam = new GameObject("Famille");
-        var ulysse = Put(fam, "Ulysse", "personnages/ulysse.png", L.P.x, L.P.y);
+        var ulysse = new GameObject("Ulysse");
+        ulysse.transform.SetParent(fam.transform);
+        ulysse.transform.position = World.ToUnity(L.P.x, L.P.y);
+        var vis = Put(ulysse, "Visuel", "personnages/ulysse.png", L.P.x, L.P.y);
+        var rb = ulysse.AddComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic; rb.gravityScale = 0f; rb.freezeRotation = true;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate; rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        var pc = ulysse.AddComponent<CircleCollider2D>(); pc.radius = 17f / World.Scale;
+        var marker = Put(fam, "MarqueurToucher", "ui/marqueur.png", L.P.x, L.P.y, order: -50);
+        var msr = marker.GetComponent<SpriteRenderer>(); msr.color = new Color(1, 1, 1, 0);
+        var player = ulysse.AddComponent<PlayerController>();
+        player.visual = vis.transform; player.tapMarker = msr;
         Put(fam, "Sacha_sur_Ninou", "animaux/sacha_sur_ninou.png", L.F.sacha.x, L.F.sacha.y);
         Put(fam, "Didou", "animaux/didou.png", L.F.didou.x, L.F.didou.y);
         Put(fam, "Bibou", "animaux/bibou.png", L.F.bibou.x, L.F.bibou.y);
@@ -84,6 +101,19 @@ public static class Ch1SceneBuilder
             cc.radius = p.r / World.Scale;
         }
 
+        // Grille de marche
+        var grid = new GameObject("GrilleDeMarche").AddComponent<PathGrid>();
+        grid.bounds = new Rect(0f, -L.WH / World.Scale, L.WW / World.Scale, L.WH / World.Scale);
+
+        // Limites de la caméra
+        var lim = new GameObject("LimitesCamera");
+        var poly = lim.AddComponent<PolygonCollider2D>();
+        poly.isTrigger = true;
+        float W = L.WW / World.Scale, H = L.WH / World.Scale;
+        poly.points = new[] { new Vector2(0, 0), new Vector2(W, 0), new Vector2(W, -H), new Vector2(0, -H) };
+
+        new GameObject("EventSystem", typeof(EventSystem), typeof(InputSystemUIInputModule));
+
         // Caméra paysage, cadrage proche du HTML (environ 860 x 600 unités HTML visibles)
         var camGo = new GameObject("Main Camera");
         camGo.tag = "MainCamera";
@@ -95,6 +125,18 @@ public static class Ch1SceneBuilder
         camGo.transform.position = ulysse.transform.position + new Vector3(0, 0.6f, -10f);
         var cd = camGo.AddComponent<UniversalAdditionalCameraData>();
         cd.renderPostProcessing = true;
+        camGo.AddComponent<CinemachineBrain>();
+        var vcamGo = new GameObject("CameraSuivi");
+        var vcam = vcamGo.AddComponent<CinemachineCamera>();
+        vcam.Follow = ulysse.transform;
+        var lens = vcam.Lens; lens.OrthographicSize = 5.5f; vcam.Lens = lens;
+        vcamGo.transform.position = camGo.transform.position;
+        var comp = vcamGo.AddComponent<CinemachinePositionComposer>();
+        comp.Damping = new Vector3(0.35f, 0.35f, 0f);
+        comp.TargetOffset = new Vector3(0f, 0.6f, 0f);
+        comp.CameraDistance = 10f;
+        var conf = vcamGo.AddComponent<CinemachineConfiner2D>();
+        conf.BoundingShape2D = poly;
 
         var lightGo = new GameObject("Global Light 2D");
         var l2d = lightGo.AddComponent<Light2D>();
@@ -115,6 +157,13 @@ public static class Ch1SceneBuilder
     }
 
     static readonly List<string> missing = new List<string>();
+
+    // Obstacle rond au pied de l'objet (rayon en unités HTML)
+    static void Obstacle(GameObject go, float r)
+    {
+        var c = go.AddComponent<CircleCollider2D>();
+        c.radius = r / World.Scale;
+    }
 
     static GameObject Put(GameObject parent, string name, string sprite, float x, float y, int order = 0, bool flip = false)
     {
