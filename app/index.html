@@ -70,6 +70,7 @@ body{background:var(--grass);color:var(--ink);font-family:var(--text);overflow:h
   <p id="sText"></p>
   <div class="row">
     <button class="big" id="playBtn" type="button">Jouer</button>
+    <button class="big ghost" id="alt1" type="button" hidden>Chapitre 1</button>
     <button class="big ghost" id="closeBtn" type="button">Fermer</button>
   </div>
 </div>
@@ -115,6 +116,10 @@ try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&Array.isArray(s.
 const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(SAVE));}catch(e){}};
 const isDone=n=>SAVE.done.includes(n);
 const nextCh=()=>{for(const c of CH)if(!isDone(c.n))return c.n;return 9;};
+/* Un chapitre s'ouvre quand le précédent est fini (les parents peuvent tout ouvrir : 5 touches sur le titre) */
+const unlocked=n=>n===1||!!SAVE.all||isDone(n-1);
+/* Le ch9 se passe à la Perralière, comme le ch1 : un seul lieu sur la carte, qui mène au ch9 une fois le ch8 fini */
+const PINS=()=>CH.filter(c=>c.n!==9).map(c=>c.n===1&&unlocked(9)?Object.assign({},CH[8],{x:c.x,y:c.y,alt:CH[0]}):c);
 
 /* ---------- la carte ---------- */
 const cv=$('map');let ctx=cv.getContext('2d'),W=0,H=0,dpr=1,sc=1,sx=1,sy=1,ox=0,oy=0,sel=null,t=0;
@@ -139,10 +144,12 @@ function draw(){
   river([[980,180],[800,230],[620,240],[460,330],[430,420],[420,520],[405,600],[420,700]],30);
   /* le chemin de l'histoire, d'un chapitre au suivant */
   ctx.setLineDash([2*sc,10*sc]);ctx.lineWidth=4*sc;ctx.strokeStyle='rgba(43,58,85,.45)';ctx.lineCap='round';ctx.beginPath();
-  CH.forEach((c,i)=>{const [x,y]=P(c.x,c.y);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();ctx.setLineDash([]);
+  CH.forEach((c,i)=>{const q=c.n===9?CH[0]:c,[x,y]=P(q.x,q.y);if(!i)ctx.moveTo(x,y);else if(unlocked(c.n))ctx.lineTo(x,y);});ctx.stroke();ctx.setLineDash([]);
   /* les lieux */
   const nx=nextCh();
-  for(const c of CH){const [x,y]=P(c.x,c.y),R=Math.max(18,26*sc),done=isDone(c.n),next=c.n===nx,on=sel===c;
+  for(const c of PINS()){const [x,y]=P(c.x,c.y),R=Math.max(18,26*sc),done=isDone(c.n),next=c.n===nx,on=!!sel&&sel.n===c.n,lock=!unlocked(c.n);
+    if(lock){ctx.beginPath();ctx.arc(x,y,R*.8,0,Math.PI*2);ctx.fillStyle='rgba(255,250,240,.55)';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='rgba(43,58,85,.35)';ctx.stroke();
+      ctx.fillStyle='rgba(43,58,85,.45)';ctx.fillRect(x-R*.28,y-R*.05,R*.56,R*.42);ctx.lineWidth=2.5;ctx.strokeStyle='rgba(43,58,85,.45)';ctx.beginPath();ctx.arc(x,y-R*.08,R*.2,Math.PI,0);ctx.stroke();continue;}
     if(next||on){const pu=1+.12*Math.sin(t*4);ctx.beginPath();ctx.arc(x,y,R*1.45*pu,0,Math.PI*2);ctx.fillStyle='rgba(255,122,61,.25)';ctx.fill();}
     ctx.beginPath();ctx.arc(x+2,y+4,R,0,Math.PI*2);ctx.fillStyle='rgba(43,58,85,.2)';ctx.fill();
     ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fillStyle=done?'#ffd25a':(next||on)?'#ff7a3d':'#fffaf0';ctx.fill();
@@ -158,14 +165,17 @@ function draw(){
 function loop(now){t=now/1000;if(!$('map').hidden)draw();requestAnimationFrame(loop);}
 
 function pick(e){const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=1e9;
-  for(const c of CH){const [px,py]=P(c.x,c.y),d=Math.hypot(px-x,py-y);if(d<bd){bd=d;best=c;}}
-  return bd<44?best:null;}
+  for(const c of PINS()){const [px,py]=P(c.x,c.y),d=Math.hypot(px-x,py-y);if(d<bd){bd=d;best=c;}}
+  return bd<44&&unlocked(best.n)?best:null;}
 cv.addEventListener('pointerdown',e=>{const c=pick(e);if(c)openSheet(c);});
 function openSheet(c){sel=c;$('sChap').textContent='Chapitre '+c.n+(isDone(c.n)?' · terminé':'');$('sName').textContent=c.name;$('sText').textContent=c.text;
-  $('playBtn').textContent=isDone(c.n)?'Rejouer':'Jouer';$('sheet').hidden=false;resize();$('playBtn').focus();}
+  $('playBtn').textContent=isDone(c.n)?'Rejouer':'Jouer';$('alt1').hidden=!c.alt;$('sheet').hidden=false;resize();$('playBtn').focus();}
 function closeSheet(){sel=null;$('sheet').hidden=true;resize();}
 $('closeBtn').addEventListener('click',closeSheet);
 $('playBtn').addEventListener('click',()=>{if(sel)play(sel.n);});
+$('alt1').addEventListener('click',()=>play(1));
+let taps=0,tapT=0;$('title').addEventListener('pointerdown',()=>{const now=Date.now();taps=now-tapT<800?taps+1:1;tapT=now;
+  if(taps>=5){taps=0;SAVE.all=!SAVE.all;persist();$('progress').textContent=SAVE.all?'Mode parents : tous les chapitres sont ouverts':'Mode parents désactivé';}});
 
 /* ---------- jouer un chapitre ---------- */
 let cur=0;
