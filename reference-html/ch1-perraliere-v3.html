@@ -109,7 +109,7 @@ body.portrait .tools .tool{width:40px;height:40px}
 
 <div class="hud" id="hud" hidden aria-label="Les trottinettes retrouvées">
   <div class="slot" id="slot0"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#4f9fd8" stroke-width="5"/><path d="M30 34l5-22" stroke="#4f9fd8" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
-  <div class="slot" id="slot1"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#f08a4b" stroke-width="5"/><path d="M30 34l5-22" stroke="#f08a4b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
+  <div class="slot" id="slot1"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#c9c9c0" stroke-width="5"/><path d="M30 34l5-22" stroke="#c9c9c0" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
   <div class="slot" id="slot2"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#e4567b" stroke-width="5"/><path d="M30 34l5-22" stroke="#e4567b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
 </div>
 </div>
@@ -897,7 +897,7 @@ function resWorld(c,L,inView){
     let dy=0;if(p.bk){const o=BLD.find(q=>q.b===RES[p.bk]);if(o&&(o.fa==null||o.fa>.5))dy=o.H;}
     c.drawImage(PSPRS[i],p.x-1,p.y-p.H-1-dy);}});});
   /* l'entrée de l'école, sur la façade ouest */
-  {const ey=RES.ecole.y+RES.ecole.h/2;L.push({y:ey+34,d:()=>{rrect(c,1496,ey-30,26,60,4);fs(c,'#e5483a',1.6);rrect(c,1500,ey-20,12,48,2);fill(c,'#bfe0f0');}});}
+  if(false){const ey=RES.ecole.y+RES.ecole.h/2;L.push({y:ey+34,d:()=>{rrect(c,1496,ey-30,26,60,4);fs(c,'#e5483a',1.6);rrect(c,1500,ey-20,12,48,2);fill(c,'#bfe0f0');}});}
   /* le grillage du tennis, côté sud */
   L.push({y:RES.tennis.y+RES.tennis.h,d:()=>{const tn=RES.tennis,y=tn.y+tn.h;c.fillStyle='rgba(47,106,74,.22)';c.fillRect(tn.x,y-34,tn.w,34);c.strokeStyle='#2f6a4a';c.lineWidth=3;
     for(let x=tn.x;x<=tn.x+tn.w;x+=tn.w/6){c.beginPath();c.moveTo(x,y);c.lineTo(x,y-36);c.stroke();}c.beginPath();c.moveTo(tn.x,y-36);c.lineTo(tn.x+tn.w,y-36);c.stroke();}});
@@ -1037,7 +1037,7 @@ function nordBlocked(x,y,r){
   return false;
 }
 /* la caméra : à l'ouest de la rue, seulement quand on est au nord */
-function camXMin(){const y=cam.y;return y<150?-1400:y>650?0:-1400*(650-y)/500;}
+function camXMin(){const y=cam.y;return y<150?-1400:y>650?-300:-1400+1100*(y-150)/500;}
 /* ---------- le fond du nord : trois toiles, autour de celle de la résidence ---------- */
 const NBG=[{x:-1400,y:-1900,w:2400,h:1900},{x:1000,y:-640,w:1400,h:640},{x:-1400,y:0,w:1400,h:700}];
 function bgNord(g){
@@ -1047,7 +1047,7 @@ function bgNord(g){
   const dash=(x1,y1,x2,y2)=>{g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=3;g.setLineDash([22,18]);g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();g.setLineDash([]);};
   const hedge=(x,y,w,h)=>{rrect(g,x,y,w,h,Math.min(8,h/2));fsh(g,'#3f8a4a',x,y,w,h,1.6,.35,.2);for(let i=x+8;i<x+w-6;i+=18){circ(g,i,y+h*.35,Math.min(7,h*.4));g.fillStyle='rgba(120,190,100,.45)';g.fill();}};
   /* trottoirs partout, puis les rues */
-  pav(-1400,-1900,3800,1900);pav(-1400,0,1400,700);
+  pav(-1400,-1900,3800,1900);pav(-1400,0,1400,700);pav(-400,700,400,1800);g.fillStyle='#b9b6ae';g.fillRect(-4,80,4,2420);
   /* au nord du boulevard : le pied des immeubles d'en face */
   g.fillStyle='#d9cdb8';g.fillRect(-1400,-1900,3800,200);for(let x=-1380;x<2400;x+=160){if(x>-40&&x<340)continue;g.fillStyle='#bfe0f0';g.fillRect(x,-1780,60,40);g.fillStyle='#e5d3b0';g.fillRect(x+80,-1770,50,70);}
   road(0,-1900,110,380);dash(55,-1900,55,-1520);pav(114,-1700,226,180,'#e6e0d2');
@@ -1080,9 +1080,11 @@ function bgNord(g){
   rrect(g,BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,30);g.fillStyle='#c99a62';g.fill();t.speck(BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,700,['rgba(120,80,40,.5)','rgba(240,200,140,.6)']);
   rrect(g,SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,20);g.fillStyle='#c99a62';g.fill();t.speck(SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,240,['rgba(120,80,40,.5)']);
   /* la fontaine */
+  if(FONTAINE.r>0){
   circ(g,FONTAINE.x+6,FONTAINE.y+8,FONTAINE.r);g.fillStyle='rgba(43,58,85,.15)';g.fill();
   circ(g,FONTAINE.x,FONTAINE.y,FONTAINE.r);fs(g,'#d8cfc0',2.4);circ(g,FONTAINE.x,FONTAINE.y,FONTAINE.r-11);g.fillStyle='#7cc4e8';g.fill();
   circ(g,FONTAINE.x-8,FONTAINE.y-8,14);g.fillStyle='rgba(255,255,255,.35)';g.fill();circ(g,FONTAINE.x,FONTAINE.y-6,9);fs(g,'#c8bfae',1.6);
+  }
   /* la table de ping-pong */
   const pp=PINGPONG;rrect(g,pp.x+4,pp.y+6,pp.w,pp.h,4);g.fillStyle='rgba(43,58,85,.18)';g.fill();rrect(g,pp.x,pp.y,pp.w,pp.h,4);fs(g,'#2f8a5e',2);g.strokeStyle='#fff';g.lineWidth=2;g.strokeRect(pp.x+5,pp.y+5,pp.w-10,pp.h-10);
   g.beginPath();g.moveTo(pp.x+pp.w/2,pp.y);g.lineTo(pp.x+pp.w/2,pp.y+pp.h);g.stroke();g.strokeStyle='#2b2f3a';g.lineWidth=3;g.beginPath();g.moveTo(pp.x+pp.w/2,pp.y-4);g.lineTo(pp.x+pp.w/2,pp.y+pp.h+4);g.stroke();
@@ -1188,15 +1190,13 @@ function nordWorld(c,L,inView){
   for(const b of BOUCHES)if(inView(b.x+b.w/2,b.y,260))L.push({y:b.y+b.h,d:()=>drawBouche(c,b)});
   if(inView(BATEAU.x+BATEAU.w/2,BATEAU.y,420))L.push({y:BATEAU.y+BATEAU.h,d:()=>drawBateau(c)});
   if(inView(SWING3.x,SWING3.y0+90,260))L.push({y:SWING3.y1,d:()=>drawSwingsV(c,SWING3,3,['#e5483a','#4fb0d6','#ffd25a'])});
-  {const b=BLD.find(o=>o.creche);if(b&&inView(555,-140,300))L.push({y:-119,d:()=>{rrect(c,385,-160,340,26,8);fs(c,'#fffaf0',1.6);c.textAlign='center';c.textBaseline='middle';c.font='800 13px Grandstander, Trebuchet MS, sans-serif';c.fillStyle='#2b3a55';c.fillText('Crèche · Relais assistantes maternelles',555,-146);
-    [[260,'#e5483a'],[330,'#ffd25a'],[780,'#4fb0d6'],[850,'#5fc06a']].forEach(([x,col])=>{rrect(c,x-14,-142,28,20,4);fs(c,col,1.4);});}});}
   if(inView(SWING2.x+50,SWING2.y,200))L.push({y:SWING2.y,d:()=>drawSwings(c,SWING2,2,['#5fc06a','#c97ad8'])});
   if(inView(-1100,-300,200))L.push({y:-290,d:()=>drawSlideSmall(c,-1110,-290,'#4fb0d6')});
   if(inView(-1070,-1230,200))L.push({y:-1230,d:()=>drawSlideSmall(c,-1080,-1230,'#ff9ec0')});
   if(inView(KIOSQUE.x,KIOSQUE.y,240))L.push({y:KIOSQUE.y+20,d:()=>drawKiosque(c)});
   if(inView(ARAU.x,ARAU.y,260))L.push({y:ARAU.y,d:()=>drawAraucaria(c,ARAU)});
   /* le jet d'eau de la fontaine */
-  if(inView(FONTAINE.x,FONTAINE.y,120))L.push({y:FONTAINE.y,d:()=>{for(let k=0;k<6;k++){const a=k/6*Math.PI*2+S.t,h=26+Math.sin(S.t*5+k)*6;c.strokeStyle='rgba(159,208,245,.85)';c.lineWidth=3;c.beginPath();c.moveTo(FONTAINE.x,FONTAINE.y-10);c.quadraticCurveTo(FONTAINE.x+Math.cos(a)*14,FONTAINE.y-10-h,FONTAINE.x+Math.cos(a)*30,FONTAINE.y-4+Math.sin(a)*12);c.stroke();}}});
+  if(FONTAINE.r>0&&inView(FONTAINE.x,FONTAINE.y,120))L.push({y:FONTAINE.y,d:()=>{for(let k=0;k<6;k++){const a=k/6*Math.PI*2+S.t,h=26+Math.sin(S.t*5+k)*6;c.strokeStyle='rgba(159,208,245,.85)';c.lineWidth=3;c.beginPath();c.moveTo(FONTAINE.x,FONTAINE.y-10);c.quadraticCurveTo(FONTAINE.x+Math.cos(a)*14,FONTAINE.y-10-h,FONTAINE.x+Math.cos(a)*30,FONTAINE.y-4+Math.sin(a)*12);c.stroke();}}});
   for(const k of BLVC)if(inView(k.x,k.y,80))L.push({y:-1430,d:()=>drawTopCar(c,k.x,k.y,48,24,k.col,false)});
 }
 Object.assign(SFX,{
@@ -1653,7 +1653,7 @@ let BGS={};
 let BGL=[];
 function buildBG(){
   const mk=(x,y,w,h,fn)=>{const cnv=document.createElement('canvas');cnv.width=w;cnv.height=h;const g=cnv.getContext('2d');g.translate(-x,-y);seed=11;fn(g);grain(g,w,h);BGL.push({c:cnv,x,y,w,h});};
-  mk(0,0,W_RES,H_RES,g=>bgRes(g,REG.res));
+  mk(0,0,W_RES,H_RES,g=>{bgRes(g,REG.res);bgLot1(g);});
   for(const b of NBG)mk(b.x,b.y,b.w,b.h,g=>bgNord(g));
 }
 function drawOutside(c,R,cx,cy,w,h){
@@ -2573,7 +2573,7 @@ NPCS.push(
     again:()=>ITEMS[0].back?"Merci Ulysse ! J'ai retrouvé ma trottinette bleue !":S.gateOpen?"Ma trottinette est dans la cour, près du toboggan !":"Lance ta boule de feu sur les ronces du portail !"},
   {id:'mahe',x:1560,y:2272,dir:'left',first:"Super-héros ! Tu as brûlé les ronces ! Trop fort !",again:"Tu reviens jouer dans la cour ?"},
   {id:'nanou',x:1566,y:1450,dir:'down',first:"Bonjour Ulysse ! Bonjour mon petit Sacha ! Regardez Bibou, il renifle sous la haie !",again:"Faites attention à vous, les super-héros !"},
-  {id:'victorine',x:1640,y:1460,dir:'down',first:"Sacha ! Le dinosaure a caché ma trottinette orange sous la haie !",again:()=>ITEMS[1].back?"Merci Didou ! Ma trottinette orange !":"Ma trottinette est sous la haie !"}
+  {id:'victorine',x:1640,y:1460,dir:'down',first:"Sacha ! Le dinosaure a caché ma trottinette blanche sous la haie !",again:()=>ITEMS[1].back?"Merci Didou ! Ma trottinette blanche !":"Ma trottinette est sous la haie !"}
 );
 NPCS.forEach(n=>{n.home={x:n.x,y:n.y,dir:n.dir};});
 /* les ronces : deux au portail de la cour, trois pour le plaisir */
@@ -2636,7 +2636,7 @@ function spots(){
   for(const sh of SHOPS)L.push({x:sh.x,y:sh.y,tr:40,ax:sh.x,ay:118,reach:40,kind:'shop',opt:true,act:()=>{SFX.shop();bubble(sh.x,sh.y-60,sh.text);if(sh.x===875){S.cross=2;}}});
   for(const a of HURT)if(a.hurt&&!a.healing)L.push({x:a.x,y:a.y,tr:50,ax:a.x+(P.x<a.x?-50:50),ay:a.y+10,reach:40,kind:'heal',act:()=>heal(a)});
   for(const p of PLAYS){if(p.gate&&!S.gateOpen)continue;L.push({x:p.x,y:p.y,tr:80,ax:p.ax,ay:p.ay,reach:30,kind:'ride',act:()=>startPlay(p)});}
-  if(!BUSH.open&&F.bibou.mode==='flair')L.push({x:BUSH.x,y:BUSH.y,tr:70,ax:BUSH.x,ay:BUSH.y-52,reach:40,kind:'paw',act:openBush});
+  if(!BUSH.open&&F.bibou.mode==='flair')L.push({x:BUSH.x,y:BUSH.y,tr:70,ax:BUSH.x+20,ay:BUSH.y+56,reach:40,kind:'paw',act:openBush});
   return L;
 }
 function nearCar(){
@@ -2677,7 +2677,7 @@ function updateDidou(dt){
   else if(t<2.8){d.hidden=true;BUSH.rustle=.8;
     if(Math.floor(t/.7)!==Math.floor((t-dt)/.7)){bubble(BUSH.x-50+((t*70)%100),BUSH.y-50,'Hop hop !');SFX.yip();}
     if(!reduceMotion&&rand()<dt*10)PARTS.push({x:BUSH.x-60+rand()*120,y:BUSH.y-10,vx:(rand()-.5)*60,vy:-40-rand()*40,life:.6,max:.6,color:'rgba(120,170,90,.8)',size:4,kind:'dust'});}
-  else if(!d.out){d.out=true;d.hidden=false;d.x=BUSH.x+30;d.y=BUSH.y-40;d.face=-1;const it=ITEMS[1];it.hidden=false;SFX.sparkle();burst(it.x,it.y-20,14,['#f08a4b','#ffd25a']);}
+  else if(!d.out){d.out=true;d.hidden=false;d.x=BUSH.x+40;d.y=BUSH.y+44;d.face=-1;const it=ITEMS[1];it.hidden=false;SFX.sparkle();burst(it.x,it.y-20,14,['#f08a4b','#ffd25a']);}
   if(t>3.6){S.didouT=-1;F.didou.mode='follow';d.out=false;ITEMS[1].lock=false;collect(ITEMS[1],'didou');}
 }
 /* ---------- les trottinettes retrouvées, rendues à leur propriétaire ---------- */
@@ -2690,7 +2690,7 @@ function collect(it,by){
   if(by==='didou')say([['didou',"Je l'ai trouvée ! Elle était coincée sous la haie !"],['ulysse','Merci Didou ! On la rend à Victorine !']]);
   else say([['didou','Bravo Ulysse ! Tu as retrouvé la trottinette '+it.de+' ! On la lui rend !']]);
 }
-const THANKS={t1:"Merci Ulysse ! Ma trottinette bleue ! Je vais faire le tour de la cour !",t2:"Ma trottinette orange ! Merci Didou, merci Sacha !",t3:"Ma trottinette rose ! Merci Ulysse, merci Sacha !"};
+const THANKS={t1:"Merci Ulysse ! Ma trottinette bleue ! Je vais faire le tour de la cour !",t2:"Ma trottinette blanche ! Merci Didou, merci Sacha !",t3:"Ma trottinette rose ! Merci Ulysse, merci Sacha !"};
 function returned(it){
   const k=ITEMS.filter(i=>i.back).length,n=NPC(it.ownerId);
   const lines=[[it.ownerId,THANKS[it.key]]];
@@ -2811,6 +2811,7 @@ function drawLinePlan(W,H){
 }
 /* ---------- la mise à jour de l'histoire, appelée à chaque image ---------- */
 function storyUpdate(dt){
+  busUpdate(dt);
   /* les copines qui suivent la bande */
   for(const n of NPCS){if(n.wave>0)n.wave-=dt;if(!n.fol)continue;const t=trailAt(n.fol),ox=n.x,oy=n.y;followTo(n,t.x,t.y,dt,Math.max(200,dist(n.x,n.y,t.x,t.y)*6));
     n.fmoving=Math.hypot(n.x-ox,n.y-oy)>.3;if(n.fmoving){n.wph=(n.wph||0)+dt*11;const dx=n.x-ox,dy=n.y-oy;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');}}
@@ -2844,7 +2845,7 @@ function storyUpdate(dt){
   const B=F.bibou;
   if(B.mode==='follow'&&S.mode==='play'&&!BUSH.open&&dist(P.x,P.y,BUSH.x,BUSH.y)<300)B.mode='flair';
   if(B.mode==='flair'){
-    followTo(B,BUSH.x-48,BUSH.y-34,dt,270);
+    followTo(B,BUSH.x-30,BUSH.y+44,dt,270);
     if(!B.moving){B.face=1;B.meowT-=dt;
       if(B.meowT<=0){B.meowT=2.8;SFX.meow();bubble(B.x,B.y-46,'Miaou !');BUSH.rustle=.7;
         PARTS.push({x:BUSH.x,y:BUSH.y-50,vx:0,vy:-30,life:1,max:1,color:'#ffd25a',size:9,kind:'spark'});
@@ -2907,10 +2908,11 @@ function drawFootR(c){
     [-.55,0,.55].forEach(t=>{c.save();c.rotate(t);ell(c,8,0,4,1.8);c.fill();c.restore();});c.restore();}
   c.globalAlpha=1;
 }
-function drawHedgeBush(c){const b=BUSH,sh=b.rustle>0&&!reduceMotion?Math.sin(S.t*40)*2:0;
-  for(let i=0;i<7;i++){const x=1556+i*22+sh,y=1572-(i%2)*6;circ(c,x,y,20);fsh(c,i%2?'#4f9a4a':'#3f8a4a',x-20,y-20,40,40,1.6,.35,.2);}
-  for(let i=0;i<6;i++){circ(c,1566+i*24+sh,1556,7);c.fillStyle='rgba(140,200,110,.55)';c.fill();}}
+function drawHedgeBush(c){const b=BUSH,sh=b.rustle>0&&!reduceMotion?Math.sin(S.t*40)*2:0,x0=b.x-54,y0=b.y+6;
+  for(let i=0;i<6;i++){const x=x0+i*22+sh,y=y0-(i%2)*6;circ(c,x,y,20);fsh(c,i%2?'#4f9a4a':'#3f8a4a',x-20,y-20,40,40,1.6,.35,.2);}
+  for(let i=0;i<5;i++){circ(c,x0+10+i*24+sh,y0-16,7);c.fillStyle='rgba(140,200,110,.55)';c.fill();}}
 function storyWorld(c,L,inView){
+  lot1World(c,L,inView);
   if(S.scooter)for(const r of RAMPS)if(inView(r.x,r.y,80))L.push({y:r.y-14,d:()=>drawRampR(c,r)});
   L.push({y:-1e6,d:()=>drawFootR(c)});
   if(inView(BUSH.x,BUSH.y,200))L.push({y:BUSH.y+16,d:()=>drawHedgeBush(c)});
@@ -2934,6 +2936,141 @@ function storyWorld(c,L,inView){
     L.push({y:p.y,d:()=>{drawPerson(c,p.x,p.y,LOOK[k],p.moving?'up':(k==='papa'?'right':'left'),S.t*11,p.moving,{seedT:k.length});
       if(carry){const sd=k==='papa'?-1:1;c.save();c.translate(p.x+sd*22,p.y-6);drawTrott(c,1,sc,'right',0,false,'all');c.restore();
         c.save();c.translate(p.x+sd*8,p.y-14);c.beginPath();c.arc(0,0,10,Math.PI,0);c.closePath();fsh(c,he,-10,-10,20,10,1.6);c.restore();}}});});}
+}
+/* ===================== lot 1 : carte et décor (cahier des charges du 6 novembre 2026) ===================== */
+const rmRect=f=>{for(let i=RECTS.length-1;i>=0;i--)if(f(RECTS[i]))RECTS.splice(i,1);};
+const isR=(r,x,y,w,h)=>r.x===x&&r.y===y&&(w==null||r.w===w)&&(h==null||r.h===h);
+/* c'est le jour : plus de lampadaires ; plus de fontaine ; le ping-pong près de l'aire de jeux du nord-ouest */
+LAMPS.length=0;
+FONTAINE.r=0;
+rmRect(r=>isR(r,PINGPONG.x,PINGPONG.y,PINGPONG.w,PINGPONG.h));
+PINGPONG.x=-1316;PINGPONG.y=-1104;RECTS.push({x:PINGPONG.x,y:PINGPONG.y,w:PINGPONG.w,h:PINGPONG.h});
+for(let i=TREES.length-1;i>=0;i--){const t=TREES[i];if(Math.abs(t.x+1240)<4&&Math.abs(t.y+1060)<4)TREES.splice(i,1);}
+/* le long de la rue, côté résidence : un trottoir, puis une haie ; on sort par le chemin devant chez nous ou par le parking */
+const HAIE_O={x:176,y:80,h:1525,gaps:[[740,830],[1300,1362]]};
+for(const t of TREES)if(t.x===150)t.x=228;
+{let y=HAIE_O.y;for(const [a,b] of HAIE_O.gaps){RECTS.push({x:HAIE_O.x,y,w:12,h:a-y});y=b;}RECTS.push({x:HAIE_O.x,y,w:12,h:HAIE_O.y+HAIE_O.h-y});}
+/* le parking ne mène pas à l'école ; la barre de Prune s'arrête avant */
+{const r=RECTS.find(r=>isR(r,1240,1680,120,470));if(r)r.h=230;RES.barrePR.h=230;
+ const k=PORCHES.findIndex(p=>p.x===1222&&p.y===1990);if(k>=0)PORCHES.splice(k,1);}
+RECTS.push({x:1240,y:1910,w:180,h:240},{x:1360,y:1880,w:60,h:30});
+/* le jardin de Nanou, plus grand, au pied de sa tour ; on y entre par un portillon sur le trottoir de la rue */
+RES.jardin.x=1840;RES.jardin.y=1660;RES.jardin.w=330;RES.jardin.h=230;
+RES.parkingS.w=400;for(let i=PARKEDS.length-1;i>=0;i--)if(PARKEDS[i].x>1790)PARKEDS.splice(i,1);
+{const r=RECTS.find(r=>isR(r,1440,1702,520,146));if(r)r.w=360;}
+RECTS.push({x:1840,y:1660,w:330,h:12},{x:1840,y:1660,w:12,h:230},{x:1840,y:1878,w:330,h:12});
+{const r=RECTS.find(r=>isR(r,2170,1360,30,540));if(r){r.h=370;RECTS.push({x:2170,y:1790,w:30,h:110});}}
+const PORTILLON={x:2185,y:1760};
+const SABLE_N={x:1960,y:1800,w:90,h:56};
+/* la haie où la trottinette de Victorine est coincée : dans le jardin, à l'ouest */
+rmRect(r=>isR(r,1548,1548,150,40));
+BUSH.x=1910;BUSH.y=1724;RECTS.push({x:1860,y:1706,w:100,h:36});
+ITEMS[1].x=1910;ITEMS[1].y=1770;ITEMS[1].color='#f2f2ec';
+/* l'école : un long bâtiment bas, bardé de losanges bruns sur un socle en béton ; la cour intérieure est fermée ;
+   la grande cour au sud, où Ulysse joue et où on vient le chercher le soir, avec son toboggan au fond */
+rmRect(r=>isR(r,RES.ecole.x,RES.ecole.y,RES.ecole.w,RES.ecole.h));
+RES.ecole.w=480;RES.ecole.h=185;RECTS.push({x:RES.ecole.x,y:RES.ecole.y,w:RES.ecole.w,h:RES.ecole.h});
+{const k=BLD.findIndex(o=>o.kind==='ecole');if(k>=0)BLD.splice(k,1);}
+rmRect(r=>isR(r,1700,1958,500,542)||isR(r,1500,2305,200,195)||isR(r,1700,2195,60,110)||isR(r,1500,2305,260,10)||isR(r,1500,2280,6,25));
+RES.cour.x=1500;RES.cour.y=2160;RES.cour.w=600;RES.cour.h=280;
+RECTS.push({x:2000,y:1958,w:100,h:202},{x:2100,y:1958,w:100,h:542},{x:1500,y:2440,w:600,h:60},{x:1496,y:2270,w:8,h:170});
+for(let i=TREES.length-1;i>=0;i--){const t=TREES[i];if(t.x>1490&&t.x<2110&&t.y>1950&&t.y<2460)TREES.splice(i,1);}
+TREES.push({x:1720,y:2300,seed:71,bloom:false,aut:false},{x:1880,y:2236,seed:73,bloom:false,aut:true});
+RONCES.forEach(r=>{if(r.tag==='gate'){if(r.r===34){r.x=1492;r.y=2214;}else{r.x=1456;r.y=2198;}}});
+GATE.x=1475;GATE.y=2214;
+{const r=RECTS.find(r=>isR(r,SLIDE_COUR.x-44,SLIDE_COUR.y-30,96,36));SLIDE_COUR.x=2010;SLIDE_COUR.y=2392;if(r){r.x=SLIDE_COUR.x-44;r.y=SLIDE_COUR.y-30;}}
+ITEMS[0].x=1934;ITEMS[0].y=2404;ITEMS[0].color='#4f9fd8';
+{const m=NPC('mahe');m.x=1640;m.y=2330;m.home={x:m.x,y:m.y,dir:'left'};}
+/* le relais, au pied d'une tour à balcons ; le magasin de bricolage derrière la bouche direction Perrache */
+{const b=BLD.find(o=>o.creche);b.b={x:190,y:-330,w:730,h:210};b.H=26;b.col='#e98d72';}
+BLD.push({b:{x:430,y:-560,w:300,h:200},H:96,kind:'tower',col:'#ece6da',bal:['#c9c2b4','#d8d2c4']});
+/* le bus C23 : deux arrêts « La Perralière » face à face au niveau du parking, un arrêt « Flachet » avant le cours */
+const ABRIS=[{x:112,y:900,name:'La Perralière',dir:'Flachet'},{x:-34,y:900,name:'La Perralière',dir:'Cité Internationale'},{x:112,y:-1200,name:'Flachet',dir:'Flachet'}];
+ABRIS.forEach(a=>{if(a.x>0)RECTS.push({x:a.x,y:a.y-40,w:22,h:80});});
+const BUSC=[{lane:1,y:2300,stops:[900,-1200],wait:0,col:'#f4f4f2'},{lane:0,y:-1650,stops:[900],wait:0,col:'#f4f4f2'}];
+function busUpdate(dt){
+  for(const b of BUSC){const dir=b.lane?-1:1;if(b.wait>0){b.wait-=dt;if(b.wait<=0)b.done=b.at;continue;}
+    let st=false;for(const w of [CROSSW[1],CROSSW[2]])if(carStops(b.y,dir,w.y,w.y+w.h))st=true;
+    for(const s of b.stops)if(b.done!==s&&Math.abs(b.y-s)<4){b.wait=3.5;b.at=s;b.y=s;st=true;if(dist(P.x,P.y,b.lane?80:30,s)<420){bubble(b.lane?80:30,s-70,'Pschhh !');SFX.door();}}
+    if(!st)b.y+=dir*110*dt;
+    if(b.y<-1720){b.y=2580;b.done=null;}if(b.y>2580){b.y=-1720;b.done=null;}}
+}
+function drawBusC23(c,b){const x=b.lane?80:30,y=b.y,w=34,h=112,d=b.lane?-1:1;
+  rrect(c,x-w/2+4,y-h/2+6,w,h,8);fill(c,'rgba(43,58,85,.22)');
+  rrect(c,x-w/2,y-h/2,w,h,8);fsh(c,b.col,x-w/2,y-h/2,w,h,2,.35,.18);
+  c.fillStyle='#d8343c';c.fillRect(x-w/2+2,y-h/2+10,4,h-20);c.fillRect(x+w/2-6,y-h/2+10,4,h-20);
+  const fy=d<0?y-h/2+4:y+h/2-16;rrect(c,x-w/2+4,fy,w-8,12,3);fill(c,'#bfe0f0');
+  rrect(c,x-9,y-14,18,28,3);fs(c,'#dfe3ea',1.2);
+  c.save();c.translate(x,y);c.rotate(d<0?0:Math.PI);c.fillStyle='#2b3a55';c.font='800 11px Grandstander, Trebuchet MS, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('C23',0,-h/2+26);c.restore();}
+function drawAbri(c,a){const x=a.x,y=a.y;
+  rrect(c,x,y-40,22,80,3);c.fillStyle='rgba(191,224,240,.55)';c.fill();c.lineWidth=2;c.strokeStyle='#5a6070';c.stroke();
+  rrect(c,x-3,y-46,28,8,3);fs(c,'#5a6070',1.2);
+  const px=a.x>0?x+32:x-10;c.strokeStyle='#5a6070';c.lineWidth=3;c.beginPath();c.moveTo(px,y+40);c.lineTo(px,y-56);c.stroke();
+  rrect(c,px-26,y-96,52,40,6);fs(c,'#fffaf0',1.6);rrect(c,px-22,y-92,20,14,3);fill(c,'#d8343c');
+  c.fillStyle='#fff';c.font='800 9px Grandstander, Trebuchet MS, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('C23',px-12,y-85);
+  c.fillStyle='#2b3a55';c.font='700 8px Andika, Trebuchet MS, sans-serif';c.fillText(a.name,px,y-70);c.fillText('→ '+a.dir,px,y-61);}
+/* l'école, dessinée à part : socle en béton, bardage brun en losanges, grands volumes à toits en pente, cour intérieure fermée */
+function drawEcole(c){const e=RES.ecole,x=e.x,y=e.y,w=e.w,h=e.h,H=44;
+  const vol=[[x,y,170,h,0],[x+170,y,150,h,16],[x+320,y,160,h,6]];
+  /* la bande plantée et la grille brune, le long de l'allée */
+  c.fillStyle='#8fbf78';c.fillRect(x,y-14,w,14);for(let k=0;k<w;k+=14){circ(c,x+7+k,y-8,5);c.fillStyle=k%28?'#5fa85a':'#7cb86a';c.fill();}
+  /* le toit : trois volumes et la cour intérieure, fermée, avec son jeu rouge */
+  for(const [vx,vy,vw,vh,dh] of vol){c.fillStyle='#7a4a36';c.fillRect(vx,vy-H-dh,vw,vh);c.strokeStyle='rgba(40,20,10,.35)';c.lineWidth=1;
+    c.save();c.beginPath();c.rect(vx,vy-H-dh,vw,vh);c.clip();for(let k=-vh;k<vw+vh;k+=16){c.beginPath();c.moveTo(vx+k,vy-H-dh);c.lineTo(vx+k+vh,vy-H-dh+vh);c.moveTo(vx+k+vh,vy-H-dh);c.lineTo(vx+k,vy-H-dh+vh);c.stroke();}c.restore();}
+  const ix=x+150,iy=y-H+40,iw=200,ih=86;rrect(c,ix,iy,iw,ih,6);fs(c,'#ece6d8',1.6);rrect(c,ix+70,iy+30,60,36,14);fill(c,'#d9604a');
+  rrect(c,ix+92,iy+18,14,30,2);fs(c,'#2f6a5a',1.2);c.beginPath();c.moveTo(ix+106,iy+28);c.lineTo(ix+136,iy+52);c.lineTo(ix+132,iy+56);c.lineTo(ix+104,iy+36);c.closePath();fs(c,'#e5483a',1.2);
+  circ(c,ix+30,iy+40,14);fs(c,'#5fa85a',1.2);circ(c,ix+170,iy+40,14);fs(c,'#5fa85a',1.2);
+  /* la façade sud : le bardage en haut, le socle en béton et ses grandes baies en bas */
+  for(const [vx,,vw,,dh] of vol){const fy=y+h-H-dh,fh=H+dh;c.fillStyle='#8a5440';c.fillRect(vx,fy,vw,fh*.55);
+    c.save();c.beginPath();c.rect(vx,fy,vw,fh*.55);c.clip();c.strokeStyle='rgba(40,20,10,.35)';for(let k=-40;k<vw+40;k+=12){c.beginPath();c.moveTo(vx+k,fy);c.lineTo(vx+k+20,fy+fh*.55);c.moveTo(vx+k+20,fy);c.lineTo(vx+k,fy+fh*.55);c.stroke();}c.restore();
+    c.fillStyle='#d9d7d2';c.fillRect(vx,fy+fh*.55,vw,fh*.45);
+    for(let k=vx+12;k<vx+vw-20;k+=34){c.fillStyle='#bfe0f0';c.fillRect(k,fy+fh*.62,20,fh*.33);c.fillStyle='#c9c6bf';c.fillRect(k+22,fy+fh*.58,5,fh*.42);}
+    rrect(c,vx+vw/2-14,fy+6,28,fh*.4,2);fs(c,'#bfe0f0',1.2);}
+  c.strokeStyle='rgba(43,58,85,.6)';c.lineWidth=2;c.strokeRect(x,y-H-16,w,h+16);
+  /* l'entrée vitrée, sur le parvis à l'ouest, et son panneau */
+  rrect(c,x-6,y+60,10,64,2);fs(c,'#bfe0f0',1.6);
+  rrect(c,x+8,y-H-6,104,22,6);fs(c,'#fffaf0',1.4);c.fillStyle='#2b3a55';c.font='800 11px Grandstander, Trebuchet MS, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('École maternelle',x+60,y-H+5);}
+function drawRelais(c){const b=BLD.find(o=>o.creche).b,y=b.y+b.h;
+  c.fillStyle='#1f1f24';c.font='800 15px Andika, Trebuchet MS, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('relais perralière',b.x+b.w/2,y-13);
+  circ(c,b.x+b.w/2+92,y-21,4);fill(c,'#4fa8e0');ell(c,b.x+b.w/2+94,y-8,4,6);fill(c,'#8fd05a');ell(c,b.x+b.w/2+86,y-6,2.4,4);fill(c,'#3f9a4a');
+  rrect(c,b.x+40,y-24,18,24,2);fs(c,'#cfd6e4',1.2);}
+function drawBrico(c){const x=360,w=560,y=-1050;
+  c.fillStyle='#e8642c';c.fillRect(x,y-60,w,12);
+  rrect(c,x+20,y-44,w-120,38,3);fs(c,'#bfe0f0',1.6);
+  /* des outils dans la vitrine : marteau, scie, perceuse, pots de peinture */
+  c.save();c.translate(x+70,y-25);c.rotate(-.5);rrect(c,-3,-14,6,28,2);fs(c,'#a8784c',1.2);rrect(c,-10,-18,20,8,2);fs(c,'#6b7488',1.2);c.restore();
+  c.beginPath();c.moveTo(x+120,y-14);c.lineTo(x+170,y-14);c.lineTo(x+170,y-30);c.closePath();fs(c,'#cfd6e4',1.2);rrect(c,x+108,y-22,14,10,3);fs(c,'#e5483a',1.2);
+  rrect(c,x+210,y-34,30,14,4);fs(c,'#f2b440',1.2);rrect(c,x+218,y-20,10,14,2);fs(c,'#f2b440',1.2);
+  [['#4f9fd8',290],['#5fc06a',320],['#e5483a',350]].forEach(([col,px])=>{rrect(c,px,y-28,22,20,3);fs(c,col,1.2);});
+  rrect(c,x+w-90,y-50,50,50,2);fs(c,'#8f96a8',1.4);rrect(c,x+w-86,y-46,42,44,2);fill(c,'#bfe0f0');}
+function bgLot1(g){const t=bgTools(g);
+  /* le trottoir le long de la rue, la haie de la résidence */
+  t.paving(110,80,66,1525,'#ddd8cc','rgba(110,105,95,.14)',30);
+  {let y=HAIE_O.y;const pieces=[];for(const [a,b] of HAIE_O.gaps){pieces.push([y,a]);y=b;}pieces.push([y,HAIE_O.y+HAIE_O.h]);for(const [a,b] of pieces)t.hedge(HAIE_O.x,a,12,b-a);}
+  t.paving(176,1300,12,62,'#7d8088','rgba(30,30,40,.1)',30);
+  /* la barre de Prune s'arrête : derrière, une haie et un jardinet */
+  t.grass(1240,1910,180,240,'#9fce86');t.hedge(1240,1906,180,12);t.hedge(1356,1880,64,12);
+  /* le jardin de Nanou : pelouse, haie tout autour, portillon sur la rue, bac à sable */
+  const jd=RES.jardin;t.hedge(jd.x,jd.y,jd.w,12);t.paving(2168,1730,34,60,'#ddd8cc','rgba(110,105,95,.14)',20);
+  rrect(g,SABLE_N.x,SABLE_N.y,SABLE_N.w,SABLE_N.h,10);g.fillStyle='#f0dca0';g.fill();g.lineWidth=4;g.strokeStyle='#a07246';g.stroke();
+  /* la grande cour de l'école : un sol clair, un tapis souple rouge autour du toboggan */
+  const cr=RES.cour;g.fillStyle='#e6e1d6';g.fillRect(cr.x,cr.y,cr.w,cr.h);t.speck(cr.x,cr.y,cr.w,cr.h,1200,['rgba(150,140,120,.35)','rgba(255,255,255,.5)']);
+  rrect(g,SLIDE_COUR.x-80,SLIDE_COUR.y-50,170,90,30);g.fillStyle='#d9604a';g.fill();
+  [[1540,2215],[1600,2255]].forEach(([x,y])=>{for(let i=0;i<4;i++){g.strokeStyle='#ffd25a';g.lineWidth=2;g.strokeRect(x+i*22,y,20,20);}});
+  [[1560,2410],[1600,2420],[1640,2405],[1680,2415]].forEach(([x,y],i)=>{g.beginPath();g.moveTo(x,y-10);g.lineTo(x+7,y+4);g.lineTo(x-7,y+4);g.closePath();g.fillStyle=['#ffd25a','#e5483a','#4fb0d6','#5fc06a'][i];g.fill();});
+  /* la rue continue : trottoir d'en face, côté ouest */
+}
+/* la rue continue au sud du carrefour : le trottoir d'en face et ses immeubles, côté ouest */
+NBG.push({x:-400,y:700,w:400,h:1800});
+BLD.push({b:{x:-400,y:640,w:340,h:420},H:54,kind:'autre',col:'#e9e1d2'},{b:{x:-400,y:1110,w:340,h:520},H:60,kind:'autre',col:'#efe6d6'},{b:{x:-400,y:1680,w:340,h:700},H:48,kind:'autre',col:'#e6dccb'});
+{const p=NPC('nanou');p.x=2120;p.y=1800;p.dir='left';const v=NPC('victorine');v.x=2040;v.y=1745;[p,v].forEach(n=>n.home={x:n.x,y:n.y,dir:n.dir});}
+function lot1World(c,L,inView){
+  const e=RES.ecole;if(inView(e.x+e.w/2,e.y,e.w))L.push({y:e.y+e.h,d:()=>{const o=occluded(e,44)?.3:1;c.save();c.globalAlpha=o;drawEcole(c);c.restore();}});
+  if(inView(555,-140,420))L.push({y:-119,d:()=>drawRelais(c)});
+  if(inView(640,-1060,420))L.push({y:-1049,d:()=>drawBrico(c)});
+  for(const a of ABRIS)if(inView(a.x,a.y,160))L.push({y:a.y+40,d:()=>drawAbri(c,a)});
+  for(const b of BUSC)if(inView(b.lane?80:30,b.y,140))L.push({y:b.y+56,d:()=>drawBusC23(c,b)});
+  if(inView(PORTILLON.x,PORTILLON.y,160))L.push({y:PORTILLON.y+30,d:()=>{for(const y of [1730,1790]){rrect(c,2168,y-34,8,36,2);fs(c,'#5d6378',1.2);}c.strokeStyle='#5d6378';c.lineWidth=2.4;c.beginPath();c.moveTo(2172,1736);c.lineTo(2140,1748);c.stroke();}});
 }
 /* ---------- au parc et dans la cour, on joue pour de vrai : le bateau, les toboggans, les balançoires ---------- */
 ACT_LABEL.ride='Jouer';
