@@ -967,24 +967,25 @@ const PARC={x:-1340,y:-1360,w:1280,h:1300};
 const ZA={x:-1290,y:-430,w:360,h:320};          /* la zone des petits, avec du sable */
 const ZB={x:-1220,y:-1320,w:290,h:170};          /* au fond à gauche, sans sable */
 const BATEAU={x:-820,y:-540,w:480,h:84};         /* le bateau : tronc à l'ouest, pont de corde, toboggan à l'est */
-const SWING3={x:-580,y0:-400,y1:-220};           /* les 3 balançoires, au sud du bateau, à la perpendiculaire (nord-sud) */
+const SWING3={x:-380,y0:-400,y1:-220};           /* les 3 balançoires, au sud du bateau, à la perpendiculaire (nord-sud) */
 const SWING2={x:-1320,y:-1170,w:100};            /* les 2 balançoires, à gauche de la structure du fond */
 const KIOSQUE={x:-760,y:-1070};
 const FONTAINE={x:-650,y:-780,r:52};
 const PINGPONG={x:-355,y:-800,w:110,h:62};
 const ARAU={x:-470,y:-1090};
 /* une bouche de chaque côté du boulevard, sur le trottoir est de la rue : au nord La Soie, au sud Perrache */
-const BOUCHES=[{x:190,y:-1706,w:140,h:62,dir:'Vaulx-en-Velin La Soie'},{x:190,y:-1330,w:140,h:62,dir:'Perrache'}];
+const BOUCHES=[{x:190,y:-1650,w:140,h:62,dir:'Vaulx-en-Velin La Soie'},{x:190,y:-1330,w:140,h:62,dir:'Perrache'}];
 const METRO={x:260,y:-1252};                     /* le haut des marches de la bouche direction Perrache */
 /* les trois passages piétons : on ne traverse qu'au vert */
-const CROSSW=[{x:195,y:0,w:60,h:80,v:true},{x:0,y:-58,w:110,h:52,v:false},{x:0,y:-1414,w:110,h:52,v:false}];
-const PEDS=[{x:150,y:96},{x:268,y:-8},{x:124,y:-64},{x:-12,y:-64},{x:124,y:-1356},{x:-12,y:-1356}];
+const CROSSW=[{x:195,y:0,w:60,h:80,v:true},{x:0,y:-58,w:110,h:52,v:false},{x:0,y:-1414,w:110,h:52,v:false},{x:120,y:-1520,w:60,h:100,v:true}];
+const PEDS=[{x:150,y:96},{x:268,y:-8},{x:124,y:-64},{x:-12,y:-64},{x:124,y:-1356},{x:-12,y:-1356},{x:196,y:-1410},{x:196,y:-1530}];
 const onCrossing=(x,y)=>CROSSW.some(w=>x>w.x-4&&x<w.x+w.w+4&&y>w.y-4&&y<w.y+w.h+4);
 let GRIDBUILD=false;
 /* les rues : bloquées sauf aux passages piétons */
 RECTS.push({x:-1400,y:0,w:1595,h:80},{x:255,y:0,w:2145,h:80});
 RECTS.push({x:0,y:-6,w:110,h:6},{x:0,y:-1362,w:110,h:1304},{x:0,y:-1420,w:110,h:6});
-RECTS.push({x:-1400,y:-1900,w:3800,h:480});                 /* le boulevard et au-delà */
+/* le cours (deux voies) se traverse à l'est de la rue, vers la bouche La Soie ; au-delà, les immeubles */
+RECTS.push({x:-1400,y:-1900,w:3800,h:200},{x:-1400,y:-1700,w:1510,h:180},{x:340,y:-1700,w:2060,h:180},{x:-1400,y:-1520,w:1520,h:100},{x:180,y:-1520,w:2220,h:100});                 /* le boulevard et au-delà */
 RECTS.push({x:-1400,y:80,w:1400,h:2420});                   /* les immeubles au sud-ouest du carrefour */
 RECTS.push({x:-1400,y:-1420,w:60,h:1420});                  /* à l'ouest du parc */
 RECTS.push({x:340,y:-1420,w:2060,h:1360},{x:170,y:-980,w:170,h:920}); /* les immeubles à l'est de la rue ; le parvis du métro reste libre */
@@ -1001,7 +1002,7 @@ RECTS.push({x:KIOSQUE.x-80,y:KIOSQUE.y-26,w:160,h:46},{x:PINGPONG.x,y:PINGPONG.y
 RECTS.push({x:ZB.x-100,y:ZB.y+ZB.h,w:250,h:14},{x:ZB.x+230,y:ZB.y+ZB.h,w:60,h:14},{x:ZB.x+ZB.w,y:ZB.y,w:14,h:ZB.h+14});
 const PARCBENCH=[{x:-950,y:-640},{x:-420,y:-640},{x:-950,y:-930},{x:-300,y:-1000}];
 PARCBENCH.forEach(b=>{BENCHES.push(b);RECTS.push({x:b.x-28,y:b.y-6,w:56,h:12});});
-[[-1300,-560],[-1300,-760],[-1300,-960],[-1240,-1060],[-120,-300],[-120,-520],[-120,-760],[-120,-980],[-120,-1180],[-560,-1300],[-760,-1300],[-880,-200],[-300,-200],[-1000,-560]]
+[[-1300,-560],[-1300,-760],[-1300,-960],[-1240,-1060],[-120,-300],[-120,-520],[-120,-760],[-120,-980],[-120,-1180],[-560,-1300],[-760,-1300],[-880,-200],[-1000,-560]]
   .forEach(([x,y],i)=>TREES.push({x,y,seed:40+i*1.7,bloom:false,aut:i%3===1}));
 [[-30,-300],[-30,-700],[-30,-1100],[140,-400],[140,-800],[-600,-90],[-1000,-90],[700,-30],[1300,-30],[-500,-560],[-500,-940]].forEach(([x,y])=>LAMPS.push({x,y}));
 /* des gens au parc, sur le trottoir ; des pigeons sur l'esplanade */
@@ -1012,7 +1013,7 @@ BLD.push({b:{x:360,y:-1340,w:560,h:290},H:60,kind:'autre',col:'#ece3d4'},{b:{x:1
   {b:{x:190,y:-540,w:730,h:420},H:24,kind:'autre',col:'#f6dcb4',creche:true},{b:{x:980,y:-560,w:620,h:470},H:54,kind:'autre',col:'#e6dccb'},
   {b:{x:1660,y:-560,w:660,h:470},H:36,kind:'autre',col:'#efe6d6'},{b:{x:-1340,y:150,w:1280,h:440},H:54,kind:'autre',col:'#e9e1d2'});
 /* les voitures : la route et la rue continuent ; le boulevard a ses voitures */
-const BLVC=[0,1,2,3].map(i=>({x:i*900-1200,lane:i%2,y:[-1585,-1450,-1545,-1485][i],sp:i%2?170:210,col:['#4f6fa8','#f2b440','#cfd2d8','#e5483a'][i]}));
+const BLVC=[0,1,2,3].map(i=>({x:i*900-1200,lane:i%2,y:[-1495,-1445,-1495,-1445][i],sp:i%2?170:210,col:['#4f6fa8','#f2b440','#cfd2d8','#e5483a'][i]}));
 /* le bonhomme : rouge 7 s, vert 7 s ; s'il y a quelqu'un au bord, le vert vient vite */
 function curbWait(){if(S.mode!=='play')return false;for(const w of CROSSW){const m=70;if(P.x>w.x-m&&P.x<w.x+w.w+m&&P.y>w.y-m&&P.y<w.y+w.h+m&&!onCrossing(P.x,P.y))return true;}return false;}
 function pedUpdate(dt){
@@ -1026,8 +1027,8 @@ function carStops(pos,dir,lo,hi,w){const stop=S.ped==='green'||onCrossing(P.x,P.
   return dir>0?(pos+26>lo-30&&pos<lo+4):(pos-26<hi+30&&pos>hi-4);}
 function nordCars(dt){
   for(const c of ROADC){const dir=c.lane?-1:1,w=CROSSW[0];if(!carStops(c.x,dir,w.x,w.x+w.w))c.x+=dir*c.sp*dt;if(c.x>2480)c.x=-1480;if(c.x<-1480)c.x=2480;}
-  for(const c of AVC){const dir=c.lane?-1:1;let st=false;for(const w of [CROSSW[1],CROSSW[2]])if(carStops(c.y,dir,w.y,w.y+w.h))st=true;if(!st)c.y+=dir*c.sp*dt;if(c.y>2580)c.y=-1900;if(c.y<-1900)c.y=2580;}
-  for(const c of BLVC){c.x+=(c.lane?-1:1)*c.sp*dt;if(c.x>2480)c.x=-1480;if(c.x<-1480)c.x=2480;}
+  for(const c of AVC){const dir=c.lane?-1:1;let st=false;for(const w of [CROSSW[1],CROSSW[2]])if(carStops(c.y,dir,w.y,w.y+w.h))st=true;if(!st)c.y+=dir*c.sp*dt;if(c.y>2580)c.y=-1720;if(c.y<-1720)c.y=2580;}
+  for(const c of BLVC){const dir=c.lane?-1:1,w=CROSSW[3];if(!carStops(c.x,dir,w.x,w.x+w.w))c.x+=dir*c.sp*dt;if(c.x>2480)c.x=-1480;if(c.x<-1480)c.x=2480;}
 }
 function nordBlocked(x,y,r){
   if(GRIDBUILD||S.ped!=='red'||onCrossing(P.x,P.y))return false;
@@ -1047,11 +1048,10 @@ function bgNord(g){
   /* trottoirs partout, puis les rues */
   pav(-1400,-1900,3800,1900);pav(-1400,0,1400,700);
   /* au nord du boulevard : le pied des immeubles d'en face */
-  g.fillStyle='#d9cdb8';g.fillRect(-1400,-1900,3800,180);for(let x=-1380;x<2400;x+=160){if(x>-40&&x<340)continue;g.fillStyle='#bfe0f0';g.fillRect(x,-1800,60,40);g.fillStyle='#e5d3b0';g.fillRect(x+80,-1790,50,70);}
-  road(0,-1900,110,300);dash(55,-1900,55,-1610);pav(114,-1720,226,110,'#e6e0d2');
-  /* le grand boulevard : deux fois deux voies et un terre-plein planté */
-  road(-1400,-1610,3800,190);g.fillStyle='#8fbf78';g.fillRect(-1400,-1524,3800,18);for(let x=-1380;x<2400;x+=70){circ(g,x,-1515,8);g.fillStyle='#5fa85a';g.fill();}
-  dash(-1400,-1568,2400,-1568);dash(-1400,-1462,2400,-1462);g.fillStyle='#b9b6ae';g.fillRect(-1400,-1424,3800,4);g.fillRect(-1400,-1610,3800,4);
+  g.fillStyle='#d9cdb8';g.fillRect(-1400,-1900,3800,200);for(let x=-1380;x<2400;x+=160){if(x>-40&&x<340)continue;g.fillStyle='#bfe0f0';g.fillRect(x,-1780,60,40);g.fillStyle='#e5d3b0';g.fillRect(x+80,-1770,50,70);}
+  road(0,-1900,110,380);dash(55,-1900,55,-1520);pav(114,-1700,226,180,'#e6e0d2');
+  /* le cours : deux voies */
+  road(-1400,-1520,3800,100);dash(-1400,-1470,2400,-1470);g.fillStyle='#b9b6ae';g.fillRect(-1400,-1424,3800,4);g.fillRect(-1400,-1524,3800,4);
   /* la route du Casino, vers l'ouest ; le trottoir d'en face */
   road(-1400,0,1400,80);dash(-1400,40,0,40);g.fillStyle='#b9b6ae';g.fillRect(-1400,-4,1400,4);g.fillRect(-1400,80,1400,4);
   /* la rue, vers le nord, jusqu'au boulevard */
