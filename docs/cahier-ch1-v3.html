@@ -1,0 +1,157 @@
+<title>Perralière v3, chantier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Andika:wght@400;700&display=swap">
+<style>
+/* Mise en page : une colonne de lecture, des lots numérotés dans l'ordre de travail, chaque tâche avec son état. */
+:root{
+  --bg:#fbf7ef; --paper:#ffffff; --ink:#2b3a55; --muted:#5f6a80; --line:#e3dccd;
+  --flame:#e8642c; --leaf:#3f8a4a; --sky:#3f86d6; --chip:#fff1dc;
+  --f-display:'Grandstander','Trebuchet MS',sans-serif; --f-body:'Andika','Trebuchet MS',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:2rem}h2{font-size:1.4rem}h3{font-size:1.05rem}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--chip);border-radius:999px;padding:3px 12px;font-size:.85rem}
+section{display:flex;flex-direction:column;gap:12px}
+.lot{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.lot header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--f-display);color:var(--flame);font-size:1.3rem;font-variant-numeric:tabular-nums}
+.lot .why{color:var(--muted);font-size:.95rem}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+li{max-width:65ch}
+.tag{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;border-radius:6px;padding:1px 7px;margin-right:6px;white-space:nowrap}
+.t-new{background:color-mix(in srgb,var(--sky) 18%,transparent);color:var(--sky)}
+.t-fix{background:color-mix(in srgb,var(--flame) 18%,transparent);color:var(--flame)}
+.t-cut{background:color-mix(in srgb,var(--muted) 18%,transparent);color:var(--muted)}
+.t-idea{background:color-mix(in srgb,var(--leaf) 18%,transparent);color:var(--leaf)}
+blockquote{margin:0;border-left:3px solid var(--line);padding-left:12px;color:var(--muted);font-style:italic}
+.order{counter-reset:s;list-style:none;padding:0}
+.order li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:8px}
+.order li::before{content:counter(s);font-family:var(--f-display);color:var(--flame)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted)}
+a{color:var(--sky)}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <h1>Chapitre 1, la Perralière : le chantier de la v3</h1>
+  <p class="lead">Tout ce qu'on a décidé avec Mich le 6 novembre 2026, dans l'ordre où le faire. La v3 jouable actuelle sert de base. Les répliques restent celles de la v2, sauf celles listées ici.</p>
+  <div class="meta"><span class="chip">Base : reference-html/ch1-perraliere-v3.html</span><span class="chip">Lien de test : claude.ai/artifact/LeuAv4ZfocjY77vYV4DZgw</span><span class="chip">Pas d'application avant la fin du jeu</span></div>
+  <div class="legend"><span><span class="tag t-new">Nouveau</span>à ajouter</span><span><span class="tag t-fix">Corriger</span>existe mais faux</span><span><span class="tag t-cut">Retirer</span>à enlever</span><span><span class="tag t-idea">Proposé</span>idée de Claude, à valider</span></div>
+</header>
+
+<section>
+<h2>L'histoire, en une phrase par étape</h2>
+<ul class="order">
+  <li><span>Départ devant chez nous, <b>déjà en trottinette</b>. Didou est dans le sac d'Ulysse, Ninou dans celui de Sacha, Bibou dans un chariot accroché à la trottinette d'Ulysse. On croise Elisa et Lucia (en poussette) devant chez elles, Helena et Maya devant chez nous.</span></li>
+  <li><span>En allant à l'école, on passe devant le jardin de Nanou : <b>Victorine</b>. Bibou saute du chariot et flaire la haie, Didou sort du sac et se faufile. La trottinette blanche est rendue. Sacha reste jouer avec Victorine.</span></li>
+  <li><span>À l'école : <b>Iris et sa maman Myriam</b>. Ronces du portail, boule de feu, grande cour au sud, trottinette bleue près du toboggan. Myriam dit d'aller voir Léonie, et la flèche montre le chemin.</span></li>
+  <li><span>Retour par le jardin : Sacha remonte sur sa trottinette. Prune et Roman jouent vers chez Nanou.</span></li>
+  <li><span>Devant chez nous : <b>Léonie</b>, qui nous suit pour sa quête. Galerie, deux passages piétons, parc. Sacha fait un câlin au hérisson, on trouve la trottinette rose. Léonie reste au parc.</span></li>
+  <li><span>Rex se montre au parc et s'enfuit vers le métro. Poursuite courte. Rex traverse au vert, le feu passe au rouge quand on arrive. Il descend la bouche direction Perrache.</span></li>
+  <li><span>Métro A, 5 arrêts courts jusqu'à Masséna, puis l'écran de fin.</span></li>
+</ul>
+</section>
+
+<section>
+<h2>Les lots de travail</h2>
+
+<div class="lot"><header><span class="num">1</span><h3>Carte et décor</h3></header>
+<p class="why">On garde le plan et l'ordonnancement actuels. On corrige les détails faux et on ajoute ce qui manque.</p>
+<ul>
+  <li><span class="tag t-cut">Retirer</span>Tous les lampadaires (c'est le jour, et l'un d'eux bloque le trottoir près du relais). La fontaine du parc.</li>
+  <li><span class="tag t-fix">Corriger</span>Hors de la résidence et du parc, c'est la ville : un trottoir le long de la rue du Casino au lieu de l'herbe. Une haie entre la résidence et le parking. On sort par le chemin est-ouest devant chez nous ou par le parking.</li>
+  <li><span class="tag t-fix">Corriger</span>Fermer le passage entre le parking et l'école. Raccourcir la barre de Prune : elle ne descend pas jusqu'à l'école.</li>
+  <li><span class="tag t-fix">Corriger</span>Allonger la rue entre la sortie de la résidence et l'allée de l'école.</li>
+  <li><span class="tag t-fix">Corriger</span><b>L'école</b>, d'après les photos : un bâtiment bas, un bardage brun en losanges, un socle en béton clair, une grille brune avec sa bande plantée, un parvis devant l'entrée. La cour intérieure est visible mais fermée. La grande cour sud a son toboggan au fond, et le chemin est continu jusqu'à elle, sans herbe qui arrive d'un coup.</li>
+  <li><span class="tag t-fix">Corriger</span>Agrandir le jardin de Nanou : Victorine et Sacha y jouent.</li>
+  <li><span class="tag t-fix">Corriger</span><b>Le relais</b> en face du Casino : un bâtiment bas, un mur rose saumon, l'inscription « relais perralière » en lettres noires avec trois gouttes (bleue, vert clair, vert), au pied d'une tour à balcons.</li>
+  <li><span class="tag t-new">Nouveau</span>Un magasin de bricolage derrière la bouche Perrache : une vitrine d'outils, sans nom ni logo.</li>
+  <li><span class="tag t-new">Nouveau</span>Bus C23 : deux arrêts « La Perralière » face à face, au niveau du parking (direction Cité Internationale d'un côté, direction Flachet de l'autre), et un arrêt « Flachet » dans la rue, juste avant le cours. Des abribus, et un bus C23 qui passe et s'arrête.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">2</span><h3>Le parc et le château</h3></header>
+<p class="why">Mich : on doit pouvoir jouer comme dans les autres chapitres, avec des structures fidèles aux photos.</p>
+<ul>
+  <li><span class="tag t-fix">Corriger</span>Le « bateau » devient <b>le château</b> : 3 tours en bois à toit pointu de bardeaux rouge-brun, des fenêtres à cadre rouge, des passerelles entre les tours. Deux toboggans en inox partent vers le nord, l'un de la tour ouest, l'autre de celle du milieu.</li>
+  <li><span class="tag t-new">Nouveau</span>Ulysse choisit par où monter : l'échelle à rampes, la rampe à tasseaux ou le mur d'escalade. Puis il choisit son toboggan. Sacha suit. On peut refaire un tour.</li>
+  <li><span class="tag t-new">Nouveau</span>La structure d'escalade en métal pour les grands : poteaux gris à embouts jaunes, arceaux, boules noires, anneau en filet. On la voit, mais on n'y joue pas.</li>
+  <li><span class="tag t-fix">Corriger</span>Les sols : du sable rouge-brun presque partout, un grand bac à sable avec son toboggan pour les petits, un sol souple autour de la structure du nord-est.</li>
+  <li><span class="tag t-fix">Corriger</span>Le ping-pong se place près de l'aire de jeux du nord-ouest.</li>
+  <li><span class="tag t-fix">Corriger</span>Les balançoires : de vrais pieds en A visibles sur le portique nord-sud.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">3</span><h3>Personnages, sacs à dos et répliques</h3></header>
+<ul>
+  <li><span class="tag t-new">Nouveau</span>Trottinettes dès le départ. Didou dans le sac d'Ulysse, Ninou dans celui de Sacha, Bibou dans un chariot derrière la trottinette d'Ulysse. Chacun sort quand on a besoin de lui, puis retourne à sa place.</li>
+  <li><span class="tag t-cut">Retirer</span>Papa : « Vos trottinettes à vous, Rex ne les a pas trouvées : elles sont rangées à la maison. » · Ulysse : « Nos trottinettes ! Elles sont à la maison ! » · Papa : « Bonne idée, Ulysse ! On file à la maison les chercher ! » · Maman : « Voilà vos trottinettes et vos casques ! » · Sacha : « Moi aussi je roule ! Je descends du dos de Ninou ! » · Ninou : « Le métro roule sous la terre, comme une taupe géante ! » · Rex : « Même moi, j'attends le vert ! »</li>
+  <li><span class="tag t-fix">Corriger</span>Gardées et adaptées : Didou « Il court trop vite ! », Ulysse « C'est parti ! », Papa « Au feu, on s'arrête ! ».</li>
+  <li><span class="tag t-new">Nouveau</span><b>Myriam</b>, la maman d'Iris (35 à 40 ans, cheveux et yeux marron, sans lunettes), à côté d'Iris devant l'école. Après la quête : « Léonie cherche sa trottinette, elle aussi ! Elle est devant chez vous. »</li>
+  <li><span class="tag t-new">Nouveau</span><b>Roman</b> (6 ans, cheveux mi-longs blond foncé, yeux bleus, dessin repris du ch3) avec Prune, vers chez Nanou. Ils ne suivent pas la bande.</li>
+  <li><span class="tag t-fix">Corriger</span>Lucia en poussette. Iris ne suit pas la bande. Helena et Maya devant chez nous. Léonie devant chez nous : elle suit pendant sa quête, puis reste au parc.</li>
+  <li><span class="tag t-new">Nouveau</span>Sacha reste jouer avec Victorine au jardin pendant l'école (ballon, bac à sable, Ninou à côté). Au retour : « Je viens avec toi, Ulysse ! ». Victorine : « Au revoir Sacha ! On rejoue demain ! ». On ne peut pas aller au hérisson sans Sacha.</li>
+  <li><span class="tag t-fix">Corriger</span>La trottinette de Victorine devient blanche (dessin, bande du haut et répliques).</li>
+  <li><span class="tag t-new">Nouveau</span>Le bouclier : une boule de feu qui touche quelqu'un rebondit sur une bulle bleue (« Pouf ! »), et la personne rit. Papa dit une seule fois : « On lance la boule de feu sur les ronces, jamais sur les copains. » La boule ne vise que les ronces et les obstacles.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">4</span><h3>Savoir où aller</h3></header>
+<p class="why">Mich : on ne sait pas toujours quoi faire ni où aller.</p>
+<ul>
+  <li><span class="tag t-fix">Corriger</span>La flèche suit le vrai chemin, celui qui contourne les obstacles et passe aux passages piétons. Elle montre toujours le prochain virage, jamais le but en ligne droite. Toujours visible et discrète, grande quand on appuie sur l'ampoule.</li>
+  <li><span class="tag t-new">Nouveau</span>Un ordre fixe : une seule étape mise en avant à la fois (Victorine, puis Iris, puis Léonie).</li>
+  <li><span class="tag t-new">Nouveau</span>Les empreintes vertes de Rex mènent à chaque trottinette.</li>
+  <li><span class="tag t-new">Nouveau</span>La bande du haut montre chaque trottinette en silhouette, avec le visage de sa propriétaire. Didou annonce la suivante dès qu'une trottinette est rendue.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">5</span><h3>Animations</h3></header>
+<p class="why">L'audit : les gestes importants sont trop courts et peu lisibles.</p>
+<ul>
+  <li><span class="tag t-fix">Corriger</span>Boule de feu : une pose d'élan (0,2 s), une grosse boule lumineuse avec sa traînée, un petit tremblement à l'impact, des ronces qui crépitent puis partent en étincelles.</li>
+  <li><span class="tag t-fix">Corriger</span>Câlin de Sacha : il court, serre l'animal, une grosse gerbe de cœurs part, et l'animal se relève et saute de joie.</li>
+  <li><span class="tag t-fix">Corriger</span>Didou : il saute du sac, renifle (la truffe bouge), plonge dans la haie. La haie tremble sur son trajet, des feuilles volent, puis il ressort en tirant la trottinette.</li>
+  <li><span class="tag t-fix">Corriger</span>Bibou : il saute du chariot, file vers la haie, y gratte, puis remonte dans le chariot.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">6</span><h3>Rex, la poursuite et le métro</h3></header>
+<ul>
+  <li><span class="tag t-fix">Corriger</span>Rex s'enfuit dans la bonne direction, vers le métro. Il ne revient jamais vers la maison.</li>
+  <li><span class="tag t-fix">Corriger</span>Une poursuite courte (environ 20 secondes) mais vivante : un détour par une allée du parc, un ou deux tremplins, des encouragements de Léonie et des gens du parc.</li>
+  <li><span class="tag t-fix">Corriger</span>Le feu : Rex traverse au vert, le feu passe au rouge quand Ulysse arrive. Rex sautille de l'autre côté (« Hi hi ! Trop tard ! »). L'attente dure environ 1,5 seconde, puis il descend la bouche Perrache.</li>
+  <li><span class="tag t-fix">Corriger</span>Le métro : 5 arrêts, environ 3 secondes entre deux, chaque quai dessiné d'après les photos. Flachet a ses mosaïques géométriques et ses sièges jaunes ; Gratte-Ciel sa forêt verte et ses hublots à mots ; République sa fresque de fleurs bleues, rouges et noir et blanc ; Charpennes ses carreaux roses, rouges et blancs ; Masséna ses carreaux beiges à joints noirs et son nom en lettres lumineuses. La rame est grise, avec une bande rouge, un avant arrondi et des phares ronds, sans logo.</li>
+</ul></div>
+
+<div class="lot"><header><span class="num">7</span><h3>Améliorations auxquelles on n'avait pas pensé</h3></header>
+<ul>
+  <li><span class="tag t-idea">Proposé</span>Retrouver la partie là où on l'a laissée (dernière étape faite), pour qu'Ulysse n'ait pas à tout refaire si on ferme la page.</li>
+  <li><span class="tag t-idea">Proposé</span>Des sons d'ambiance : enfants dans la cour, oiseaux au parc, cloche de l'école, bus C23 qui freine.</li>
+  <li><span class="tag t-idea">Proposé</span>Des enfants inventés qui jouent dans la grande cour de l'école, pour qu'elle soit vivante.</li>
+  <li><span class="tag t-idea">Proposé</span>Sur l'écran de fin, les trois copines avec leur trottinette rendue.</li>
+  <li><span class="tag t-idea">Proposé</span>Un geste caché pour Papa (appui long sur l'ampoule) qui saute l'étape en cours, utile quand Ulysse fatigue.</li>
+  <li><span class="tag t-idea">Proposé</span>Vérifier la mémoire sur un vieux téléphone : le monde est grand, il faudra peut-être alléger les toiles du décor.</li>
+  <li><span class="tag t-idea">Proposé</span>Relire toutes les répliques : aucune ne parle d'une chose qu'on ne voit pas encore (celle de Myriam s'accompagne de la flèche) et aucune ne s'empile.</li>
+</ul></div>
+</section>
+
+<section>
+<h2>L'ordre de travail</h2>
+<p class="lead">Une étape par lot, un commit et une publication sur le même lien après chacune. Il faut compter 3 à 4 sessions.</p>
+<ul class="order">
+  <li><span>Lot 1 : carte et décor, avec l'école et le relais.</span></li>
+  <li><span>Lot 2 : le parc et le château jouable.</span></li>
+  <li><span>Lot 3 : personnages, sacs, répliques et bouclier.</span></li>
+  <li><span>Lot 4 : la flèche qui suit le chemin, les empreintes, la bande du haut.</span></li>
+  <li><span>Lot 5 : les animations.</span></li>
+  <li><span>Lot 6 : Rex, la poursuite et les 5 stations.</span></li>
+  <li><span>Les tests de CLAUDE.md : partie complète au toucher et à la souris, marche réelle partout, captures téléphone et PC, relecture des dialogues. Puis la mise à jour de docs/reprise.md.</span></li>
+</ul>
+<blockquote>Les petits jeux pédagogiques de moyenne section viendront dans les chapitres suivants, pas dans celui-ci.</blockquote>
+</section>
+</div>

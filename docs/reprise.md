@@ -107,3 +107,7 @@ Le portage est l'occasion de corriger les anciens chapitres :
 - Testé : partie complète automatique jusqu'à l'écran de fin (clavier), toucher pour marcher sur téléphone, captures PC et téléphone, aucune erreur.
 - À faire : partie complète à la main sur téléphone ; toit de la galerie qui cache le bas du passage du Casino ; toit gris uni de la crèche.
 - Décision de Mich (6 novembre) : pas d'application (Android, .exe) tant que le jeu n'est pas fini ; on la fera en une fois à la fin.
+
+## Ch1 v3 : chantier suivant (6 novembre 2026)
+- Cahier des charges validé avec Mich : `docs/cahier-ch1-v3.html`, publié ici : https://claude.ai/artifact/PMSgNjKwfRsYBAmzPq2jru
+- Sept lots, dans l'ordre : carte et décor (école, relais, C23) ; parc et château ; personnages, sacs à dos et bouclier ; flèche qui suit le chemin ; animations ; Rex, poursuite, 5 stations ; tests. Compter 3 à 4 sessions.
