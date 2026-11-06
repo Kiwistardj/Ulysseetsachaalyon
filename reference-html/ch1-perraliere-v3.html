@@ -1060,25 +1060,23 @@ function bgNord(g){
   /* le parvis du métro */
   pav(114,-1420,226,440,'#e6e0d2');
   /* le parc */
-  const pk=PARC;t.grass(pk.x,pk.y,pk.w,pk.h);
+  const pk=PARC;g.fillStyle='#d6a27e';g.fillRect(pk.x,pk.y,pk.w,pk.h);t.speck(pk.x,pk.y,pk.w,pk.h,5200,['rgba(150,90,60,.35)','rgba(255,235,210,.45)']);
+  t.grass(pk.x,pk.y,pk.w,60);t.grass(pk.x,pk.y,60,pk.h);t.grass(pk.x+pk.w-60,pk.y,60,pk.h);t.grass(pk.x,pk.y+pk.h-50,pk.w,50);
   /* les allées : de l'entrée sud à l'esplanade, au kiosque, à l'entrée nord-est */
-  g.strokeStyle='#e6d6b4';g.lineCap='round';g.lineJoin='round';g.lineWidth=60;
+  g.strokeStyle='#e4bc98';g.lineCap='round';g.lineJoin='round';g.lineWidth=60;
   g.beginPath();g.moveTo(-180,-40);g.lineTo(-200,-380);g.lineTo(-560,-600);g.stroke();
   g.beginPath();g.moveTo(-200,-380);g.lineTo(-900,-380);g.lineTo(-1100,-450);g.stroke();
   g.beginPath();g.moveTo(-760,-960);g.lineTo(-760,-1000);g.stroke();
   g.beginPath();g.moveTo(-560,-1000);g.lineTo(-300,-1290);g.lineTo(-40,-1290);g.stroke();
   g.beginPath();g.moveTo(-900,-1000);g.lineTo(-1020,-1140);g.stroke();
   /* la grande esplanade */
-  rrect(g,-1120,-990,960,420,40);g.fillStyle='#e2d3b2';g.fill();t.speck(-1120,-990,960,420,1400,['rgba(150,120,80,.4)','rgba(255,255,255,.4)']);
+  rrect(g,-1120,-990,960,420,40);g.fillStyle='#dcab86';g.fill();t.speck(-1120,-990,960,420,1400,['rgba(150,120,80,.4)','rgba(255,255,255,.4)']);
   /* la zone des petits, avec son sable, et sa bordure en bois */
   rrect(g,ZA.x,ZA.y,ZA.w,ZA.h,26);g.fillStyle='#f0dca0';g.fill();t.speck(ZA.x,ZA.y,ZA.w,ZA.h,500,['rgba(180,140,80,.5)','rgba(255,255,255,.5)']);g.lineWidth=6;g.strokeStyle='#a07246';g.stroke();
   /* la zone du fond, sans sable : un sol souple de couleur */
-  rrect(g,ZB.x,ZB.y,ZB.w,ZB.h,20);g.fillStyle='#e58a6a';g.fill();for(let i=0;i<14;i++){circ(g,ZB.x+20+rand()*(ZB.w-40),ZB.y+20+rand()*(ZB.h-40),10+rand()*14);g.fillStyle=['#4fb0d6','#ffd25a','#5fc06a'][i%3];g.fill();}
+  rrect(g,ZB.x,ZB.y,ZB.w,ZB.h,20);g.fillStyle='#d09670';g.fill();
   g.lineWidth=3;g.strokeStyle='rgba(43,58,85,.5)';rrect(g,ZB.x,ZB.y,ZB.w,ZB.h,20);g.stroke();
-  rrect(g,SWING2.x-30,SWING2.y-40,SWING2.w+60,80,16);g.fillStyle='rgba(229,138,106,.85)';g.fill();
   /* sous le bateau et les balançoires : des copeaux */
-  rrect(g,BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,30);g.fillStyle='#c99a62';g.fill();t.speck(BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,700,['rgba(120,80,40,.5)','rgba(240,200,140,.6)']);
-  rrect(g,SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,20);g.fillStyle='#c99a62';g.fill();t.speck(SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,240,['rgba(120,80,40,.5)']);
   /* la fontaine */
   if(FONTAINE.r>0){
   circ(g,FONTAINE.x+6,FONTAINE.y+8,FONTAINE.r);g.fillStyle='rgba(43,58,85,.15)';g.fill();
@@ -1116,7 +1114,7 @@ function drawSwings(c,s,n,col){const x0=s.x,x1=s.x+s.w,y=s.y,top=y-96,riders=swi
     drawSeat(c,sx,fy,col[i%col.length],false,riders[i]);}}
 function drawSwingsV(c,s,n,col){const x=s.x,y0=s.y0,y1=s.y1,H=96,riders=swingRiders(s);
   ell(c,x+4,(y0+y1)/2,30,(y1-y0)/2+16);fill(c,'rgba(43,58,85,.12)');
-  for(const y of [y0,y1]){postWood(c,x-16,y,x,y-H);postWood(c,x+16,y,x,y-H);}
+  for(const y of [y0,y1]){postWood(c,x-28,y+6,x,y-H);postWood(c,x+28,y-6,x,y-H);c.strokeStyle='#7a5a40';c.lineWidth=3;c.beginPath();c.moveTo(x-15,y-44);c.lineTo(x+15,y-50);c.stroke();}
   postWood(c,x,y0-H,x,y1-H);
   for(let i=0;i<n;i++){const sy=y0+(i+.5)*(y1-y0)/n,sw=swingSway(s,i);
     c.strokeStyle='#7a7f8f';c.lineWidth=2;c.beginPath();c.moveTo(x,sy-H-8);c.lineTo(x+sw,sy-30);c.moveTo(x,sy-H+8);c.lineTo(x+sw,sy-22);c.stroke();
@@ -1654,7 +1652,7 @@ let BGL=[];
 function buildBG(){
   const mk=(x,y,w,h,fn)=>{const cnv=document.createElement('canvas');cnv.width=w;cnv.height=h;const g=cnv.getContext('2d');g.translate(-x,-y);seed=11;fn(g);grain(g,w,h);BGL.push({c:cnv,x,y,w,h});};
   mk(0,0,W_RES,H_RES,g=>{bgRes(g,REG.res);bgLot1(g);});
-  for(const b of NBG)mk(b.x,b.y,b.w,b.h,g=>bgNord(g));
+  for(const b of NBG)mk(b.x,b.y,b.w,b.h,g=>{bgNord(g);bgLot2(g);});
 }
 function drawOutside(c,R,cx,cy,w,h){
   c.save();c.fillStyle=R.out||'#8fbf78';
@@ -2912,7 +2910,7 @@ function drawHedgeBush(c){const b=BUSH,sh=b.rustle>0&&!reduceMotion?Math.sin(S.t
   for(let i=0;i<6;i++){const x=x0+i*22+sh,y=y0-(i%2)*6;circ(c,x,y,20);fsh(c,i%2?'#4f9a4a':'#3f8a4a',x-20,y-20,40,40,1.6,.35,.2);}
   for(let i=0;i<5;i++){circ(c,x0+10+i*24+sh,y0-16,7);c.fillStyle='rgba(140,200,110,.55)';c.fill();}}
 function storyWorld(c,L,inView){
-  lot1World(c,L,inView);
+  lot1World(c,L,inView);lot2World(c,L,inView);
   if(S.scooter)for(const r of RAMPS)if(inView(r.x,r.y,80))L.push({y:r.y-14,d:()=>drawRampR(c,r)});
   L.push({y:-1e6,d:()=>drawFootR(c)});
   if(inView(BUSH.x,BUSH.y,200))L.push({y:BUSH.y+16,d:()=>drawHedgeBush(c)});
@@ -3114,6 +3112,70 @@ function playUpdate(dt){
   /* des étoiles sur ce qui se joue, quand on est tout près */
   S.playT=(S.playT||0)-dt;if(S.playT<0){S.playT=1.6;for(const p of PLAYS){if(p.gate&&!S.gateOpen)continue;const d=dist(P.x,P.y,p.ax,p.ay);if(d<520)PARTS.push({x:p.x+(rand()-.5)*30,y:p.y-70,vx:0,vy:-24,life:1.1,max:1.1,color:'#ffd25a',size:8,kind:'spark'});}}
 }
+/* ===================== lot 2 : le château du parc (photos de Mich) =====================
+   Trois tours en bois sur une ligne ouest-est, toits pointus en bardeaux rouge-brun, fenêtres à cadre rouge, passerelles couvertes.
+   On monte au choix : le mur d'escalade (tour ouest), la rampe à tasseaux (tour du milieu), l'échelle (tour est).
+   Deux toboggans en inox partent vers le nord, depuis la tour ouest et la tour du milieu. */
+const CHAT={y:-480,d:50,lift:64,towers:[-760,-580,-400],tw:64};
+rmRect(r=>isR(r,-820,-520,480,64)||isR(r,-866,-494,40,24));
+BATEAU.x=-796;BATEAU.y=-530;BATEAU.w=432;BATEAU.h=50;
+RECTS.push({x:-796,y:-528,w:432,h:46},{x:-726,y:-690,w:40,h:66},{x:-546,y:-690,w:40,h:66});
+/* la structure en métal des grands, au nord-est du parc, sur son sol souple : on la voit, on n'y joue pas */
+const METAL={x:-250,y:-1170};
+RECTS.push({x:METAL.x-46,y:METAL.y-24,w:92,h:36});
+function chutePts(tx,startY){const pts=[];const x0=tx+26,y0=startY,x1=tx+84,y1=-690;for(let k=1;k<=8;k++){const u=k/8,l=CHAT.lift*(1-u)*(1-u*.2);pts.push([x0+(x1-x0)*u,y0+(y1-y0)*u,Math.max(0,l),340]);}pts.push([x1+6,y1-18,0,180]);return pts;}
+function chatPath(kind){const L=CHAT.lift,W=-476,[tw,tm,te]=CHAT.towers;
+  if(kind==='mur')return [[tw,-452,0],[tw,W,L,38],[tw+18,W,L,90],[tw+24,W-20,L,90],...chutePts(tw,W-20)];
+  if(kind==='rampe')return [[tm-4,-430,0],[tm,W,L,60],[tm+18,W,L,90],[tm+24,W-20,L,90],...chutePts(tm,W-20)];
+  return [[te,-452,0],[te,W,L,44],[(te+tm)/2,W,L+4,110],[tm+18,W,L,110],[tm+24,W-20,L,90],...chutePts(tm,W-20)];}
+PLAYS.splice(0,1,
+  {kind:'bateau',x:CHAT.towers[0],y:-560,ax:CHAT.towers[0],ay:-452,pts:()=>chatPath('mur')},
+  {kind:'bateau',x:CHAT.towers[1],y:-560,ax:CHAT.towers[1]-4,ay:-430,pts:()=>chatPath('rampe')},
+  {kind:'bateau',x:CHAT.towers[2],y:-560,ax:CHAT.towers[2],ay:-452,pts:()=>chatPath('echelle')});
+function drawTower(c,tx){const y=CHAT.y,pl=y-CHAT.lift,w=CHAT.tw,x=tx-w/2;
+  /* les poteaux */
+  for(const px of [x+4,x+w-4]){postWood(c,px,y,px,pl-4);}
+  /* la plateforme et la cabane en planches */
+  rrect(c,x-4,pl-6,w+8,10,2);fsh(c,'#b48a5e',x-4,pl-6,w+8,10,1.6,.3,.2);
+  c.fillStyle='#a07a52';c.fillRect(x,pl-58,w,52);c.strokeStyle='rgba(70,45,25,.45)';c.lineWidth=1.2;for(let k=x+6;k<x+w;k+=8){c.beginPath();c.moveTo(k,pl-58);c.lineTo(k,pl-6);c.stroke();}
+  c.lineWidth=2;c.strokeStyle='rgba(43,58,85,.7)';c.strokeRect(x,pl-58,w,52);
+  /* les fenêtres à cadre rouge */
+  for(const fx of [x+10,x+w-26]){c.fillStyle='#3a2a20';c.fillRect(fx,pl-46,16,16);c.strokeStyle='#d8343c';c.lineWidth=3.2;c.strokeRect(fx,pl-46,16,16);}
+  /* le toit pointu en bardeaux */
+  c.beginPath();c.moveTo(x-10,pl-56);c.lineTo(tx,pl-112);c.lineTo(x+w+10,pl-56);c.closePath();fsh(c,'#8a4a3a',x-10,pl-112,w+20,56,2,.3,.25);
+  c.save();c.clip();c.strokeStyle='rgba(60,25,20,.45)';c.lineWidth=1.4;for(let k=pl-104;k<pl-56;k+=7){c.beginPath();c.moveTo(x-12,k);c.lineTo(x+w+12,k);c.stroke();}c.restore();
+  postWood(c,tx,pl-112,tx,pl-124);}
+function drawPasserelle(c,a,b){const pl=CHAT.y-CHAT.lift;
+  c.fillStyle='#a8845a';c.fillRect(a,pl-30,b-a,26);c.strokeStyle='rgba(70,45,25,.45)';c.lineWidth=1.2;for(let k=a+6;k<b;k+=7){c.beginPath();c.moveTo(k,pl-30);c.lineTo(k,pl-4);c.stroke();}
+  c.strokeStyle='rgba(43,58,85,.6)';c.lineWidth=2;c.strokeRect(a,pl-30,b-a,26);rrect(c,a-2,pl-6,b-a+4,6,2);fs(c,'#b48a5e',1.2);}
+function drawChute(c,tx){const pl=CHAT.y-CHAT.lift,x0=tx+26,y0=pl-10,x1=tx+84,y1=-690;
+  const g=c.createLinearGradient(x0,0,x0+24,0);g.addColorStop(0,'#dfe5ec');g.addColorStop(.5,'#8e9aa8');g.addColorStop(1,'#cbd3dc');
+  c.beginPath();c.moveTo(x0-10,y0);c.lineTo(x0+10,y0);c.quadraticCurveTo(x1+4,y0-10,x1+14,y1);c.lineTo(x1-6,y1);c.quadraticCurveTo(x1-16,y0-14,x0-10,y0);c.closePath();c.fillStyle=g;c.fill();c.lineWidth=2;c.strokeStyle='rgba(43,58,85,.7)';c.stroke();
+  c.strokeStyle='rgba(255,255,255,.85)';c.lineWidth=2;c.beginPath();c.moveTo(x0-2,y0-2);c.quadraticCurveTo(x1-4,y0-12,x1+4,y1+4);c.stroke();
+  c.strokeStyle='#6b7488';c.lineWidth=3;c.beginPath();c.moveTo(x0-10,y0);c.quadraticCurveTo(x1-16,y0-14,x1-6,y1);c.moveTo(x0+10,y0);c.quadraticCurveTo(x1+4,y0-10,x1+14,y1);c.stroke();rrect(c,x1-8,y1-8,24,10,3);fs(c,'#cbd3dc',1.4);}
+function drawAccess(c){const [tw,tm,te]=CHAT.towers,y=CHAT.y,pl=y-CHAT.lift;
+  /* le mur d'escalade, sous la tour ouest */
+  rrect(c,tw-24,pl+2,48,CHAT.lift-2,3);fsh(c,'#8a6a4a',tw-24,pl+2,48,CHAT.lift-2,1.6,.3,.2);
+  [[-14,10,'#ffd25a'],[8,18,'#4fb0d6'],[-6,30,'#e5483a'],[12,40,'#5fc06a'],[-12,50,'#c97ad8']].forEach(([dx,dy,col])=>{ell(c,tw+dx,pl+dy,5,4);fs(c,col,1.2);});
+  /* la rampe à tasseaux, devant la tour du milieu */
+  c.beginPath();c.moveTo(tm-18,y+46);c.lineTo(tm+18,y+46);c.lineTo(tm+16,pl);c.lineTo(tm-16,pl);c.closePath();fsh(c,'#b48a5e',tm-18,pl,36,y+46-pl,1.8,.3,.2);
+  c.strokeStyle='#7a5a40';c.lineWidth=3;for(let k=0;k<6;k++){const yy=pl+8+k*(y+40-pl)/6;c.beginPath();c.moveTo(tm-14,yy);c.lineTo(tm+14,yy);c.stroke();}
+  /* l'échelle à rampes, devant la tour est */
+  postWood(c,te-12,y+22,te-10,pl-2);postWood(c,te+12,y+22,te+10,pl-2);c.strokeStyle='#a8784c';c.lineWidth=3;for(let k=8;k<CHAT.lift+20;k+=11){c.beginPath();c.moveTo(te-11,y+22-k);c.lineTo(te+11,y+22-k);c.stroke();}}
+function drawBateau(c){const [tw,tm,te]=CHAT.towers,h=CHAT.tw/2;
+  ell(c,(tw+te)/2,CHAT.y+6,(te-tw)/2+70,16);fill(c,'rgba(43,58,85,.15)');
+  drawPasserelle(c,tw+h,tm-h);drawPasserelle(c,tm+h,te-h);for(const t of CHAT.towers)drawTower(c,t);drawAccess(c);}
+function drawMetal(c){const x=METAL.x,y=METAL.y;
+  for(const [dx,dy] of [[-40,0],[0,-16],[40,0],[0,14]]){c.strokeStyle='#8f96a8';c.lineWidth=6;c.lineCap='round';c.beginPath();c.moveTo(x+dx,y+dy);c.lineTo(x+dx,y+dy-90);c.stroke();circ(c,x+dx,y+dy-92,4);fill(c,'#ffd25a');}
+  c.strokeStyle='#5a6070';c.lineWidth=3;ell(c,x,y-82,46,14);c.stroke();c.beginPath();c.moveTo(x-40,y-90);c.quadraticCurveTo(x-66,y-46,x-40,y);c.stroke();c.beginPath();c.moveTo(x+40,y-90);c.quadraticCurveTo(x+68,y-50,x+44,y+4);c.stroke();
+  [[-58,-60],[-58,-30],[60,-64],[62,-34],[54,-8]].forEach(([dx,dy])=>{circ(c,x+dx,y+dy,6);fs(c,'#2b2b36',1.2);});}
+function lot2World(c,L,inView){
+  for(const t of [CHAT.towers[0],CHAT.towers[1]])if(inView(t,-640,200))L.push({y:-690,d:()=>drawChute(c,t)});
+  if(inView(METAL.x,METAL.y,200))L.push({y:METAL.y+14,d:()=>drawMetal(c)});
+}
+function bgLot2(g){const t=bgTools(g);
+  /* le sol souple vert autour de la structure en métal */
+  ell(g,METAL.x,METAL.y,110,60);g.fillStyle='#7fb48a';g.fill();g.lineWidth=3;g.strokeStyle='rgba(43,58,85,.35)';g.stroke();}
 /* ---------- départ et fin ---------- */
 function discover(){}
 function startGame(){
