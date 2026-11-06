@@ -508,7 +508,7 @@ const RES={
   autres:{x:1320,y:80,w:880,h:380}
 };
 const START={x:530,y:1330};
-const REG={res:{x0:-1400,y0:-1700,w:3800,h:4200,bg:'#a9d690'}};
+const REG={res:{x0:-1400,y0:-1900,w:3800,h:4400,bg:'#a9d690'}};
 const regionAt=(x,y)=>{for(const k in REG){const r=REG[k];if(x>=r.x0&&x<r.x0+r.w&&y>=r.y0&&y<r.y0+r.h)return k;}return 'res';};
 const BGFN={res:bgRes}; /* les fonds de chaque région ; c1_galerie.js ajoute les intérieurs */
 const RECTS=[];
@@ -967,14 +967,15 @@ const PARC={x:-1340,y:-1360,w:1280,h:1300};
 const ZA={x:-1290,y:-430,w:360,h:320};          /* la zone des petits, avec du sable */
 const ZB={x:-1220,y:-1320,w:290,h:170};          /* au fond à gauche, sans sable */
 const BATEAU={x:-820,y:-540,w:480,h:84};         /* le bateau : tronc à l'ouest, pont de corde, toboggan à l'est */
-const SWING3={x:-720,y:-300,w:300};              /* les 3 balançoires, au sud du bateau */
+const SWING3={x:-580,y0:-400,y1:-220};           /* les 3 balançoires, au sud du bateau, à la perpendiculaire (nord-sud) */
 const SWING2={x:-1320,y:-1170,w:100};            /* les 2 balançoires, à gauche de la structure du fond */
 const KIOSQUE={x:-760,y:-1070};
 const FONTAINE={x:-650,y:-780,r:52};
 const PINGPONG={x:-355,y:-800,w:110,h:62};
 const ARAU={x:-470,y:-1090};
-const BOUCHES=[{x:190,y:-1320,w:140,h:62,dir:'Vaulx-en-Velin La Soie'},{x:190,y:-1150,w:140,h:62,dir:'Perrache'}];
-const METRO={x:260,y:-1066};                     /* le haut des marches de la bouche direction Perrache */
+/* une bouche de chaque côté du boulevard, sur le trottoir est de la rue : au nord La Soie, au sud Perrache */
+const BOUCHES=[{x:190,y:-1706,w:140,h:62,dir:'Vaulx-en-Velin La Soie'},{x:190,y:-1330,w:140,h:62,dir:'Perrache'}];
+const METRO={x:260,y:-1252};                     /* le haut des marches de la bouche direction Perrache */
 /* les trois passages piétons : on ne traverse qu'au vert */
 const CROSSW=[{x:195,y:0,w:60,h:80,v:true},{x:0,y:-58,w:110,h:52,v:false},{x:0,y:-1414,w:110,h:52,v:false}];
 const PEDS=[{x:150,y:96},{x:268,y:-8},{x:124,y:-64},{x:-12,y:-64},{x:124,y:-1356},{x:-12,y:-1356}];
@@ -983,7 +984,7 @@ let GRIDBUILD=false;
 /* les rues : bloquées sauf aux passages piétons */
 RECTS.push({x:-1400,y:0,w:1595,h:80},{x:255,y:0,w:2145,h:80});
 RECTS.push({x:0,y:-6,w:110,h:6},{x:0,y:-1362,w:110,h:1304},{x:0,y:-1420,w:110,h:6});
-RECTS.push({x:-1400,y:-1700,w:3800,h:280});                 /* le boulevard et au-delà */
+RECTS.push({x:-1400,y:-1900,w:3800,h:480});                 /* le boulevard et au-delà */
 RECTS.push({x:-1400,y:80,w:1400,h:2420});                   /* les immeubles au sud-ouest du carrefour */
 RECTS.push({x:-1400,y:-1420,w:60,h:1420});                  /* à l'ouest du parc */
 RECTS.push({x:340,y:-1420,w:2060,h:1360},{x:170,y:-980,w:170,h:920}); /* les immeubles à l'est de la rue ; le parvis du métro reste libre */
@@ -992,7 +993,7 @@ BOUCHES.forEach(b=>RECTS.push({x:b.x,y:b.y,w:b.w,h:b.h}));
 RECTS.push({x:-1340,y:-66,w:1110,h:8},{x:-130,y:-66,w:70,h:8},{x:-66,y:-1250,w:8,h:1190},{x:-66,y:-1360,w:8,h:30},{x:-1340,y:-1366,w:1280,h:8});
 /* dans le parc */
 RECTS.push({x:BATEAU.x,y:BATEAU.y+20,w:BATEAU.w,h:BATEAU.h-20},{x:BATEAU.x-46,y:BATEAU.y+46,w:40,h:24});
-RECTS.push({x:SWING3.x-4,y:SWING3.y-6,w:10,h:10},{x:SWING3.x+SWING3.w-6,y:SWING3.y-6,w:10,h:10});
+RECTS.push({x:SWING3.x-16,y:SWING3.y0-6,w:32,h:12},{x:SWING3.x-16,y:SWING3.y1-6,w:32,h:12});
 RECTS.push({x:SWING2.x-4,y:SWING2.y-6,w:10,h:10},{x:SWING2.x+SWING2.w-6,y:SWING2.y-6,w:10,h:10});
 RECTS.push({x:-1150,y:-330,w:100,h:40},{x:-1110,y:-1270,w:90,h:40});      /* les deux petits toboggans */
 RECTS.push({x:KIOSQUE.x-80,y:KIOSQUE.y-26,w:160,h:46},{x:PINGPONG.x,y:PINGPONG.y,w:PINGPONG.w,h:PINGPONG.h});
@@ -1008,7 +1009,7 @@ PARCBENCH.forEach(b=>{BENCHES.push(b);RECTS.push({x:b.x-28,y:b.y-6,w:56,h:12});}
 [[-560,-660],[-530,-680],[-760,-900],[-730,-880]].forEach(([x,y],i)=>PIGEONS.push({x,y,hx:x,hy:y,face:i%2?1:-1,peck:0,fly:0,t:i}));
 /* les immeubles autour : en plongée, comme ceux de la résidence */
 BLD.push({b:{x:360,y:-1340,w:560,h:290},H:60,kind:'autre',col:'#ece3d4'},{b:{x:190,y:-930,w:730,h:320},H:60,kind:'autre',col:'#e9dfcf'},
-  {b:{x:190,y:-560,w:730,h:470},H:42,kind:'autre',col:'#efe6d6'},{b:{x:980,y:-560,w:620,h:470},H:54,kind:'autre',col:'#e6dccb'},
+  {b:{x:190,y:-540,w:730,h:420},H:24,kind:'autre',col:'#f6dcb4',creche:true},{b:{x:980,y:-560,w:620,h:470},H:54,kind:'autre',col:'#e6dccb'},
   {b:{x:1660,y:-560,w:660,h:470},H:36,kind:'autre',col:'#efe6d6'},{b:{x:-1340,y:150,w:1280,h:440},H:54,kind:'autre',col:'#e9e1d2'});
 /* les voitures : la route et la rue continuent ; le boulevard a ses voitures */
 const BLVC=[0,1,2,3].map(i=>({x:i*900-1200,lane:i%2,y:[-1585,-1450,-1545,-1485][i],sp:i%2?170:210,col:['#4f6fa8','#f2b440','#cfd2d8','#e5483a'][i]}));
@@ -1025,7 +1026,7 @@ function carStops(pos,dir,lo,hi,w){const stop=S.ped==='green'||onCrossing(P.x,P.
   return dir>0?(pos+26>lo-30&&pos<lo+4):(pos-26<hi+30&&pos>hi-4);}
 function nordCars(dt){
   for(const c of ROADC){const dir=c.lane?-1:1,w=CROSSW[0];if(!carStops(c.x,dir,w.x,w.x+w.w))c.x+=dir*c.sp*dt;if(c.x>2480)c.x=-1480;if(c.x<-1480)c.x=2480;}
-  for(const c of AVC){const dir=c.lane?-1:1;let st=false;for(const w of [CROSSW[1],CROSSW[2]])if(carStops(c.y,dir,w.y,w.y+w.h))st=true;if(!st)c.y+=dir*c.sp*dt;if(c.y>2580)c.y=-1500;if(c.y<-1500)c.y=2580;}
+  for(const c of AVC){const dir=c.lane?-1:1;let st=false;for(const w of [CROSSW[1],CROSSW[2]])if(carStops(c.y,dir,w.y,w.y+w.h))st=true;if(!st)c.y+=dir*c.sp*dt;if(c.y>2580)c.y=-1900;if(c.y<-1900)c.y=2580;}
   for(const c of BLVC){c.x+=(c.lane?-1:1)*c.sp*dt;if(c.x>2480)c.x=-1480;if(c.x<-1480)c.x=2480;}
 }
 function nordBlocked(x,y,r){
@@ -1036,7 +1037,7 @@ function nordBlocked(x,y,r){
 /* la caméra : à l'ouest de la rue, seulement quand on est au nord */
 function camXMin(){const y=cam.y;return y<150?-1400:y>650?0:-1400*(650-y)/500;}
 /* ---------- le fond du nord : trois toiles, autour de celle de la résidence ---------- */
-const NBG=[{x:-1400,y:-1700,w:2400,h:1700},{x:1000,y:-640,w:1400,h:640},{x:-1400,y:0,w:1400,h:700}];
+const NBG=[{x:-1400,y:-1900,w:2400,h:1900},{x:1000,y:-640,w:1400,h:640},{x:-1400,y:0,w:1400,h:700}];
 function bgNord(g){
   const t=bgTools(g);
   const pav=(x,y,w,h,col)=>t.paving(x,y,w,h,col||'#ddd8cc','rgba(110,105,95,.14)',30);
@@ -1044,9 +1045,10 @@ function bgNord(g){
   const dash=(x1,y1,x2,y2)=>{g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=3;g.setLineDash([22,18]);g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();g.setLineDash([]);};
   const hedge=(x,y,w,h)=>{rrect(g,x,y,w,h,Math.min(8,h/2));fsh(g,'#3f8a4a',x,y,w,h,1.6,.35,.2);for(let i=x+8;i<x+w-6;i+=18){circ(g,i,y+h*.35,Math.min(7,h*.4));g.fillStyle='rgba(120,190,100,.45)';g.fill();}};
   /* trottoirs partout, puis les rues */
-  pav(-1400,-1700,3800,1700);pav(-1400,0,1400,700);
+  pav(-1400,-1900,3800,1900);pav(-1400,0,1400,700);
   /* au nord du boulevard : le pied des immeubles d'en face */
-  g.fillStyle='#d9cdb8';g.fillRect(-1400,-1700,3800,70);for(let x=-1380;x<2400;x+=160){g.fillStyle='#bfe0f0';g.fillRect(x,-1680,60,28);g.fillStyle='#e5d3b0';g.fillRect(x+80,-1690,50,40);}
+  g.fillStyle='#d9cdb8';g.fillRect(-1400,-1900,3800,180);for(let x=-1380;x<2400;x+=160){if(x>-40&&x<340)continue;g.fillStyle='#bfe0f0';g.fillRect(x,-1800,60,40);g.fillStyle='#e5d3b0';g.fillRect(x+80,-1790,50,70);}
+  road(0,-1900,110,300);dash(55,-1900,55,-1610);pav(114,-1720,226,110,'#e6e0d2');
   /* le grand boulevard : deux fois deux voies et un terre-plein planté */
   road(-1400,-1610,3800,190);g.fillStyle='#8fbf78';g.fillRect(-1400,-1524,3800,18);for(let x=-1380;x<2400;x+=70){circ(g,x,-1515,8);g.fillStyle='#5fa85a';g.fill();}
   dash(-1400,-1568,2400,-1568);dash(-1400,-1462,2400,-1462);g.fillStyle='#b9b6ae';g.fillRect(-1400,-1424,3800,4);g.fillRect(-1400,-1610,3800,4);
@@ -1075,7 +1077,7 @@ function bgNord(g){
   rrect(g,SWING2.x-30,SWING2.y-40,SWING2.w+60,80,16);g.fillStyle='rgba(229,138,106,.85)';g.fill();
   /* sous le bateau et les balançoires : des copeaux */
   rrect(g,BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,30);g.fillStyle='#c99a62';g.fill();t.speck(BATEAU.x-80,BATEAU.y-40,BATEAU.w+160,BATEAU.h+80,700,['rgba(120,80,40,.5)','rgba(240,200,140,.6)']);
-  rrect(g,SWING3.x-30,SWING3.y-50,SWING3.w+60,90,20);g.fillStyle='#c99a62';g.fill();t.speck(SWING3.x-30,SWING3.y-50,SWING3.w+60,90,240,['rgba(120,80,40,.5)']);
+  rrect(g,SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,20);g.fillStyle='#c99a62';g.fill();t.speck(SWING3.x-70,SWING3.y0-20,140,SWING3.y1-SWING3.y0+40,240,['rgba(120,80,40,.5)']);
   /* la fontaine */
   circ(g,FONTAINE.x+6,FONTAINE.y+8,FONTAINE.r);g.fillStyle='rgba(43,58,85,.15)';g.fill();
   circ(g,FONTAINE.x,FONTAINE.y,FONTAINE.r);fs(g,'#d8cfc0',2.4);circ(g,FONTAINE.x,FONTAINE.y,FONTAINE.r-11);g.fillStyle='#7cc4e8';g.fill();
@@ -1099,6 +1101,12 @@ function drawGroundNord(c){const w=CROSSW[0];c.fillStyle='rgba(255,255,255,.9)';
 function drawSwings(c,s,n,col){const x0=s.x,x1=s.x+s.w,y=s.y,top=y-92;
   c.strokeStyle='#8a5f3c';c.lineWidth=6;c.lineCap='round';c.beginPath();c.moveTo(x0-10,y);c.lineTo(x0,top);c.lineTo(x1,top);c.lineTo(x1+10,y);c.stroke();
   for(let i=0;i<n;i++){const sx=x0+(i+.5)*s.w/n,sw=reduceMotion?0:Math.sin(S.t*2+i*1.7)*10;c.strokeStyle='#7a7f8f';c.lineWidth=2;c.beginPath();c.moveTo(sx-8,top+2);c.lineTo(sx-8+sw,y-30);c.moveTo(sx+8,top+2);c.lineTo(sx+8+sw,y-30);c.stroke();rrect(c,sx-12+sw,y-32,24,8,3);fs(c,col[i%col.length],1.4);}}
+function drawSwingsV(c,s,n,col){const x=s.x,y0=s.y0,y1=s.y1,H=92;
+  c.strokeStyle='#8a5f3c';c.lineWidth=6;c.lineCap='round';
+  for(const y of [y0,y1]){c.beginPath();c.moveTo(x-14,y);c.lineTo(x,y-H);c.lineTo(x+14,y);c.stroke();}
+  c.beginPath();c.moveTo(x,y0-H);c.lineTo(x,y1-H);c.stroke();
+  for(let i=0;i<n;i++){const sy=y0+(i+.5)*(y1-y0)/n,sw=reduceMotion?0:Math.sin(S.t*2+i*1.7)*12;c.strokeStyle='#7a7f8f';c.lineWidth=2;
+    c.beginPath();c.moveTo(x,sy-H-10);c.lineTo(x+sw,sy-26);c.moveTo(x,sy-H+10);c.lineTo(x+sw,sy-14);c.stroke();rrect(c,x-5+sw,sy-28,10,22,3);fs(c,col[i%col.length],1.4);}}
 function drawSlideSmall(c,x,y,col){rrect(c,x-40,y-46,22,46,3);fs(c,'#8a5f3c',1.6);c.beginPath();c.moveTo(x-18,y-44);c.lineTo(x+46,y-4);c.lineTo(x+46,y+6);c.lineTo(x-18,y-30);c.closePath();fs(c,col,1.8);rrect(c,x-44,y-52,30,10,3);fs(c,'#e5483a',1.4);}
 function drawBateau(c){const b=BATEAU,x=b.x,y=b.y,w=b.w;
   /* la coque */
@@ -1138,7 +1146,9 @@ function nordWorld(c,L,inView){
   for(const p of PEDS)if(inView(p.x,p.y,140))L.push({y:p.y,d:()=>drawPedLight(c,p)});
   for(const b of BOUCHES)if(inView(b.x+b.w/2,b.y,260))L.push({y:b.y+b.h,d:()=>drawBouche(c,b)});
   if(inView(BATEAU.x+BATEAU.w/2,BATEAU.y,420))L.push({y:BATEAU.y+BATEAU.h,d:()=>drawBateau(c)});
-  if(inView(SWING3.x+150,SWING3.y,240))L.push({y:SWING3.y,d:()=>drawSwings(c,SWING3,3,['#e5483a','#4fb0d6','#ffd25a'])});
+  if(inView(SWING3.x,SWING3.y0+90,260))L.push({y:SWING3.y1,d:()=>drawSwingsV(c,SWING3,3,['#e5483a','#4fb0d6','#ffd25a'])});
+  {const b=BLD.find(o=>o.creche);if(b&&inView(555,-140,300))L.push({y:-119,d:()=>{rrect(c,385,-160,340,26,8);fs(c,'#fffaf0',1.6);c.textAlign='center';c.textBaseline='middle';c.font='800 13px Grandstander, Trebuchet MS, sans-serif';c.fillStyle='#2b3a55';c.fillText('Crèche · Relais assistantes maternelles',555,-146);
+    [[260,'#e5483a'],[330,'#ffd25a'],[780,'#4fb0d6'],[850,'#5fc06a']].forEach(([x,col])=>{rrect(c,x-14,-142,28,20,4);fs(c,col,1.4);});}});}
   if(inView(SWING2.x+50,SWING2.y,200))L.push({y:SWING2.y,d:()=>drawSwings(c,SWING2,2,['#5fc06a','#c97ad8'])});
   if(inView(-1100,-300,200))L.push({y:-290,d:()=>drawSlideSmall(c,-1110,-290,'#4fb0d6')});
   if(inView(-1070,-1230,200))L.push({y:-1230,d:()=>drawSlideSmall(c,-1080,-1230,'#ff9ec0')});
