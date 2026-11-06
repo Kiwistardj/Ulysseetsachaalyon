@@ -1538,7 +1538,7 @@ function update(dt){
       if(!a.isButton&&!S.water&&rand()<dt*9)PARTS.push({x:a.x+FS.side*14+(rand()-.5)*30,y:a.y-34,vx:(rand()-.5)*20,vy:-55,life:1,max:1,color:'#ff7ea8',size:7,kind:'heart'});
       if(S.water&&rand()<dt*26)PARTS.push({x:FS.x-FS.side*18,y:FS.y-34,vx:-FS.side*(60+rand()*40),vy:-20+rand()*30,life:.55,max:.55,color:'#7cc8f0',size:3.5,kind:'drop'});
       if(FS.hugT>(a.isButton?.7:(a.long||1.8))){FS.mode='follow';FS.hugT=0;FS.target=null;const cb=a.cb;a.cb=null;if(cb)cb();}}
-  }else{const t=trailAt(FS.idx);followTo(FS,t.x,t.y,dt);}
+  }else if(FS.mode!=='stay'){const t=trailAt(FS.idx);followTo(FS,t.x,t.y,dt);}
   for(const k of ['ninou','didou']){const f=F[k];if(f.mode&&f.mode!=='follow')continue;const t=trailAt(f.idx);followTo(f,t.x,t.y,dt);}
   const B=F.bibou;
   if(B.mode==='follow'||!B.mode){const t=trailAt(B.idx);followTo(B,t.x,t.y,dt);}
@@ -1665,7 +1665,7 @@ function render(){
   if(S.mode==='metro'){drawMetroScene();drawLinePlan(vw,vh);return;}
   const R=REG[S.region];ctx.fillStyle=R.bg;ctx.fillRect(0,0,vw,vh);
   const top=(S.mode==="title"||S.mode==="end")?0:Math.min(64,vh*.08),bot=vh-(S.mode==="title"||S.mode==="end"?0:S.occ);
-  const z=zoom,visH=Math.max(120,bot-top),viewW=vw/z,viewH=visH/z;
+  const z=zoom*(S.czoom&&!reduceMotion?1+(S.czoom.k-1)*Math.sin(Math.PI*clamp(S.czoom.t/S.czoom.d,0,1)):1),visH=Math.max(120,bot-top),viewW=vw/z,viewH=visH/z;
   const XM=camXMin(),cx=clamp(cam.x-viewW/2,XM,Math.max(XM,R.x0+R.w-viewW));
   const cy=viewH>=R.h?R.y0+(R.h-viewH)/2-top/z:clamp(cam.y-((top+bot)/2)/z,R.y0-top/z,R.y0+R.h-bot/z);
   VIEW.cx=cx;VIEW.cy=cy;VIEW.z=z;
@@ -1683,18 +1683,18 @@ function render(){
   resWorld(c,L,inView);resWorldEnd(c,L,inView);storyWorld(c,L,inView);
   for(const n of NPCS)if(!n.hidden&&inView(n.x,n.y,80))L.push({y:n.y,d:()=>{
     if(n.rex){const hop=n.happy>0&&!reduceMotion?Math.abs(Math.sin(n.happy*12))*14:0;drawRex(c,n.x,n.y-hop,n.dir==='left'?-1:1,S.t*4,false,1.15);return;}
-    const lift=n.wave>0&&!reduceMotion?Math.abs(Math.sin(S.t*9))*10:0,mv=!!n.fol&&n.fmoving;drawPerson(c,n.x,n.y,LOOK[n.id],n.dir,mv?n.wph:S.t*2,mv,{seedT:n.x*.013,lift:lift+(n.lift||0),scooter:n.scoot});}});
+    if(n.pram){drawPram(c,n.x,n.y,LOOK[n.id]);return;}const lift=n.wave>0&&!reduceMotion?Math.abs(Math.sin(S.t*9))*10:0,mv=!!n.fol&&n.fmoving;drawPerson(c,n.x,n.y,LOOK[n.id],n.dir,mv?n.wph:S.t*2,mv,{seedT:n.x*.013,lift:lift+(n.lift||0),scooter:n.scoot});}});
   const sc=onScoot(),fs_=F.sacha,fd=F.didou,fb=F.bibou,fn=F.ninou;
   /* au ch1, Sacha est sur le dos de Ninou ; il descend pour un câlin, et pour la trottinette à la fin */
   const hugging=fs_.mode==='hug'&&fs_.hugT>0&&fs_.target;
   if(!S.sachaDown){L.push({y:fs_.y,d:()=>{c.save();c.translate(0,-(fs_.lift||0));drawPanther(c,fs_.x,fs_.y,fs_.face,fs_.phase,fs_.moving,.95,!hugging&&!S.swing);c.restore();}});
     if(hugging){const a=fs_.target,sx=a.x+fs_.side*(a.sx||20),sy=a.y+4;L.push({y:sy+1,d:()=>drawPerson(c,sx,sy,LOOK.sacha,fs_.side>0?'left':'right',S.t*8,true)});}}
-  else{L.push({y:fn.y,d:()=>drawPanther(c,fn.x,fn.y,fn.face,fn.phase,fn.moving,.95,false)});
-    L.push({y:fs_.y,d:()=>drawPerson(c,fs_.x,fs_.y,LOOK.sacha,fs_.moving?(fs_.dir||'down'):'down',fs_.phase,fs_.moving,sc?{scooter:'#22356b',helmet:'#9fd0f5',lift:jumpLift(fs_)}:{})});}
+  else{if(fn.mode!=='bag')L.push({y:fn.y,d:()=>drawPanther(c,fn.x,fn.y,fn.face,fn.phase,fn.moving,.95,false)});
+    L.push({y:fs_.y,d:()=>drawPerson(c,fs_.x,fs_.y,LOOK.sacha,fs_.moving?(fs_.dir||'down'):'down',fs_.phase,fs_.moving,sc&&!S.sachaStay?{scooter:'#22356b',helmet:'#9fd0f5',lift:jumpLift(fs_)+(fs_.lift||0)}:{})});}
   for(const k of ['papa','maman']){const f=F[k];if(S.fetch)continue;if(f.on||f.walk||S.parentsStay)L.push({y:f.y,d:()=>drawPerson(c,f.x,f.y,LOOK[k],f.moving?(f.dir||'down'):'down',f.phase,f.moving,{seedT:k.length})});}
   L.push({y:P.y,d:()=>{const op=sc&&!S.dig?{scooter:'#5fb35a',helmet:'#ff8a3d'}:{};if(S.dig>0)op.shovel=Math.abs(Math.sin(S.dig*7));op.lift=jumpLift(P)+(P.lift||0);if(S.swing)return;drawPerson(c,P.x,P.y,LOOK.ulysse,P.dir,P.phase,P.moving,op);}});
-  if(!fd.hidden)L.push({y:fd.y,d:()=>{c.save();c.translate(0,-(fd.lift||0));drawFox(c,fd.x,fd.y,fd.face,fd.phase,fd.moving,1.05);c.restore();}});
-  L.push({y:fb.y,d:()=>{c.save();c.translate(0,-(fb.lift||0));drawCat(c,fb.x,fb.y,fb.face,fb.phase,fb.moving,1);c.restore();}});
+  if(!fd.hidden&&fd.mode!=='bag')L.push({y:fd.y,d:()=>{c.save();c.translate(0,-(fd.lift||0));drawFox(c,fd.x,fd.y,fd.face,fd.phase,fd.moving,1.05);c.restore();}});
+  if(fb.mode!=='cart')L.push({y:fb.y,d:()=>{c.save();c.translate(0,-(fb.lift||0));drawCat(c,fb.x,fb.y,fb.face,fb.phase,fb.moving,1);c.restore();}});
   L.sort((a,b)=>a.y-b.y);for(const q of L)q.d();
   drawLeaves(c);
   for(const f of FIREBALLS){const g=c.createRadialGradient(f.x,f.y,2,f.x,f.y,20);g.addColorStop(0,'#fff6d6');g.addColorStop(.4,'#ffd25a');g.addColorStop(1,'rgba(255,122,61,0)');c.fillStyle=g;circ(c,f.x,f.y,20);c.fill();}
@@ -1716,12 +1716,6 @@ function render(){
   c.font='800 18px Grandstander, Trebuchet MS, sans-serif';
   for(const b of BUBBLES){c.globalAlpha=clamp(b.t/.4,0,1);const w=c.measureText(b.text).width+22;rrect(c,b.x-w/2,b.y-16,w,32,16);fs(c,'#fffaf0',2);c.fillStyle='#2b3a55';c.fillText(b.text,b.x,b.y+1);}
   c.globalAlpha=1;
-  if(S.arrow&&S.mode==='play'){
-    const a=S.arrow,d=dist(P.x,P.y,a.x,a.y),pulse=1+Math.sin(S.t*8)*.12;
-    if(d>170){const ang=Math.atan2(a.y-P.y,a.x-P.x);c.save();c.translate(P.x+Math.cos(ang)*84,P.y-24+Math.sin(ang)*84);c.rotate(ang);c.scale(pulse,pulse);
-      c.beginPath();c.moveTo(22,0);c.lineTo(-8,-16);c.lineTo(-2,-6);c.lineTo(-20,-6);c.lineTo(-20,6);c.lineTo(-2,6);c.lineTo(-8,16);c.closePath();fs(c,'#ff7a3d',2.5);c.restore();}
-    const by=a.y-90+Math.sin(S.t*6)*8;c.save();c.translate(a.x,by);c.beginPath();c.moveTo(0,22);c.lineTo(-16,-4);c.lineTo(-6,-4);c.lineTo(-6,-22);c.lineTo(6,-22);c.lineTo(6,-4);c.lineTo(16,-4);c.closePath();fs(c,'#ff7a3d',2.5);c.restore();
-  }
   ctx.setTransform(dpr,0,0,dpr,0,0);
   const lg=ctx.createRadialGradient(vw*.12,-vh*.15,0,vw*.12,-vh*.15,Math.max(vw,vh)*1.15);lg.addColorStop(0,'rgba(255,236,190,.22)');lg.addColorStop(1,'rgba(255,236,190,0)');ctx.fillStyle=lg;ctx.fillRect(0,0,vw,vh);
   if(S.fade){const a=S.fade.t<.35?S.fade.t/.35:1-(S.fade.t-.35)/.35;ctx.fillStyle='rgba(255,250,240,'+clamp(a,0,1)+')';ctx.fillRect(0,0,vw,vh);}
@@ -2567,7 +2561,7 @@ NPCS.push(
   {id:'leonie',x:300,y:102,dir:'down',first:"Salut Ulysse ! Le dinosaure a pris ma trottinette rose ! Il est parti vers l'aire de jeux du parc, de l'autre côté de la route !",
     again:()=>ITEMS[2].back?"Merci Ulysse ! J'ai retrouvé ma trottinette rose !":"Ma trottinette rose est à l'aire de jeux, derrière la haie !"},
   {id:'prune',x:1418,y:1924,dir:'right',first:"Coucou Sacha ! Coucou Bibou ! Il est tout doux, Bibou !",again:"Je peux faire un câlin à Ninou ?",join:"Je viens avec vous !"},
-  {id:'iris',x:1440,y:2000,dir:'down',first:"Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
+  {id:'iris',x:1428,y:1996,dir:'down',first:"Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
     again:()=>ITEMS[0].back?"Merci Ulysse ! J'ai retrouvé ma trottinette bleue !":S.gateOpen?"Ma trottinette est dans la cour, près du toboggan !":"Lance ta boule de feu sur les ronces du portail !"},
   {id:'mahe',x:1560,y:2272,dir:'left',first:"Super-héros ! Tu as brûlé les ronces ! Trop fort !",again:"Tu reviens jouer dans la cour ?"},
   {id:'nanou',x:1566,y:1450,dir:'down',first:"Bonjour Ulysse ! Bonjour mon petit Sacha ! Regardez Bibou, il renifle sous la haie !",again:"Faites attention à vous, les super-héros !"},
@@ -2665,7 +2659,7 @@ function finishHeal(a){
 }
 function openBush(){
   if(S.didouT)return;
-  BUSH.open=true;BUSH.rustle=1;S.didouT=.001;F.didou.mode='sneak';S.idle=0;S.arrow=null;ITEMS[1].lock=true;
+  BUSH.open=true;BUSH.rustle=1;S.didouT=.001;F.didou.mode='sneak';F.didou.hidden=false;F.didou.x=P.x;F.didou.y=P.y;S.idle=0;S.arrow=null;ITEMS[1].lock=true;
   SFX.yip();bubble(BUSH.x,BUSH.y-70,'Je me faufile !');
 }
 function updateDidou(dt){
@@ -2809,15 +2803,15 @@ function drawLinePlan(W,H){
 }
 /* ---------- la mise à jour de l'histoire, appelée à chaque image ---------- */
 function storyUpdate(dt){
+  lot3Update(dt);
   busUpdate(dt);
   /* les copines qui suivent la bande */
   for(const n of NPCS){if(n.wave>0)n.wave-=dt;if(!n.fol)continue;const t=trailAt(n.fol),ox=n.x,oy=n.y;followTo(n,t.x,t.y,dt,Math.max(200,dist(n.x,n.y,t.x,t.y)*6));
     n.fmoving=Math.hypot(n.x-ox,n.y-oy)>.3;if(n.fmoving){n.wph=(n.wph||0)+dt*11;const dx=n.x-ox,dy=n.y-oy;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');}}
-  {const it=ITEMS[2],n=NPC('leonie');if(it.carry&&S.mode==='play'&&dist(P.x,P.y,n.x,n.y)<150){it.carry=false;S.rets.push({it,n,t:0,fx:P.x,fy:P.y-40});}}
   playUpdate(dt);updateDidou(dt);updateReturns(dt);updateJumps(dt);if(S.fetch)updateFetch(dt);
   if(S.mode==='play'&&!D.cur){
     /* on parle quand on approche */
-    for(const n of NPCS){if(n.fol||S.met.has(n.id))continue;if(n.id==='mahe'&&!S.gateOpen)continue;if(dist(P.x,P.y,n.x,n.y)<118){talk(n);break;}}
+    for(const n of NPCS){if(n.fol||n.quiet||S.met.has(n.id))continue;if(n.id==='leonie'&&!(ITEMS[0].back&&ITEMS[1].back))continue;if(n.id==='mahe'&&!S.gateOpen)continue;if(dist(P.x,P.y,n.x,n.y)<118){talk(n);break;}}
     if(S.goMetro&&dist(P.x,P.y,METRO.x,METRO.y)<72)startMetro();
     if(S.chase)cheer();
     /* les feux : Papa et Maman expliquent */
@@ -2825,7 +2819,6 @@ function storyUpdate(dt){
     if(!D.cur&&atCurb&&S.ped==='red'&&!S.redWarned){S.redWarned=true;say([['papa',"Stop ! Le bonhomme est rouge, les voitures passent. On attend qu'il devienne vert !"]]);}
     if(!D.cur&&atCurb&&S.ped==='green'&&!S.greenTold){S.greenTold=true;say([['maman',"Le bonhomme est vert ! On regarde à gauche, à droite, et on traverse."]]);}
     /* Prune encourage Ulysse devant les ronces */
-    if(!S.said.prune&&NPC('prune').fol&&!S.gateOpen&&dist(P.x,P.y,GATE.x,GATE.y)<300){S.said.prune=1;say([['prune',"Vas-y Ulysse !"]]);}
   }
   /* les animaux blessés */
   for(const a of HURT){
@@ -2833,7 +2826,7 @@ function storyUpdate(dt){
     if(a.hurt&&!a.healing&&S.mode==='play'){
       const d=dist(P.x,P.y,a.x,a.y);
       if(d<260){a.ouch-=dt;if(a.ouch<=0){a.ouch=3;bubble(a.x,a.y-44,'Aïe !');}}
-      if(d<190&&!a.noticed&&!D.cur&&!S.chase&&!S.goMetro){a.noticed=true;S.idle=0;say([['didou',a.id==='herisson'?'Oh ! Un hérisson blessé ! Appuie sur '+btnA()+', Sacha va lui faire un câlin guérisseur !':'Oh ! Un petit oiseau blessé ! Appuie sur '+btnA()+' pour le câlin guérisseur de Sacha !']]);}
+      if(d<190&&!a.noticed&&!D.cur&&!S.chase&&!S.goMetro&&!S.sachaStay){a.noticed=true;S.idle=0;say([['didou',a.id==='herisson'?'Oh ! Un hérisson blessé ! Appuie sur '+btnA()+', Sacha va lui faire un câlin guérisseur !':'Oh ! Un petit oiseau blessé ! Appuie sur '+btnA()+' pour le câlin guérisseur de Sacha !']]);}
     }
     if(a.walk){const ox=a.x;followTo(a,a.walk.x,a.walk.y,dt,70);if(Math.abs(a.x-ox)>.1)a.face=a.x<ox?-1:1;if(!a.moving)a.walk=null;}
     if(a.fly===true){const dx=a.perch.x-a.x,dy=a.perch.y-a.y,d=Math.hypot(dx,dy);if(d>3){const st=Math.min(d,180*dt);a.x+=dx/d*st;a.y+=dy/d*st;a.face=dx<0?-1:1;}else a.fly='perched';}
@@ -2841,14 +2834,13 @@ function storyUpdate(dt){
   }
   /* Bibou flaire la haie : il y va d'abord, ensuite Didou dit ce qu'il a senti */
   const B=F.bibou;
-  if(B.mode==='follow'&&S.mode==='play'&&!BUSH.open&&dist(P.x,P.y,BUSH.x,BUSH.y)<300)B.mode='flair';
   if(B.mode==='flair'){
     followTo(B,BUSH.x-30,BUSH.y+44,dt,270);
     if(!B.moving){B.face=1;B.meowT-=dt;
       if(B.meowT<=0){B.meowT=2.8;SFX.meow();bubble(B.x,B.y-46,'Miaou !');BUSH.rustle=.7;
         PARTS.push({x:BUSH.x,y:BUSH.y-50,vx:0,vy:-30,life:1,max:1,color:'#ffd25a',size:9,kind:'spark'});
         if(!S.flagFlair&&S.mode==='play'&&!D.cur){S.flagFlair=true;say([['didou','Bibou a senti quelque chose sous la haie ! C\'est trop petit pour toi, Ulysse. Va devant et appuie sur '+btnA()+' : je me faufile !']]);}}}
-    if(BUSH.open)B.mode='follow';
+    if(BUSH.open)B.mode='back';
   }
   if(BUSH.rustle>0)BUSH.rustle=Math.max(0,BUSH.rustle-dt);
   /* les ronces du portail */
@@ -2866,12 +2858,7 @@ function storyUpdate(dt){
     if(REX.state==='enter'){
       REX.x-=320*dt;
       if(REX.x<=REX.tx){
-        REX.x=REX.tx;REX.state='talk';
-        say([
-          ['rex','Hi hi hi ! Bravo les super-héros !',()=>SFX.rex()],
-          ['rex',"Mais j'ai encore plein de jouets dans mon sac ! Et le petit train de la Tête d'Or, je l'ai démonté !"],
-          ['rex',"Je file au métro Flachet ! Vous ne m'attraperez jamais, je cours trop vite ! Hi hi !"]
-        ],()=>{REX.state='leave';REX.face=1;SFX.rex();});
+        REX.x=REX.tx;REX.state='talk0';
       }
     }else if(REX.state==='leave'){
       REX.x+=420*dt;REX.face=1;
@@ -2910,7 +2897,7 @@ function drawHedgeBush(c){const b=BUSH,sh=b.rustle>0&&!reduceMotion?Math.sin(S.t
   for(let i=0;i<6;i++){const x=x0+i*22+sh,y=y0-(i%2)*6;circ(c,x,y,20);fsh(c,i%2?'#4f9a4a':'#3f8a4a',x-20,y-20,40,40,1.6,.35,.2);}
   for(let i=0;i<5;i++){circ(c,x0+10+i*24+sh,y0-16,7);c.fillStyle='rgba(140,200,110,.55)';c.fill();}}
 function storyWorld(c,L,inView){
-  lot1World(c,L,inView);lot2World(c,L,inView);
+  lot1World(c,L,inView);lot2World(c,L,inView);lot3World(c,L,inView);
   if(S.scooter)for(const r of RAMPS)if(inView(r.x,r.y,80))L.push({y:r.y-14,d:()=>drawRampR(c,r)});
   L.push({y:-1e6,d:()=>drawFootR(c)});
   if(inView(BUSH.x,BUSH.y,200))L.push({y:BUSH.y+16,d:()=>drawHedgeBush(c)});
@@ -3204,6 +3191,311 @@ function showEnd(){
     const d=document.createElement('div');d.className='friend';const c=document.createElement('canvas');c.width=116;c.height=116;drawPortrait(c,id);
     const s=document.createElement('span');s.textContent=LOOK[id].name;d.appendChild(c);d.appendChild(s);box.appendChild(d);});
   $('hud').hidden=true;$('touch').hidden=true;$('end').hidden=false;
+}
+
+/* ===================== lots 3, 4 et 6 : l'histoire, le guidage, la poursuite et le métro (cahier des charges du 6 novembre 2026) =====================
+   On part en trottinette. Didou est dans le sac d'Ulysse, Ninou dans celui de Sacha, Bibou dans un chariot derrière Ulysse.
+   Ordre : Victorine (jardin de Nanou, Sacha y reste jouer), Iris et Myriam (école), Sacha qu'on récupère, Léonie (devant chez nous, elle vient au parc),
+   puis Rex, la poursuite courte et le métro. */
+Object.assign(LOOK,{
+  myriam:{name:'Myriam',s:1.24,skin:'#f3d6c0',hair:'#6a4428',hs:'long',eyes:'#6a4428',top:'#3fa6a0',bottom:'#38507e',pitch:1.1,vt:'female'},
+  roman:{name:'Roman',s:1.08,skin:'#f6d8c2',hair:'#c9a050',hs:'bob',eyes:'#3f86d6',top:'#e5483a',bottom:'#2f4a6e',pitch:1.4,vt:'narrator'},
+  sanassy:{name:'Sanassy',s:.86,skin:'#5a3a28',hair:'#1f1a16',hs:'short',eyes:'#3a2a22',top:'#f2c548',bottom:'#2f4a6e',pitch:1.5,vt:'narrator'},
+  inaya:{name:'Inaya',s:.94,skin:'#6a4430',hair:'#1f1a16',hs:'pigtails',eyes:'#3a2a22',top:'#ff9ec0',bottom:'#5a4a7a',pitch:1.55,vt:'narrator'},
+  ridha:{name:'Ridha',s:.96,skin:'#d9a57a',hair:'#2b1f18',hs:'short',eyes:'#4a3424',top:'#4fb0d6',bottom:'#39405a',pitch:1.45,vt:'narrator'}
+});
+INTROS.myriam="C'est Myriam, la maman d'Iris !";
+/* les places : Prune et Roman vers chez Nanou ; Léonie devant chez nous ; Myriam à côté d'Iris ; les copains de classe dans la grande cour */
+{const pr=NPC('prune');pr.x=1600;pr.y=1470;pr.dir='down';delete pr.join;
+ const le=NPC('leonie');le.x=612;le.y=1328;le.dir='down';
+ const lu=NPC('lucia');lu.pram=true;lu.first="Areu ! Areu !";lu.again="Areu !";
+ NPCS.push({id:'roman',x:1656,y:1490,dir:'left',first:"Coucou Ulysse ! On joue au ballon avec Prune !",again:"Tu reviens jouer avec nous ?"},
+  {id:'myriam',x:1492,y:1962,dir:'down',quiet:true,first:"Bonjour Ulysse ! Iris a besoin de ta boule de feu.",again:"Bonne journée, Ulysse !"},
+  {id:'sanassy',x:1780,y:2250,dir:'left',quiet:true,first:"Ulysse ! On fait du toboggan ?",again:"Le toboggan, c'est trop bien !"},
+  {id:'inaya',x:1840,y:2370,dir:'left',quiet:true,first:"Coucou Ulysse ! Coucou Bibou !",again:"À demain, Ulysse !"},
+  {id:'ridha',x:1600,y:2390,dir:'right',quiet:true,first:"Regarde, je cours super vite !",again:"On fait la course ?"});
+ NPCS.forEach(n=>{n.home={x:n.x,y:n.y,dir:n.dir};});}
+/* les doudous dans les sacs, Bibou dans son chariot, les trottinettes dès le départ */
+Object.assign(S,{scooter:true,sachaDown:true,sachaStay:false,step:'victorine',hitOnce:false,guideT:0,guide:null});
+F.didou.mode='bag';F.ninou.mode='bag';F.bibou.mode='cart';
+const STAY={x:1996,y:1838};
+/* la poursuite : de la zone du fond du parc, une allée, la grille nord-est, le passage piéton, la bouche direction Perrache */
+CH_WP.length=0;CH_WP.push([-850,-1180],[-700,-1040],[-430,-1180],[-200,-1290],[-40,-1290],[-24,-1388],[140,-1388],[140,-1250],[METRO.x,METRO.y]);
+RAMPS.length=0;RAMPS.push({x:-560,y:-1108},{x:-300,y:-1238});
+for(const k in CHEER)delete CHEER[k];for(const k in CHEER_TXT)delete CHEER_TXT[k];CHEER_TXT.leonie='Vas-y Ulysse !';
+/* ---------- objectifs : une seule étape à la fois ---------- */
+function objectives(){
+  if(S.chase&&REX.on)return [{x:REX.x,y:REX.y,text:"Suis Rex sur ta trottinette ! Il file au métro Flachet !"}];
+  if(S.goMetro)return [{x:METRO.x,y:METRO.y,text:"Rex est descendu dans le métro Flachet ! Vite, on le suit !"}];
+  if(S.chase||S.mode==='cut')return [];
+  if(!ITEMS[1].found){if(!S.met.has('nanou'))return [{x:PORTILLON.x,y:PORTILLON.y,text:"Va au jardin de Nanou, au bout de la rue. Il y a un petit portillon !"}];
+    return [{x:BUSH.x,y:BUSH.y,text:"Va chez Nanou, à la haie. Bibou va renifler !"}];}
+  if(!S.gateOpen)return [{x:GATE.x,y:GATE.y,text:"L'école est fermée par des ronces. Lance ta boule de feu dessus !"}];
+  if(!ITEMS[0].found)return [{x:ITEMS[0].x,y:ITEMS[0].y,text:"La trottinette d'Iris est dans la cour de l'école, près du toboggan !"}];
+  if(S.sachaStay)return [{x:PORTILLON.x,y:PORTILLON.y,text:"Sacha t'attend dans le jardin de Nanou !"}];
+  const le=NPC('leonie');
+  if(!S.met.has('leonie'))return [{x:le.x,y:le.y,text:"Léonie t'attend devant chez nous !"}];
+  if(!ITEMS[2].found)return [HURT[0].hurt?{x:HURT[0].x,y:HURT[0].y,text:"Va à l'aire de jeux. Un hérisson blessé a besoin d'un câlin de Sacha !"}:{x:ITEMS[2].x,y:ITEMS[2].y,text:"La trottinette de Léonie est derrière la haie, à l'aire de jeux !"}];
+  return [];
+}
+function talk(n){
+  const dx=P.x-n.x,dy=P.y-n.y;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');
+  S.idle=0;stopGoal();
+  if(n.id==='leonie'&&!S.met.has('leonie')&&!(ITEMS[0].back&&ITEMS[1].back)){bubble(n.x,n.y-90,'Coucou Ulysse !');n.wave=1.4;return;}
+  if(!S.met.has(n.id)){S.met.add(n.id);SFX.sparkle();burst(n.x,n.y-60,10,['#ffd25a','#ff9ec0','#9fd18b']);
+    const L=n.lines?n.lines():[[n.id,n.first]];
+    if(n.id==='leonie')L.push([n.id,"Je viens avec vous !",()=>{n.fol=96;}]);
+    say(L);return;}
+  if(n.id==='victorine'&&ITEMS[1].back){say([['victorine',S.sachaStay?"On joue au sable avec Sacha !":"Au revoir Sacha ! On rejoue demain !"]]);return;}
+  say([[n.id,typeof n.again==='function'?n.again():n.again]]);
+}
+function collect(it,by){
+  if(it.found)return;
+  it.found=true;S.idle=0;
+  SFX.pickup();buzz(40);burst(it.x,it.y-20,28,['#ffd25a','#ff7a3d','#4fb0d6','#ef5b7a','#9fd18b']);
+  $('slot'+it.slot).classList.add('on');camZoom(1.25,2.2);
+  S.rets.push({it,n:NPC(it.ownerId),t:0,fx:it.x,fy:it.y});
+  if(by==='didou')say([['didou',"Je l'ai trouvée ! Elle était coincée sous la haie !"],['ulysse','Merci Didou ! On la rend à Victorine !']]);
+  else say([['didou','Bravo Ulysse ! Tu as retrouvé la trottinette '+it.de+' ! On la lui rend !']]);
+}
+function returned(it){
+  const k=ITEMS.filter(i=>i.back).length,n=NPC(it.ownerId);
+  const lines=[[it.ownerId,THANKS[it.key]]];
+  if(k===1)lines.push(['ninou','Encore deux trottinettes à trouver !']);
+  if(k===2)lines.push(['ninou',"Plus qu'une trottinette à trouver !"]);
+  if(it.key==='t2'&&!ITEMS[0].back){
+    lines.push(['nanou',"Sacha, tu restes jouer avec Victorine pendant qu'Ulysse va à l'école ?"],['sacha',"Oui ! Je joue avec Victorine !",()=>{S.sachaStay=true;F.sacha.mode='stay';const v=NPC('victorine');v.x=STAY.x+46;v.y=STAY.y-6;}],['didou',"Maintenant, on va à l'école d'Ulysse !"]);}
+  if(it.key==='t1'&&!S.met.has('leonie'))lines.push(['myriam',"Léonie cherche sa trottinette, elle aussi ! Elle est devant chez vous.",()=>{S.met.add('myriam');const o=objectives()[0];if(o)S.arrow={x:o.x,y:o.y,t:8};}]);
+  if(it.key==='t3'){n.fol=0;n.home={x:n.x,y:n.y,dir:'down'};}
+  if(k===3)say(lines,startEnding);else say(lines,()=>{const o=objectives()[0];if(o)S.arrow={x:o.x,y:o.y,t:6};});
+}
+function finishHeal(a){
+  a.hurt=false;a.healing=false;S.met.add(a.id);S.idle=0;
+  SFX.heal();buzz(30);burst(a.x,a.y-24,26,['#ff7ea8','#ffd25a','#ffffff']);a.joy=1.6;
+  if(a.id==='herisson'){a.walk={x:-1010,y:-1250};a.face=1;
+    const L=[['herisson',"Merci Sacha ! Je me suis piqué la patte en courant derrière le dinosaure. La trottinette de Léonie est derrière moi !"]];
+    if(NPC('leonie').fol)L.push(['leonie',"Bravo Sacha !"]);say(L);}
+  else{a.fly=true;say([['oiseau',"Cui cui ! Merci Sacha ! Je vais chanter pour vous !"]]);}
+}
+function spots(){
+  const L=[];resSpots(L);
+  for(let i=L.length-1;i>=0;i--)if(L[i].x===875&&L[i].y===150)L.splice(i,1);
+  for(const sh of SHOPS)L.push({x:sh.x,y:sh.y,tr:40,ax:sh.x,ay:118,reach:40,kind:'shop',opt:true,act:()=>{SFX.shop();bubble(sh.x,sh.y-60,sh.text);if(sh.x===875){S.cross=2;}}});
+  if(!S.sachaStay)for(const a of HURT)if(a.hurt&&!a.healing)L.push({x:a.x,y:a.y,tr:50,ax:a.x+(P.x<a.x?-50:50),ay:a.y+10,reach:40,kind:'heal',act:()=>heal(a)});
+  for(const p of PLAYS){if(p.gate&&!S.gateOpen)continue;L.push({x:p.x,y:p.y,tr:80,ax:p.ax,ay:p.ay,reach:30,kind:'ride',act:()=>startPlay(p)});}
+  if(!BUSH.open&&F.bibou.mode==='flair')L.push({x:BUSH.x,y:BUSH.y,tr:70,ax:BUSH.x+20,ay:BUSH.y+56,reach:40,kind:'paw',act:openBush});
+  return L;
+}
+/* ---------- Rex se montre au parc, s'enfuit, et on le suit tout de suite ---------- */
+function startEnding(){
+  S.mode='cut';S.arrow=null;stopGoal();
+  const viewW=vw/zoom;
+  REX.on=true;REX.state='enter';REX.x=P.x+viewW/2+90;REX.y=P.y+6;REX.tx=P.x+150;REX.face=-1;REX.dust=1;
+  P.dir='right';SFX.rex();camZoom(1.3,4);
+}
+function rexTalk(){
+  say([
+    ['rex','Hi hi hi ! Bravo les super-héros !',()=>SFX.rex()],
+    ['rex',"Mais j'ai encore plein de jouets dans mon sac ! Et le petit train de la Tête d'Or, je l'ai démonté !"],
+    ['rex',"Je file au métro Flachet ! Vous ne m'attraperez jamais, je cours trop vite ! Hi hi !"],
+    ['didou','Il court trop vite ! Vite, sur nos trottinettes !'],
+    ['ulysse',"C'est parti !"],
+    ['papa',"On reste ensemble. Et au feu, on s'arrête !"]
+  ],()=>{S.mode='play';S.chase=true;S.idle=0;REX.state='chase';REX.wi=0;REX.acc=0;REX.tauntT=2;REX.side=1;S.forcedRed=false;SFX.rex();});
+}
+function updateChase(dt){
+  REX.waiting=false;
+  if(REX.wi>=CH_WP.length)return;
+  const w=CH_WP[REX.wi],dP=dist(P.x,P.y,REX.x,REX.y);
+  let wait=dP>360||D.cur&&dP>220;
+  /* au passage piéton : quand Rex arrive, c'est vert ; il traverse ; le feu passe au rouge quand Ulysse arrive au bord */
+  if(REX.wi===6&&!REX.crossing){S.ped='green';S.pedT=0;REX.crossing=true;}
+  if(REX.wi>=6&&!S.forcedRed&&P.x<0&&dist(P.x,P.y,-24,-1388)<130){S.forcedRed=true;S.ped='red';S.pedT=5.6;S.redWarned=false;bubble(REX.x,REX.y-96,'Hi hi ! Trop tard !');SFX.rex();}
+  if(REX.wi===8&&P.x<110)wait=true;
+  if(wait){REX.waiting=true;REX.face=P.x<REX.x?-1:1;REX.tauntT-=dt;
+    if(REX.tauntT<=0&&dP>200){REX.tauntT=3.5;SFX.rex();bubble(REX.x,REX.y-96,'Hi hi ! Par ici !');}
+    return;}
+  const dx=w[0]-REX.x,dy=w[1]-REX.y,d=Math.hypot(dx,dy),sp=dP<140?340:280,st=Math.min(d,sp*dt);
+  if(d>.5){REX.x+=dx/d*st;REX.y+=dy/d*st;if(Math.abs(dx)>2)REX.face=dx<0?-1:1;
+    REX.acc+=st;if(REX.acc>=40){REX.acc=0;REX.side=-(REX.side||1);const a=Math.atan2(dy,dx);FOOT.push({x:REX.x-Math.sin(a)*9*REX.side,y:REX.y+Math.cos(a)*9*REX.side,a,t:0});}}
+  if(d<4){REX.wi++;
+    if(REX.wi>=CH_WP.length){
+      REX.on=false;REX.state='gone';S.chase=false;S.goMetro=true;S.idle=0;S.arrow={x:METRO.x,y:METRO.y,t:9999};
+      SFX.rex();burst(METRO.x,METRO.y-40,20,['#6cc36a','#ffd25a','#ffffff']);bubble(METRO.x,METRO.y-110,"Hi hi ! À la Tête d'Or !");
+      say([['didou',"Rex est descendu dans le métro ! On le suit, vite !"]]);
+    }}
+}
+function cheer(){
+  S.cheerT=(S.cheerT||0)-1/60;if(S.cheerT>0)return;
+  for(const id in CHEER_TXT){const n=NPC(id);if(!n||n.cheered)continue;
+    if(dist(P.x,P.y,n.x,n.y)<240){n.cheered=true;n.wave=2.2;S.cheerT=.8;bubble(n.x,n.y-(LOOK[id].s||1)*60-34,CHEER_TXT[id]);SFX.sparkle();return;}}
+  for(const v of VIS){if(v.cheered||!S.chase)continue;if(dist(P.x,P.y,v.x,v.y)<200){v.cheered=true;S.cheerT=1;bubble(v.x,v.y-90,'Vas-y !');return;}}
+}
+/* ---------- la boule de feu ne se lance pas sur les gens ---------- */
+function hitPeople(){
+  for(const f of FIREBALLS){if(f.life<=0||f.done)continue;
+    if(f.kind==='fire'&&f.tx!=null&&Math.hypot(f.tx-f.x,f.ty-f.y)<90)continue;
+    const who=[...NPCS.filter(n=>!n.hidden&&!n.rex).map(n=>({o:n,id:n.id,y:n.y-(LOOK[n.id].s||1)*30})),{o:F.papa,id:'papa',y:F.papa.y-38},{o:F.maman,id:'maman',y:F.maman.y-38},...(S.sachaStay?[]:[{o:F.sacha,id:'sacha',y:F.sacha.y-26}]),...VIS.map(v=>({o:v,id:null,y:v.y-36}))];
+    for(const q of who){if(Math.hypot(f.x-q.o.x,f.y-q.y)<26){f.life=0;f.done=true;q.o.sadT=2.6;S.idle=0;
+      PARTS.push({x:q.o.x,y:q.y,vx:0,vy:-20,life:.6,max:.6,color:'rgba(140,140,150,.7)',size:9,kind:'dust'});tone(260,.18,'sine',.06,.7);
+      if(!S.hitOnce&&q.id&&!D.cur){S.hitOnce=true;const L=[[q.id,"Aïe ! Ça fait mal ! On ne lance pas de boule de feu sur les gens !"]];if(q.id!=='papa')L.push(['papa',"On lance la boule de feu sur les ronces, jamais sur les copains."]);say(L);}
+      else bubble(q.o.x,q.y-60,'Aïe !');break;}}}
+  for(const n of [...NPCS,...VIS,F.papa,F.maman,F.sacha])if(n.sadT>0)n.sadT-=1/60;
+}
+/* ---------- le guidage : la flèche suit le vrai chemin ---------- */
+function guideUpdate(dt){
+  S.guideT-=dt;if(S.guideT>0)return;S.guideT=.6;
+  const o=S.arrow||nearestObjective();if(!o||S.mode!=='play'){S.guide=null;return;}
+  const p=findPath(P.x,P.y,o.x,o.y);if(!p||p.length<2){S.guide={x:o.x,y:o.y,tx:o.x,ty:o.y,path:[]};return;}
+  let gx=p[p.length-1].x,gy=p[p.length-1].y;for(const q of p){if(dist(P.x,P.y,q.x,q.y)>110){gx=q.x;gy=q.y;break;}}
+  S.guide={x:gx,y:gy,tx:o.x,ty:o.y,path:p};
+}
+function drawGuide(c){const g=S.guide;if(!g||S.mode!=='play'||S.ride||S.swing||D.cur)return;
+  const big=!!S.arrow,d=dist(P.x,P.y,g.tx,g.ty);
+  /* les empreintes vertes de Rex, sur le chemin, jusqu'à l'objectif */
+  if(!S.chase&&g.path.length>1){let acc=0,side=1,shown=0;c.fillStyle='rgba(63,110,60,.32)';
+    for(let i=1;i<g.path.length&&shown<14;i++){const a=g.path[i-1],b=g.path[i],L=Math.hypot(b.x-a.x,b.y-a.y),an=Math.atan2(b.y-a.y,b.x-a.x);
+      for(let s=(i===1?60:0);s<L;s+=42){side=-side;const x=a.x+(b.x-a.x)*s/L-Math.sin(an)*7*side,y=a.y+(b.y-a.y)*s/L+Math.cos(an)*7*side;
+        c.save();c.translate(x,y);c.rotate(an);ell(c,0,0,5,4);c.fill();[-.55,0,.55].forEach(t=>{c.save();c.rotate(t);ell(c,8,0,4,1.8);c.fill();c.restore();});c.restore();shown++;}}}
+  if(d>150){const ang=Math.atan2(g.y-P.y,g.x-P.x),k=big?1+Math.sin(S.t*8)*.12:.62,r=big?84:66;
+    c.save();c.globalAlpha=big?1:.6;c.translate(P.x+Math.cos(ang)*r,P.y-24+Math.sin(ang)*r);c.rotate(ang);c.scale(k,k);
+    c.beginPath();c.moveTo(22,0);c.lineTo(-8,-16);c.lineTo(-2,-6);c.lineTo(-20,-6);c.lineTo(-20,6);c.lineTo(-2,6);c.lineTo(-8,16);c.closePath();fs(c,'#ff7a3d',2.5);c.restore();}
+  if(big){const by=g.ty-90+Math.sin(S.t*6)*8;c.save();c.translate(g.tx,by);c.beginPath();c.moveTo(0,22);c.lineTo(-16,-4);c.lineTo(-6,-4);c.lineTo(-6,-22);c.lineTo(6,-22);c.lineTo(6,-4);c.lineTo(16,-4);c.closePath();fs(c,'#ff7a3d',2.5);c.restore();}
+}
+/* ---------- petits plus : vibration (Android), zoom de la caméra sur les moments clés ---------- */
+function buzz(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+function camZoom(k,d){S.czoom={k,t:0,d};}
+/* ---------- la mise à jour propre à ces lots ---------- */
+function lot3Update(dt){
+  hitPeople();guideUpdate(dt);
+  if(S.czoom){S.czoom.t+=dt;if(S.czoom.t>S.czoom.d)S.czoom=null;}
+  for(const a of HURT)if(a.joy>0)a.joy-=dt;
+  /* les doudous dans les sacs, Bibou dans son chariot */
+  const Dd=F.didou,Bb=F.bibou,Nn=F.ninou,cart=trailAt(12);
+  if(Dd.mode==='bag'){Dd.x=P.x;Dd.y=P.y-2;Dd.hidden=true;}
+  else if(Dd.mode==='back'){Dd.hidden=false;followTo(Dd,P.x,P.y,dt,320);if(dist(Dd.x,Dd.y,P.x,P.y)<10){Dd.mode='bag';SFX.yip();bubble(P.x,P.y-90,'Hop, dans le sac !');}}
+  else if(Dd.mode==='follow'&&S.didouT<0){Dd.mode='back';}
+  if(Nn.mode==='bag'){Nn.x=F.sacha.x;Nn.y=F.sacha.y-2;}
+  if(Bb.mode==='cart'){Bb.x=cart.x;Bb.y=cart.y;S.cart={x:cart.x,y:cart.y};}
+  else{const cx=trailAt(12);S.cart={x:cx.x,y:cx.y};if(Bb.mode==='follow'&&BUSH.open)Bb.mode='back';
+    if(Bb.mode==='back'){followTo(Bb,S.cart.x,S.cart.y,dt,320);if(dist(Bb.x,Bb.y,S.cart.x,S.cart.y)<8){Bb.mode='cart';SFX.meow();}}}
+  /* Bibou sort du chariot quand on arrive à la haie du jardin */
+  if(Bb.mode==='cart'&&S.mode==='play'&&!BUSH.open&&S.met.has('nanou')&&dist(P.x,P.y,BUSH.x,BUSH.y)<300){Bb.mode='flair';bubble(Bb.x,Bb.y-40,'Hop !');SFX.meow();}
+  /* Sacha joue au jardin pendant l'école ; on le récupère en repassant devant */
+  if(S.sachaStay){const f=F.sacha;f.x=STAY.x;f.y=STAY.y;f.moving=false;f.face=1;
+    if(ITEMS[0].back&&S.mode==='play'&&!D.cur&&dist(P.x,P.y,PORTILLON.x,PORTILLON.y)<170){S.sachaStay=false;f.mode='follow';
+      const v=NPC('victorine');say([['sacha',"Je viens avec toi, Ulysse !"],['victorine',"Au revoir Sacha ! On rejoue demain !",()=>{v.x=v.home.x;v.y=v.home.y;}]],()=>{const o=objectives()[0];if(o)S.arrow={x:o.x,y:o.y,t:6};});}}
+  /* les copains de classe disent coucou sans parler longtemps */
+  for(const n of NPCS)if(n.quiet&&!n.waved&&S.mode==='play'&&dist(P.x,P.y,n.x,n.y)<130){n.waved=true;n.wave=1.6;bubble(n.x,n.y-(LOOK[n.id].s||1)*60-30,'Coucou !');}
+  /* Rex arrive dans un petit nuage de poussière, puis parle */
+  if(REX.on&&REX.state==='talk0'){REX.state='talk';rexTalk();}
+  if(REX.dust>0){REX.dust-=dt;if(rand()<dt*30)PARTS.push({x:REX.x+(rand()-.5)*40,y:REX.y-6,vx:(rand()-.5)*60,vy:-30-rand()*30,life:.6,max:.6,color:'rgba(200,180,150,.7)',size:6,kind:'dust'});}
+}
+/* ---------- ce que ces lots dessinent ---------- */
+function drawCart(c){if(!S.cart)return;const x=S.cart.x,y=S.cart.y;
+  c.strokeStyle='#5a6070';c.lineWidth=2;c.beginPath();c.moveTo(x,y-8);c.lineTo(P.x,P.y-6);c.stroke();
+  rrect(c,x-16,y-22,32,18,4);fsh(c,'#e5483a',x-16,y-22,32,18,1.6,.35,.2);circ(c,x-10,y-3,5);fs(c,'#2f3343',1.2);circ(c,x+10,y-3,5);fs(c,'#2f3343',1.2);
+  if(F.bibou.mode==='cart'){c.save();c.translate(x,y-24);circ(c,0,0,10);fs(c,'#fbf7f0',1.4);circ(c,-4,-4,4);fill(c,'#8f96a8');
+    c.beginPath();c.moveTo(-9,-4);c.lineTo(-6,-14);c.lineTo(-2,-7);c.closePath();fs(c,'#fbf7f0',1.2);c.beginPath();c.moveTo(9,-4);c.lineTo(6,-14);c.lineTo(2,-7);c.closePath();fs(c,'#fbf7f0',1.2);
+    circ(c,-3,0,1.6);fill(c,'#2b3a55');circ(c,3,0,1.6);fill(c,'#2b3a55');c.restore();}}
+function drawBagEars(c,o,col,inner){const x=o.x+(o.dir==='left'?8:-8),y=o.y-44-(o.lift||0);
+  c.beginPath();c.moveTo(x-7,y);c.lineTo(x-4,y-11);c.lineTo(x-1,y);c.closePath();fs(c,col,1.2);
+  c.beginPath();c.moveTo(x+1,y);c.lineTo(x+4,y-11);c.lineTo(x+7,y);c.closePath();fs(c,col,1.2);
+  rrect(c,x-10,y,20,14,4);fs(c,inner,1.4);}
+function lot3World(c,L,inView){
+  L.push({y:-1e6+1,d:()=>drawGuide(c)});
+  if(S.cart)L.push({y:S.cart.y,d:()=>drawCart(c)});
+  if(F.didou.mode==='bag')L.push({y:P.y+.5,d:()=>drawBagEars(c,P,'#f08a3d','#5a7ab0')});
+  if(F.ninou.mode==='bag'&&!S.sachaStay)L.push({y:F.sacha.y+.5,d:()=>drawBagEars(c,{x:F.sacha.x,y:F.sacha.y+8,dir:F.sacha.dir,lift:F.sacha.lift},'#4f7fd8','#e5a03a')});
+  if(S.sachaStay){const t=S.t,bx=STAY.x+24+Math.sin(t*2)*18,by=STAY.y-10-Math.abs(Math.sin(t*4))*26;L.push({y:STAY.y+2,d:()=>{ell(c,bx,STAY.y-2,7,3);fill(c,'rgba(43,58,85,.2)');circ(c,bx,by,7);fs(c,'#e5483a',1.4);c.strokeStyle='#fff';c.lineWidth=1.4;c.beginPath();c.arc(bx,by,4,0,Math.PI);c.stroke();}});
+    L.push({y:STAY.y+1,d:()=>{const k=.95;drawPanther(c,STAY.x-40,STAY.y+6,1,S.t*2,false,k,false);}});}
+  for(const n of [...NPCS,F.papa,F.maman,F.sacha])if(n.sadT>0&&!n.hidden)L.push({y:n.y+.6,d:()=>{const s=(LOOK[n.id]||{}).s||1.1,x=n.x+8,y=n.y-56*s;c.beginPath();c.moveTo(x,y-6);c.quadraticCurveTo(x+5,y+2,x,y+5);c.quadraticCurveTo(x-5,y+2,x,y-6);fs(c,'#7cc8f0',1.2);}});
+}
+/* ---------- le métro : 5 quais dessinés d'après les photos, portes qui s'ouvrent ---------- */
+function drawStation(ox,k,W,H){if(ox>W||ox<-W*1.1)return;
+  const wallH=H*.62;ctx.save();ctx.beginPath();ctx.rect(ox,0,W,H);ctx.clip();
+  if(k===0){ctx.fillStyle='#1f2a6e';ctx.fillRect(ox,0,W,wallH);const cols=['#2f55d4','#f2c548','#e5483a','#8a5fd0','#ffffff','#1f1f24','#3fb0a0'];
+    for(let x=0;x<W;x+=48)for(let y=0;y<wallH;y+=48){ctx.fillStyle=cols[(x/48*3+y/48*5)%cols.length|0];ctx.fillRect(ox+x+2,y+2,44,44);}
+    for(let x=40;x<W;x+=120){for(let i=0;i<4;i++){rrect(ctx,ox+x+i*20,wallH-40,16,30,4);ctx.fillStyle='#f2c548';ctx.fill();}}}
+  else if(k===1){ctx.fillStyle='#bfe0a0';ctx.fillRect(ox,0,W,wallH);for(let x=0;x<W;x+=26){ctx.fillStyle=x%52?'#6b4a2a':'#8a6a4a';ctx.fillRect(ox+x+8,0,7,wallH);}
+    ctx.fillStyle='rgba(90,160,70,.55)';for(let i=0;i<30;i++){circ(ctx,ox+(i*97)%W,30+(i*53)%(wallH*.5),26);ctx.fill();}
+    for(let x=W*.2;x<W;x+=W*.45){ell(ctx,ox+x,wallH*.5,70,34);ctx.fillStyle='#1f1f24';ctx.fill();ell(ctx,ox+x,wallH*.5,62,28);ctx.fillStyle='#d8f0c0';ctx.fill();
+      ctx.fillStyle='#1f1f24';ctx.font='800 13px Grandstander, Trebuchet MS, sans-serif';ctx.textAlign='center';ctx.fillText('LA NATURE',ox+x,wallH*.5+5);}}
+  else if(k===2){ctx.fillStyle='#f4f4f2';ctx.fillRect(ox,0,W,wallH);const fl=[['#2f3fd8',.15],['#e5483a',.4],['#ffffff',.62],['#2f3fd8',.85]];
+    for(const [col,u] of fl){const cx=ox+W*u,cy=wallH*.5;for(let p=0;p<8;p++){const a=p/8*Math.PI*2;ell(ctx,cx+Math.cos(a)*40,cy+Math.sin(a)*40,34,22);ctx.fillStyle=col;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#1f1f24';ctx.stroke();}circ(ctx,cx,cy,20);ctx.fillStyle='#1f1f24';ctx.fill();}}
+  else if(k===3){for(let y=0;y<wallH;y+=34)for(let x=0;x<W;x+=70){ctx.fillStyle=['#e5483a','#f4b7b0','#ffffff','#d8343c'][((x/70)+(y/34))%4|0];ctx.fillRect(ox+x,y,68,32);}}
+  else{ctx.fillStyle='#e8dfcc';ctx.fillRect(ox,0,W,wallH);ctx.strokeStyle='rgba(60,50,40,.35)';ctx.lineWidth=1;for(let y=0;y<wallH;y+=12){ctx.beginPath();ctx.moveTo(ox,y);ctx.lineTo(ox+W,y);ctx.stroke();}
+    ctx.strokeStyle='#1f1f24';ctx.lineWidth=3;for(let x=0;x<W;x+=110){ctx.beginPath();ctx.moveTo(ox+x,0);ctx.lineTo(ox+x,wallH);ctx.stroke();}rrect(ctx,ox+W*.8,wallH*.45,26,44,3);fs(ctx,'#e5483a',1.6);}
+  /* le quai, sa bande podotactile, quelques voyageurs */
+  ctx.fillStyle='#8f949e';ctx.fillRect(ox,wallH,W,H*.12);ctx.fillStyle='#e8e2d0';ctx.fillRect(ox,wallH+H*.1,W,6);
+  for(let i=0;i<3;i++){const px=ox+W*(.12+i*.36),L=VLOOK(i*2+k);drawPerson(ctx,px,wallH+H*.09,Object.assign({},L,{s:1.5}),'down',0,false,{seedT:i+k});}
+  /* le nom de la station, en grand */
+  const name=MSTA[k],pw=Math.min(380,W*.72),px=ox+(W-pw)/2,py=Math.max(10,H*.05);
+  rrect(ctx,px,py,pw,58,10);fs(ctx,k===4?'#2b2f3a':'#fffaf0',2);circ(ctx,px+32,py+29,18);fill(ctx,'#d8343c');
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='800 22px Grandstander, Trebuchet MS, sans-serif';ctx.fillText('A',px+32,py+30);
+  ctx.fillStyle=k===4?'#ffffff':'#2b3a55';ctx.font='800 '+(name.length>18?20:28)+'px Grandstander, Trebuchet MS, sans-serif';ctx.fillText(name,px+pw/2+18,py+31);
+  ctx.restore();}
+function drawMetroScene(){
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  const W=vw,H=vh,t=S.metroT,sc=S.metroScroll;
+  ctx.fillStyle='#22262e';ctx.fillRect(0,0,W,H);
+  for(let i=0;i<10;i++){const x=((i*240-sc*1.3)%(W+240)+W+240)%(W+240)-120;rrect(ctx,x,H*.16,80,6,3);ctx.fillStyle='rgba(255,233,168,.6)';ctx.fill();}
+  for(let k=0;k<MSTA.length;k++)drawStation(k*MSEG-sc,k,W,H);
+  ctx.fillStyle='#3a3f4a';ctx.fillRect(0,H*.74,W,H*.26);
+  const bob=(S.metroV>50&&!reduceMotion)?Math.sin(t*22)*1.5:0;
+  const tw=Math.min(W*.92,800),th=Math.min(H*.4,240),tx=(W-tw)/2,ty=H*.36+bob;
+  rrect(ctx,tx,ty,tw,th,26);fsh(ctx,'#e9ebee',tx,ty,tw,th,3,.4,.16);
+  ctx.fillStyle='#d8343c';ctx.fillRect(tx+12,ty+6,tw-24,th*.08);
+  const groups=[['ulysse','sacha'],['papa','maman'],['bibou','didou'],['ninou']];
+  const n=groups.length,gap=12,ww=(tw-40-gap*(n-1))/n,wh=th*.5,wy=ty+th*.2;
+  const open=(S.metroPh==='stop'||S.metroPh==='wait')?clamp((S.metroPh==='wait'?1:Math.min(1,S.metroT*3,(1.6-S.metroT)*3)),0,1):0;
+  for(let i=0;i<n;i++){
+    const wx=tx+20+i*(ww+gap),gr=groups[i],size=Math.min(wh,ww/gr.length*1.05);
+    ctx.save();rrect(ctx,wx,wy,ww,wh,12);ctx.fillStyle='#cfe8f4';ctx.fill();ctx.clip();
+    gr.forEach((w,j)=>drawInWindow(w,wx+ww*(j+.5)/gr.length,wy,wh,size));ctx.restore();
+    rrect(ctx,wx,wy,ww,wh,12);ctx.lineWidth=3;ctx.strokeStyle=INK;ctx.stroke();}
+  /* les portes, entre les fenêtres, qui s'ouvrent aux arrêts */
+  for(let i=1;i<n;i++){const dx=tx+20+i*(ww+gap)-gap/2,o=open*10;ctx.fillStyle='#c9ced6';ctx.fillRect(dx-12-o,ty+th*.12,12,th*.8);ctx.fillRect(dx+o,ty+th*.12,12,th*.8);}
+  ctx.fillStyle='#2f3343';ctx.fillRect(tx+30,ty+th,tw-60,10);
+  circ(ctx,tx+tw-26,ty+th*.82,9);fill(ctx,S.metroV>50?'#fff2a8':'#d8343c');
+  const lg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.4,W/2,H/2,Math.max(W,H)*.8);lg.addColorStop(0,'rgba(20,20,40,0)');lg.addColorStop(1,'rgba(20,20,40,.3)');ctx.fillStyle=lg;ctx.fillRect(0,0,W,H);
+}
+function startMetro(){
+  S.mode='metro';S.metroT=0;S.metroScroll=0;S.metroV=0;S.arrow=null;S.metroK=0;S.metroPh='wait';stopGoal();
+  $('touch').hidden=true;$('hud').hidden=true;
+  say([
+    ['papa','Tout le monde dans le métro ! On plie les trottinettes. Ligne A, direction Perrache.'],
+    ['maman',"On descend à Masséna, dans quatre stations. Le parc de la Tête d'Or est tout près !"]
+  ]);
+}
+function updateMetro(dt){
+  S.metroT+=dt;
+  if(S.metroPh==='wait'){S.metroV=0;if(S.metroT>1.2&&!D.cur){S.metroPh='move';S.metroT=0;SFX.bipbip();setTimeout(()=>SFX.rumble(),350);}return;}
+  if(S.metroPh==='move'){
+    const u=clamp(S.metroT/2.2,0,1);S.metroScroll=S.metroK*MSEG+MSEG*(1-Math.cos(Math.PI*u))/2;S.metroV=MSEG*Math.PI/2/2.2*Math.sin(Math.PI*u);
+    if(u>=1){S.metroK++;S.metroPh='stop';S.metroT=0;S.metroV=0;SFX.ding();buzz(20);
+      if(S.metroK<MSTA.length-1)say([['metro',MSTA[S.metroK]+' !']]);
+      else say([['metro','Masséna ! Masséna !'],['didou',"Le parc de la Tête d'Or est tout près ! Rex est parti par là. À suivre..."]],showEnd);}
+    return;}
+  S.metroV=0;
+  if(S.metroK<MSTA.length-1&&S.metroT>1.6&&!D.cur){S.metroPh='move';S.metroT=0;SFX.bipbip();setTimeout(()=>SFX.rumble(),350);}
+}
+/* ---------- le départ : en trottinette, les faces des copines dans la bande du haut ---------- */
+function startGame(){
+  if(S.mode!=='title')return;
+  audioInit();startMusic();stopSpeech();pickVoice();showTouch();
+  $('title').hidden=true;$('hud').hidden=false;
+  ITEMS.forEach(it=>{const sl=$('slot'+it.slot);if(!sl||sl.querySelector('canvas'))return;sl.style.position='relative';const cv2=document.createElement('canvas');cv2.width=48;cv2.height=48;cv2.style.cssText='position:absolute;right:-6px;bottom:-6px;width:22px;height:22px;border-radius:50%;border:2px solid #fff';drawPortrait(cv2,it.ownerId);sl.appendChild(cv2);});
+  S.mode='play';teleportFamily(START9.x,START9.y,'down');
+  say([
+    ['didou',"Ulysse ! Sacha ! C'est Didou ! Vite, venez voir !"],
+    ['ninou',"Et moi, c'est Ninou ! Cette nuit, Rex le Chipeur a pris les trottinettes des copains !"],
+    ['didou','Vite, les super-héros ! Mettez vos capes !'],
+    ['papa','Bonjour les super-héros ! Ulysse, appuie sur '+btnA()+' pour lancer ta boule de feu. Elle brûle les ronces !'],
+    ['maman','Et toi Sacha, ton câlin guérisseur soigne les animaux blessés ! Si vous êtes perdus, appuyez sur '+btnH()+'. On vient avec vous !'],
+    ['bibou','Miaou ! Je vais chercher avec vous !'],
+    ['didou','Il y a trois trottinettes à retrouver autour de la résidence. En route !']
+  ]);
 }
 
 /* pour les tests automatiques */
