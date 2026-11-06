@@ -110,4 +110,4 @@ Le portage est l'occasion de corriger les anciens chapitres :
 
 ## Ch1 v3 : chantier suivant (6 novembre 2026)
 - Cahier des charges validé avec Mich : `docs/cahier-ch1-v3.html`, publié ici : https://claude.ai/artifact/PMSgNjKwfRsYBAmzPq2jru
-- Sept lots, dans l'ordre : carte et décor (école, relais, C23) ; parc et château ; personnages, sacs à dos et bouclier ; flèche qui suit le chemin ; animations ; Rex, poursuite, 5 stations ; tests. Compter 3 à 4 sessions.
+- Sept lots, dans l'ordre : carte et décor (école, relais, C23) ; parc et château ; personnages, sacs à dos et bouclier ; flèche qui suit le chemin ; animations ; Rex, poursuite, 5 stations ; tests. Compter 4 à 5 sessions avec les finitions (pas, expressions, caméra, vibrations, etc.).
