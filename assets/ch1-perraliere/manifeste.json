@@ -1,0 +1,394 @@
+[
+ {
+  "fichier": "personnages/ulysse.png",
+  "largeur": 138,
+  "hauteur": 239
+ },
+ {
+  "fichier": "personnages/sacha.png",
+  "largeur": 118,
+  "hauteur": 204
+ },
+ {
+  "fichier": "personnages/papa.png",
+  "largeur": 172,
+  "hauteur": 306
+ },
+ {
+  "fichier": "personnages/maman.png",
+  "largeur": 168,
+  "hauteur": 298
+ },
+ {
+  "fichier": "personnages/nanou.png",
+  "largeur": 166,
+  "hauteur": 332
+ },
+ {
+  "fichier": "personnages/elisa.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/lucia.png",
+  "largeur": 156,
+  "hauteur": 199
+ },
+ {
+  "fichier": "personnages/leonie.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/victorine.png",
+  "largeur": 162,
+  "hauteur": 208
+ },
+ {
+  "fichier": "personnages/helena.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/maya.png",
+  "largeur": 162,
+  "hauteur": 208
+ },
+ {
+  "fichier": "personnages/iris.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/prune.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/mahe.png",
+  "largeur": 134,
+  "hauteur": 235
+ },
+ {
+  "fichier": "personnages/ulysse_trottinette.png",
+  "largeur": 146,
+  "hauteur": 283
+ },
+ {
+  "fichier": "personnages/ulysse_trottinette_profil.png",
+  "largeur": 161,
+  "hauteur": 283
+ },
+ {
+  "fichier": "personnages/sacha_trottinette.png",
+  "largeur": 126,
+  "hauteur": 241
+ },
+ {
+  "fichier": "personnages/sacha_trottinette_profil.png",
+  "largeur": 138,
+  "hauteur": 241
+ },
+ {
+  "fichier": "animaux/bibou.png",
+  "largeur": 263,
+  "hauteur": 171
+ },
+ {
+  "fichier": "animaux/didou.png",
+  "largeur": 249,
+  "hauteur": 167
+ },
+ {
+  "fichier": "animaux/ninou.png",
+  "largeur": 270,
+  "hauteur": 163
+ },
+ {
+  "fichier": "animaux/sacha_sur_ninou.png",
+  "largeur": 270,
+  "hauteur": 271
+ },
+ {
+  "fichier": "animaux/rex.png",
+  "largeur": 310,
+  "hauteur": 271
+ },
+ {
+  "fichier": "animaux/herisson_blesse.png",
+  "largeur": 290,
+  "hauteur": 181
+ },
+ {
+  "fichier": "animaux/herisson_gueri.png",
+  "largeur": 290,
+  "hauteur": 184
+ },
+ {
+  "fichier": "animaux/rougegorge_blesse.png",
+  "largeur": 169,
+  "hauteur": 119
+ },
+ {
+  "fichier": "animaux/rougegorge_gueri.png",
+  "largeur": 169,
+  "hauteur": 119
+ },
+ {
+  "fichier": "animaux/rougegorge_vol.png",
+  "largeur": 169,
+  "hauteur": 115
+ },
+ {
+  "fichier": "animaux/pigeon.png",
+  "largeur": 122,
+  "hauteur": 79
+ },
+ {
+  "fichier": "animaux/papillon_jaune.png",
+  "largeur": 98,
+  "hauteur": 56
+ },
+ {
+  "fichier": "animaux/papillon_rose.png",
+  "largeur": 98,
+  "hauteur": 56
+ },
+ {
+  "fichier": "animaux/papillon_bleu.png",
+  "largeur": 98,
+  "hauteur": 56
+ },
+ {
+  "fichier": "animaux/papillon_blanc.png",
+  "largeur": 98,
+  "hauteur": 56
+ },
+ {
+  "fichier": "vehicules/trottinette_verte_ulysse.png",
+  "largeur": 162,
+  "hauteur": 150
+ },
+ {
+  "fichier": "vehicules/trottinette_bleue_sacha.png",
+  "largeur": 162,
+  "hauteur": 150
+ },
+ {
+  "fichier": "vehicules/trottinette_violette_iris.png",
+  "largeur": 162,
+  "hauteur": 150
+ },
+ {
+  "fichier": "vehicules/trottinette_orange_victorine.png",
+  "largeur": 162,
+  "hauteur": 150
+ },
+ {
+  "fichier": "vehicules/trottinette_rose_leonie.png",
+  "largeur": 162,
+  "hauteur": 150
+ },
+ {
+  "fichier": "vehicules/voiture_bleue.png",
+  "largeur": 472,
+  "hauteur": 280
+ },
+ {
+  "fichier": "vehicules/voiture_jaune.png",
+  "largeur": 472,
+  "hauteur": 280
+ },
+ {
+  "fichier": "vehicules/voiture_verte.png",
+  "largeur": 472,
+  "hauteur": 280
+ },
+ {
+  "fichier": "vehicules/voiture_pompiers.png",
+  "largeur": 472,
+  "hauteur": 280
+ },
+ {
+  "fichier": "objets/arbre.png",
+  "largeur": 364,
+  "hauteur": 480
+ },
+ {
+  "fichier": "objets/arbre_fleuri.png",
+  "largeur": 364,
+  "hauteur": 480
+ },
+ {
+  "fichier": "objets/araucaria.png",
+  "largeur": 631,
+  "hauteur": 843
+ },
+ {
+  "fichier": "objets/lampadaire.png",
+  "largeur": 248,
+  "hauteur": 492
+ },
+ {
+  "fichier": "objets/boite_aux_lettres.png",
+  "largeur": 140,
+  "hauteur": 220
+ },
+ {
+  "fichier": "objets/feu_pieton_rouge.png",
+  "largeur": 216,
+  "hauteur": 534
+ },
+ {
+  "fichier": "objets/feu_pieton_vert.png",
+  "largeur": 216,
+  "hauteur": 488
+ },
+ {
+  "fichier": "objets/fontaine_jets.png",
+  "largeur": 224,
+  "hauteur": 125
+ },
+ {
+  "fichier": "objets/ronce.png",
+  "largeur": 288,
+  "hauteur": 261
+ },
+ {
+  "fichier": "objets/ronce_qui_brule.png",
+  "largeur": 182,
+  "hauteur": 167
+ },
+ {
+  "fichier": "objets/fente_local_velos_avec_trottinette.png",
+  "largeur": 412,
+  "hauteur": 67
+ },
+ {
+  "fichier": "objets/fente_local_velos_vide.png",
+  "largeur": 412,
+  "hauteur": 60
+ },
+ {
+  "fichier": "objets/tremplin.png",
+  "largeur": 300,
+  "hauteur": 120
+ },
+ {
+  "fichier": "portraits/ulysse.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/sacha.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/papa.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/maman.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/nanou.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/victorine.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/leonie.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/helena.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/maya.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/iris.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/prune.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/elisa.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/lucia.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/mahe.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/didou.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/ninou.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/bibou.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/rex.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/herisson.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/oiseau.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "portraits/metro.png",
+  "largeur": 384,
+  "hauteur": 384
+ },
+ {
+  "fichier": "decors/perraliere_carte.png",
+  "largeur": 2720,
+  "hauteur": 2240,
+  "note": "carte entiere, 1 pixel par unite, sans perte"
+ },
+ {
+  "fichier": "decors/perraliere_carte_x2.jpg",
+  "largeur": 5440,
+  "hauteur": 4480,
+  "note": "carte entiere, 2 pixels par unite, JPEG qualite 92"
+ }
+]
