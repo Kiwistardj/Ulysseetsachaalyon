@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Ulysse, Sacha et Bibou : la grande fête</title>
+<title>Ulysse, Sacha et Bibou : la Perralière</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Grandstander:wght@600;800&display=swap">
@@ -105,12 +105,13 @@ body.portrait #say{font-size:19px;line-height:1.28}
 body.portrait .tools .tool{width:40px;height:40px}
 </style>
 
-<canvas id="game" aria-label="La grande fête à la Perralière"></canvas>
+<canvas id="game" aria-label="La Perralière"></canvas>
 
-<div class="hud" id="hud" hidden aria-label="Les courses de la fête">
-  <div class="slot" id="slot0"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 30h32v10H8z" fill="#7a4a2a" stroke="#2b3a55" stroke-width="2"/><path d="M10 20h28v10H10z" fill="#8a5a36" stroke="#2b3a55" stroke-width="2"/><path d="M10 20q7 5 14 0q7 5 14 0" fill="#f6e0c8" stroke="#2b3a55" stroke-width="1.5"/><circle cx="24" cy="15" r="3" fill="#e5483a"/></svg></div>
-  <div class="slot" id="slot1"><svg viewBox="0 0 48 48" aria-hidden="true"><g stroke="#2b3a55" stroke-width="1.6"><rect x="10" y="20" width="6" height="20" rx="2" fill="#ff9ec0"/><rect x="21" y="16" width="6" height="24" rx="2" fill="#4f9fd8"/><rect x="32" y="20" width="6" height="20" rx="2" fill="#ffd25a"/></g><path d="M13 18q-2-4 0-7q2 3 0 7zM24 14q-2-4 0-7q2 3 0 7zM35 18q-2-4 0-7q2 3 0 7z" fill="#ff9a3d"/></svg></div>
-  <div class="slot" id="slot2"><svg viewBox="0 0 48 48" aria-hidden="true"><g stroke="#2b3a55" stroke-width="1.6"><ellipse cx="16" cy="16" rx="8" ry="10" fill="#e5483a"/><ellipse cx="32" cy="18" rx="8" ry="10" fill="#4f9fd8"/></g><path d="M16 26q2 8-2 16M32 28q-2 7 2 14" fill="none" stroke="#2b3a55" stroke-width="1.5"/></svg></div>
+<div class="hud" id="hud" hidden aria-label="Les trottinettes retrouvées">
+  <div class="slot" id="slot0"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#a679d8" stroke-width="5"/><path d="M30 34l5-22" stroke="#a679d8" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
+  <div class="slot" id="slot1"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#f08a4b" stroke-width="5"/><path d="M30 34l5-22" stroke="#f08a4b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
+  <div class="slot" id="slot2"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#e4567b" stroke-width="5"/><path d="M30 34l5-22" stroke="#e4567b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
+</div>
 </div>
 <div class="pad-chip" id="padChip" hidden>Manette connectée</div>
 
@@ -147,7 +148,7 @@ body.portrait .tools .tool{width:40px;height:40px}
       <g transform="translate(36 46) rotate(10)"><rect x="-14" y="-8" width="28" height="16" rx="3" fill="#f6c632" stroke="#2b3a55" stroke-width="1.5"/></g>
     </svg>
     <h1>Ulysse, Sacha et Bibou</h1>
-    <p class="chap">Chapitre 9 · La grande fête</p>
+    <p class="chap">Chapitre 1 · La Perralière</p>
     <button class="big" id="startBtn" type="button">Jouer</button>
     <ul class="how">
       <li><b>Pour marcher :</b> touche l'endroit où aller. Ulysse y va tout seul, en contournant les obstacles.</li>
@@ -162,12 +163,12 @@ body.portrait .tools .tool{width:40px;height:40px}
 
 <div class="overlay" id="end" hidden>
   <div class="card">
-    <p class="chap">Chapitre 9 · Partie 2 terminée</p>
+    <p class="chap">Chapitre 1 terminé</p>
     <h1>Bravo les super-héros !</h1>
-    <p class="lead">Trois bébés dinosaures retrouvés, et la guirlande est accrochée !</p>
+    <p class="lead">Les trois trottinettes sont rendues ! Rex a pris le métro vers la Tête d'Or.</p>
     <div class="friends" id="friends"></div>
     
-    <p class="next-chap">À suivre : <b>les courses à la galerie</b>, et le petit T-rex !</p>
+    <p class="next-chap">À suivre : <a href="https://claude.ai/artifact/B4FQgktwnwBqSDzZYFJi3t" target="_blank" rel="noopener"><b>chapitre 2, le parc de la Tête d'Or</b></a></p>
     <button class="big" id="againBtn" type="button">Rejouer</button>
   </div>
 </div>
@@ -967,7 +968,7 @@ const PARC={x:-1340,y:-1360,w:1280,h:1300};
 const ZA={x:-1290,y:-430,w:360,h:320};          /* la zone des petits, avec du sable */
 const ZB={x:-1220,y:-1320,w:290,h:170};          /* au fond à gauche, sans sable */
 const BATEAU={x:-820,y:-540,w:480,h:84};         /* le bateau : tronc à l'ouest, pont de corde, toboggan à l'est */
-const SWING3={x:-380,y0:-400,y1:-220};           /* les 3 balançoires, au sud du bateau, à la perpendiculaire (nord-sud) */
+const SWING3={x:-290,y0:-330,y1:-150};           /* les 3 balançoires, au sud du bateau, à la perpendiculaire (nord-sud) */
 const SWING2={x:-1320,y:-1170,w:100};            /* les 2 balançoires, à gauche de la structure du fond */
 const KIOSQUE={x:-760,y:-1070};
 const FONTAINE={x:-650,y:-780,r:52};
@@ -1196,7 +1197,6 @@ function blocked(x,y,r){
   for(const t of TREES)if(dist(x,y,t.x,t.y)<r+14)return true;
   for(const l of LAMPS)if(dist(x,y,l.x,l.y)<r+6)return true;
   for(const rc of RONCES)if(!rc.gone&&rc.burning===0&&dist(x,y,rc.x,rc.y)<r+rc.r-4)return true;
-  for(const n of NPCS)if(!n.hidden&&!n.walk&&!n.free&&dist(x,y,n.x,n.y)<r+13)return true;
     if(resBlocked(x,y,r))return true;
   return false;
 }
@@ -1441,10 +1441,11 @@ function update(dt){
   const pad=pollPad();
   if(S.mode==='title'){cam.x=1500+Math.sin(S.t*.2)*500;cam.y=1300+Math.cos(S.t*.15)*400;if(edgeA)startGame();resUpdate(dt);ambient(dt);return;}
   if(S.mode==='end'){ambient(dt);return;}
+  if(S.mode==='metro'){updateMetro(dt);if(D.cur)dlgTick(dt);ambient(dt);return;}
   S.occ+=(occlTarget()-S.occ)*Math.min(1,dt*8);
   if(S.cross>0)S.cross-=dt;
   if(S.fade){S.fade.t+=dt;
-    if(S.fade.t>=.35&&!S.fade.done){S.fade.done=true;const d=S.fade.d;if(d)arrive(d);}
+    if(S.fade.t>=.35&&!S.fade.done){S.fade.done=true;const d=S.fade.d;if(d)arrive(d);else if(S.fade.fn)S.fade.fn();}
     if(S.fade.t>=.7){S.fade=null;if(S.mode==='cut'&&!S.holdCut)S.mode='play';}}
   if(D.cur){dlgTick(dt);P.moving=false;}
   else if(S.mode==='play'){
@@ -1504,7 +1505,7 @@ function update(dt){
   const B=F.bibou;
   if(B.mode==='follow'||!B.mode){const t=trailAt(B.idx);followTo(B,t.x,t.y,dt);}
   for(const k of ['papa','maman']){const f=F[k];if(f.on===false)continue;const t=trailAt(f.idx);followTo(f,t.x,t.y,dt,Math.max(160,dist(f.x,f.y,t.x,t.y)*5));}
-  updateWalkers(dt);
+  updateWalkers(dt);storyUpdate(dt);
   /* les indices qui s'intensifient : le cri du long-cou, le tas de feuilles qui tremble */
   /* le tennis s'arrête tant que le bébé est coincé */
   /* boules de feu */
@@ -1576,6 +1577,9 @@ function drawPortrait(cnv,who){
   else if(L.animal==='panther')drawPanther(c,48-20*2.5,58+25*2.5,1,0,false,2.5,false);
   else if(L.animal==='rex')drawRex(c,48-13*2.2,60+41*2.2,1,0,false,2.2);
   else if(L.animal==='kitten')drawKitten(c,40,74,1,false,3.6);
+  else if(L.animal==='hedgehog')drawHedgehog(c,46-14*2.3,54+11*2.3,1,false,2.3);
+  else if(L.animal==='bird')drawRobin(c,46-6*3.4,56+14*3.4,1,false,3.4,false);
+  else if(L.animal==='metro'){circ(c,48,50,30);fs(c,'#d8343c',3);c.fillStyle='#fff';c.font='800 38px Grandstander, Trebuchet MS, sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText('A',48,52);}
 }
 
 /* un arbre, vert ou aux couleurs d'automne */
@@ -1620,6 +1624,7 @@ function drawOutside(c,R,cx,cy,w,h){
 }
 function render(){
   ctx.setTransform(dpr,0,0,dpr,0,0);
+  if(S.mode==='metro'){drawMetroScene();drawLinePlan(vw,vh);return;}
   const R=REG[S.region];ctx.fillStyle=R.bg;ctx.fillRect(0,0,vw,vh);
   const top=(S.mode==="title"||S.mode==="end")?0:Math.min(64,vh*.08),bot=vh-(S.mode==="title"||S.mode==="end"?0:S.occ);
   const z=zoom,visH=Math.max(120,bot-top),viewW=vw/z,viewH=visH/z;
@@ -1637,20 +1642,20 @@ function render(){
   for(const r of RONCES)if(!r.gone&&inView(r.x,r.y,80))L.push({y:r.y,d:()=>drawRonce(c,r)});
   for(const k of VIS)if(inView(k.x,k.y,60))L.push({y:k.y,d:()=>drawPerson(c,k.x,k.y,k.L,k.dir,k.phase,k.moving,{seedT:k.t})});
   for(const p of PIGEONS)if(p.fly>=0&&inView(p.x,p.y,60))L.push({y:p.y,d:()=>drawPigeon(c,p)});
-  resWorld(c,L,inView);resWorldEnd(c,L,inView);
+  resWorld(c,L,inView);resWorldEnd(c,L,inView);storyWorld(c,L,inView);
   for(const n of NPCS)if(!n.hidden&&inView(n.x,n.y,80))L.push({y:n.y,d:()=>{
     if(n.rex){const hop=n.happy>0&&!reduceMotion?Math.abs(Math.sin(n.happy*12))*14:0;drawRex(c,n.x,n.y-hop,n.dir==='left'?-1:1,S.t*4,false,1.15);return;}
-    const hop=S.dance>0&&n.free&&!reduceMotion?Math.abs(Math.sin(S.t*7+n.x))*7:0;n.pram?drawPram(c,n.x,n.y,LOOK[n.id]):drawPerson(c,n.x,n.y-hop,LOOK[n.id],n.dir,n.walk?n.wph:S.t*(S.dance>0?8:2),!!n.walk||hop>0,{seedT:n.x*.013});}});
+    const lift=n.wave>0&&!reduceMotion?Math.abs(Math.sin(S.t*9))*10:0,mv=!!n.fol&&n.fmoving;drawPerson(c,n.x,n.y,LOOK[n.id],n.dir,mv?n.wph:S.t*2,mv,{seedT:n.x*.013,lift,scooter:n.scoot});}});
   const sc=onScoot(),fs_=F.sacha,fd=F.didou,fb=F.bibou,fn=F.ninou;
   /* au ch1, Sacha est sur le dos de Ninou ; il descend pour un câlin, et pour la trottinette à la fin */
   const hugging=fs_.mode==='hug'&&fs_.hugT>0&&fs_.target;
   if(!S.sachaDown){L.push({y:fs_.y,d:()=>drawPanther(c,fs_.x,fs_.y,fs_.face,fs_.phase,fs_.moving,.95,!hugging)});
     if(hugging){const a=fs_.target,sx=a.x+fs_.side*(a.sx||20),sy=a.y+4;L.push({y:sy+1,d:()=>drawPerson(c,sx,sy,LOOK.sacha,fs_.side>0?'left':'right',S.t*8,true)});}}
   else{L.push({y:fn.y,d:()=>drawPanther(c,fn.x,fn.y,fn.face,fn.phase,fn.moving,.95,false)});
-    L.push({y:fs_.y,d:()=>drawPerson(c,fs_.x,fs_.y,LOOK.sacha,fs_.moving?(fs_.dir||'down'):'down',fs_.phase,fs_.moving,sc?{scooter:'#22356b',helmet:'#9fd0f5'}:{})});}
-  for(const k of ['papa','maman']){const f=F[k];if(f.on||f.walk||S.parentsStay)L.push({y:f.y,d:()=>drawPerson(c,f.x,f.y,LOOK[k],f.moving?(f.dir||'down'):'down',f.phase,f.moving,{seedT:k.length})});}
-  L.push({y:P.y,d:()=>{const op=sc&&!S.dig?{scooter:'#5fb35a',helmet:'#ff8a3d'}:{};if(S.dig>0)op.shovel=Math.abs(Math.sin(S.dig*7));drawPerson(c,P.x,P.y,LOOK.ulysse,P.dir,P.phase,P.moving,op);}});
-  L.push({y:fd.y,d:()=>drawFox(c,fd.x,fd.y,fd.face,fd.phase,fd.moving,1.05)});
+    L.push({y:fs_.y,d:()=>drawPerson(c,fs_.x,fs_.y,LOOK.sacha,fs_.moving?(fs_.dir||'down'):'down',fs_.phase,fs_.moving,sc?{scooter:'#22356b',helmet:'#9fd0f5',lift:jumpLift(fs_)}:{})});}
+  for(const k of ['papa','maman']){const f=F[k];if(S.fetch)continue;if(f.on||f.walk||S.parentsStay)L.push({y:f.y,d:()=>drawPerson(c,f.x,f.y,LOOK[k],f.moving?(f.dir||'down'):'down',f.phase,f.moving,{seedT:k.length})});}
+  L.push({y:P.y,d:()=>{const op=sc&&!S.dig?{scooter:'#5fb35a',helmet:'#ff8a3d'}:{};if(S.dig>0)op.shovel=Math.abs(Math.sin(S.dig*7));op.lift=jumpLift(P);drawPerson(c,P.x,P.y,LOOK.ulysse,P.dir,P.phase,P.moving,op);}});
+  if(!fd.hidden)L.push({y:fd.y,d:()=>drawFox(c,fd.x,fd.y,fd.face,fd.phase,fd.moving,1.05)});
   L.push({y:fb.y,d:()=>drawCat(c,fb.x,fb.y,fb.face,fb.phase,fb.moving,1)});
   L.sort((a,b)=>a.y-b.y);for(const q of L)q.d();
   drawLeaves(c);
@@ -1666,7 +1671,7 @@ function render(){
   c.textAlign='center';c.textBaseline='middle';
   if(S.mode==='play'||S.mode==='cut'){
     c.font='800 15px Grandstander, Trebuchet MS, sans-serif';
-    for(const n of NPCS){if(n.hidden||n.walk||n.rex)continue;const d=dist(P.x,P.y,n.x,n.y),dm=n.free?110:260;if(d>dm)continue;const L2=LOOK[n.id],ty=n.y-(n.pram?80:(L2.s||1)*60)-14,w=c.measureText(L2.name).width+18;
+    for(const n of NPCS){if(n.hidden||n.walk||n.rex||n.fol)continue;const d=dist(P.x,P.y,n.x,n.y),dm=n.free?110:260;if(d>dm)continue;const L2=LOOK[n.id],ty=n.y-(n.pram?80:(L2.s||1)*60)-14,w=c.measureText(L2.name).width+18;
       c.globalAlpha=clamp((dm-d)/50,0,1);rrect(c,n.x-w/2,ty-12,w,24,12);fs(c,S.met.has(n.id)?'#fffaf0':'#ffe7b8',1.6);c.fillStyle='#2b3a55';c.fillText(L2.name,n.x,ty+1);}
     c.globalAlpha=1;
   }
@@ -1999,8 +2004,8 @@ function drawMetroScene(){
   const tw=Math.min(W*.9,780),th=Math.min(H*.42,240),tx=(W-tw)/2,ty=H*.34+bob;
   rrect(ctx,tx,ty,tw,th,28);fsh(ctx,'#f3f2ee',tx,ty,tw,th,3,.4,.16);
   ctx.fillStyle='#d8343c';ctx.fillRect(tx+8,ty+th*.74,tw-16,th*.09);
-  const groups=[['ulysse','sacha'],['papa','maman'],['bibou','didou'],['ninou']];
-  const n=4,gap=10,ww=(tw-36-gap*(n-1))/n,wh=th*.52,wy=ty+th*.13;
+  const groups=[['ulysse','sacha'],['papa','maman'],['bibou','didou'],['ninou'],['iris','prune']];
+  const n=groups.length,gap=10,ww=(tw-36-gap*(n-1))/n,wh=th*.52,wy=ty+th*.13;
   for(let i=0;i<n;i++){
     const wx=tx+18+i*(ww+gap),gr=groups[i],size=Math.min(wh,ww/gr.length*1.05);
     ctx.save();rrect(ctx,wx,wy,ww,wh,12);ctx.fillStyle='#cfe8f4';ctx.fill();ctx.clip();
@@ -2482,8 +2487,445 @@ function restoreState(d){
   try{if(typeof d.music==='boolean')musicOn=d.music;if(typeof d.voice==='boolean')voiceOn=d.voice;syncTools();}catch(e){}
 }
 if(HOT&&typeof HOT.snapshot==='function'){try{HOT.snapshot(snapshot);}catch(e){}}
+/* ===================== chapitre 1 v3 : l'histoire de la v2 sur la carte du ch9 =====================
+   Répliques, quêtes et ordre des scènes : ceux de ch1-perraliere-v2.html. Changements validés par Mich (6 novembre 2026) :
+   pas de local à vélos (la haie devant chez Nanou) ; l'aire de jeux est celle du parc ; Prune et Iris rejoignent la bande. */
+Object.assign(LOOK,{
+  nanou:{name:'Nanou',s:1.25,skin:'#f1d2bb',hair:'#5a3a2a',hs:'bun',eyes:'#5a4030',top:'#8b6ad0',bottom:'#3d3f5a',pitch:1.05,vt:'female'},
+  victorine:{name:'Victorine',s:.86,skin:'#f6d8c2',hair:'#7a5136',hs:'pigtails',eyes:'#4f7a4a',top:'#f08a4b',bottom:'#5a4a7a',pitch:1.6,vt:'narrator'},
+  leonie:{name:'Léonie',s:.98,skin:'#f3d6bf',hair:'#1f1a20',hs:'long',eyes:'#3a2a22',top:'#e4567b',bottom:'#3a4d7a',pitch:1.5,vt:'narrator'},
+  helena:{name:'Helena',s:.98,skin:'#f0cdb2',hair:'#4a3020',hs:'long',eyes:'#4a3424',top:'#4fb0d6',bottom:'#3a3f66',pitch:1.5,vt:'narrator'},
+  maya:{name:'Maya',s:.86,skin:'#f0cdb2',hair:'#4a3020',hs:'pigtails',eyes:'#4a3424',top:'#f2c548',bottom:'#3a3f66',pitch:1.65,vt:'narrator'},
+  iris:{name:'Iris',s:.98,skin:'#f6d8c2',hair:'#4a2e1e',hs:'long',eyes:'#4a3424',top:'#a679d8',bottom:'#2f4a6e',pitch:1.5,vt:'narrator'},
+  prune:{name:'Prune',s:.98,skin:'#f3d3bc',hair:'#7a5136',hs:'bob',eyes:'#5a3d2a',top:'#7c3f8a',bottom:'#2f4a6e',pitch:1.5,vt:'narrator'},
+  elisa:{name:'Elisa',s:.98,skin:'#f3d6bf',hair:'#c98a4a',hs:'long',eyes:'#4f7a4a',top:'#3fa6a0',bottom:'#3a4d7a',pitch:1.5,vt:'narrator'},
+  lucia:{name:'Lucia',s:.82,skin:'#f3d6bf',hair:'#c98a4a',hs:'pigtails',eyes:'#4f7a4a',top:'#ff9ec0',bottom:'#5a4a7a',pitch:1.65,vt:'narrator'},
+  mahe:{name:'Mahé',s:.98,skin:'#f3d6bf',hair:'#6a4428',hs:'long',eyes:'#5a3d2a',top:'#3fa66b',bottom:'#2f4a6e',pitch:1.4,vt:'narrator'},
+  herisson:{name:'Hérisson',animal:'hedgehog',vt:'narrator'},
+  oiseau:{name:'Rouge-gorge',animal:'bird',vt:'narrator'},
+  metro:{name:'Métro ligne A',animal:'metro',vt:'female'}
+});
+LOOK.rex.name='Rex le Chipeur';
+NO_INTRO.delete('rex');NO_INTRO.delete('voisin');
+for(const k in INTROS)delete INTROS[k];
+Object.assign(INTROS,{herisson:"C'est le hérisson !",oiseau:"C'est le rouge-gorge !"});
+CRY.oiseau=()=>SFX.chirp();
+ACT_LABEL.shop='Sonner';ACT_LABEL.horn='Klaxon';ACT_LABEL.paw='Fouiller';
+/* ---------- la cour de l'école : on y entre par le portail, au bout de l'allée ouest ; les ronces le bloquent ---------- */
+{const i=RECTS.findIndex(r=>r.x===1420&&r.y===2140&&r.w===80);if(i>=0)RECTS[i]={x:1420,y:2300,w:80,h:200};
+ const j=RECTS.findIndex(r=>r.x===RES.cour.x&&r.y===RES.cour.y&&r.w===RES.cour.w);if(j>=0)RECTS.splice(j,1);
+ RECTS.push({x:1700,y:2195,w:60,h:110},{x:1500,y:2305,w:260,h:10},{x:1500,y:2280,w:6,h:25});}
+const SLIDE_COUR={x:1660,y:2236};
+RECTS.push({x:SLIDE_COUR.x-44,y:SLIDE_COUR.y-30,w:96,h:36});
+/* ---------- la haie devant chez Nanou, sur la petite place entre les deux tours ---------- */
+const BUSH={x:1622,y:1566,r:8,open:false,rustle:0};
+RECTS.push({x:1548,y:1548,w:150,h:40});
+/* ---------- les PNJ : avant leur quête, sur le chemin ; ils parlent quand on approche ---------- */
+NPCS.push(
+  {id:'elisa',x:380,y:1326,dir:'down',lines:()=>{const L=[['elisa',"Coucou Ulysse ! J'habite dans l'immeuble d'en face, juste là !"],['elisa',"Je ne suis jamais allée au Raptor Parc. C'est comment ?"],['ulysse',"C'est trop bien ! Il y a une luge et des motos !"]];if(!S.met.has('lucia')){S.met.add('lucia');L.push(['lucia',"Coucou Sacha ! Coucou Ninou !"]);}return L;},again:"Moi aussi, un jour, j'irai au Raptor Parc !"},
+  {id:'lucia',x:330,y:1336,dir:'down',first:"Coucou Sacha ! Coucou Ninou !",again:"Ninou, elle est toute douce !"},
+  {id:'helena',x:720,y:1318,dir:'down',first:"Coucou Ulysse ! Le dinosaure avait un gros sac plein de jouets !",again:"On se voit demain en classe !"},
+  {id:'maya',x:780,y:1334,dir:'left',first:"Fais une boule de feu, Ulysse ! Wouah !",again:"Encore une boule de feu !"},
+  {id:'leonie',x:300,y:102,dir:'down',first:"Salut Ulysse ! Le dinosaure a pris ma trottinette rose ! Il est parti vers l'aire de jeux du parc, de l'autre côté de la route !",
+    again:()=>ITEMS[2].back?"Merci Ulysse ! J'ai retrouvé ma trottinette rose !":"Ma trottinette rose est à l'aire de jeux, derrière la haie !",after:'follow'},
+  {id:'prune',x:1202,y:1792,dir:'right',first:"Coucou Sacha ! Coucou Bibou ! Il est tout doux, Bibou !",again:"Je peux faire un câlin à Ninou ?",join:"Je viens avec vous !"},
+  {id:'iris',x:1462,y:1994,dir:'down',first:"Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
+    again:()=>ITEMS[0].back?"Merci Ulysse ! J'ai retrouvé ma trottinette violette !":S.gateOpen?"Ma trottinette est dans la cour, près du toboggan !":"Lance ta boule de feu sur les ronces du portail !"},
+  {id:'mahe',x:1560,y:2272,dir:'left',first:"Super-héros ! Tu as brûlé les ronces ! Trop fort !",again:"Tu reviens jouer dans la cour ?"},
+  {id:'nanou',x:1566,y:1450,dir:'down',first:"Bonjour Ulysse ! Bonjour mon petit Sacha ! Regardez Bibou, il renifle sous la haie !",again:"Faites attention à vous, les super-héros !"},
+  {id:'victorine',x:1640,y:1460,dir:'down',first:"Sacha ! Le dinosaure a caché ma trottinette orange sous la haie !",again:()=>ITEMS[1].back?"Merci Didou ! Ma trottinette orange !":"Ma trottinette est sous la haie !"}
+);
+NPCS.forEach(n=>{n.home={x:n.x,y:n.y,dir:n.dir};});
+/* les ronces : deux au portail de la cour, trois pour le plaisir */
+RONCES.push({x:1492,y:2240,r:34,tag:'gate'},{x:1456,y:2222,r:30,tag:'gate'},{x:-1230,y:-700,r:30,tag:'fun'},{x:1990,y:1150,r:30,tag:'fun'},{x:200,y:1150,r:30,tag:'fun'});
+RONCES.forEach(r=>{r.burning=0;r.gone=false;});
+const GATE={x:1475,y:2235};
+const ITEMS=[
+  {de:"d'Iris",key:'t1',x:1606,y:2284,color:'#a679d8',owner:'Iris',ownerId:'iris',slot:0,found:false,hidden:false},
+  {de:'de Victorine',key:'t2',x:1622,y:1528,color:'#f08a4b',owner:'Victorine',ownerId:'victorine',slot:1,found:false,hidden:true},
+  {de:'de Léonie',key:'t3',x:-888,y:-1236,color:'#e4567b',owner:'Léonie',ownerId:'leonie',slot:2,found:false,hidden:false}
+];
+const HURT=[
+  {id:'herisson',x:-1100,y:-1214,r:26,hurt:true,healing:false,face:-1,noticed:false,ouch:0,walk:null,phase:0,moving:false,hx:40},
+  {id:'oiseau',x:-560,y:-1010,r:12,hurt:true,healing:false,face:1,noticed:false,ouch:0,fly:null,perch:{x:ARAU.x,y:ARAU.y-178},sing:3,phase:0,moving:false,hx:40}
+];
+const SHOPS=[{x:340,y:150,text:'Bip ! Bip !'},{x:660,y:150,text:'Miam, des croissants !'},{x:875,y:150,text:'La pharmacie soigne les bobos !'}];
+AVC[1].fire=true;
+/* la poursuite : Rex part de l'allée de chez nous, passe par le couloir, la galerie, le passage piéton, et monte le trottoir jusqu'à Flachet */
+const CH_WP=[[556,1200],[575,1060],[575,640],[540,560],[540,320],[540,200],[540,112],[226,112],[226,-30],[140,-70],[140,-600],[140,-1000],[140,-1236],[226,-1252],[METRO.x,METRO.y]];
+const CH_CURB=7;
+const RAMPS=[{x:575,y:880},{x:140,y:-420},{x:140,y:-820}];
+const CHEER={leonie:{x:440,y:480,dir:'right'},victorine:{x:640,y:488,dir:'down'},nanou:{x:690,y:476,dir:'down'}};
+const CHEER_TXT={elisa:'Plus vite, Ulysse !',lucia:'Coucou Sacha !',leonie:'Vas-y Ulysse !',victorine:'Coucou Sacha !',nanou:'Bravo les super-héros !'};
+const REX={on:false,x:0,y:0,tx:0,face:-1,phase:0,state:'none',wi:0,acc:0,tauntT:0};
+let FOOT=[];
+const MSTA=['Flachet','Gratte-Ciel','République Villeurbanne','Charpennes Charles Hernu','Masséna'],MSHORT=['Flachet','Gratte-Ciel','République','Charpennes','Masséna'],MSEG=2600;
+const SC_U='#3fa34d',HE_U='#f0862a',SC_S='#22407a',HE_S='#9fd4f2';
+Object.assign(S,{gateOpen:false,flagFlair:false,hintFlip:false,goMetro:false,rets:[],didouT:0,chase:false,sachaDown:false,fetch:null,metroK:0,metroPh:'wait',metroT:0,metroScroll:0,metroV:0});
+F.bibou.meowT=0;
+const FOLLOW={leonie:96,prune:108,iris:120};
+/* ---------- objectifs et aide ---------- */
+function objectives(){
+  if(S.chase&&REX.on)return [{x:REX.x,y:REX.y,text:"Suis Rex sur ta trottinette ! Il file au métro Flachet !"}];
+  if(S.goMetro)return [{x:METRO.x,y:METRO.y,text:"Rex est descendu dans le métro Flachet ! Vite, on le suit !"}];
+  if(S.chase||S.fetch||S.mode==='cut')return [];
+  const list=[];
+  if(!S.gateOpen)list.push({x:GATE.x,y:GATE.y,text:"L'école est fermée par des ronces. Lance ta boule de feu dessus !"});
+  else if(!ITEMS[0].found)list.push({x:ITEMS[0].x,y:ITEMS[0].y,text:"La trottinette d'Iris est dans la cour de l'école, près du toboggan !"});
+  if(!ITEMS[1].found)list.push({x:BUSH.x,y:BUSH.y,text:"Va chez Nanou, à la haie. Bibou va renifler !"});
+  if(!ITEMS[2].found)list.push(HURT[0].hurt?{x:HURT[0].x,y:HURT[0].y,text:"Va à l'aire de jeux. Un hérisson blessé a besoin d'un câlin de Sacha !"}:{x:ITEMS[2].x,y:ITEMS[2].y,text:"La trottinette de Léonie est derrière la haie, à l'aire de jeux !"});
+  return list;
+}
+function helperId(){return (S.hintFlip=!S.hintFlip)?'maman':'papa';}
+function nearNpc(){let best=null,bd=82;for(const n of NPCS){if(n.hidden||n.walk||n.fol)continue;const d=dist(P.x,P.y,n.x,n.y);if(d<bd){bd=d;best=n;}}return best;}
+function talk(n){
+  const dx=P.x-n.x,dy=P.y-n.y;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');
+  S.idle=0;stopGoal();
+  if(!S.met.has(n.id)){S.met.add(n.id);SFX.sparkle();burst(n.x,n.y-60,10,['#ffd25a','#ff9ec0','#9fd18b']);
+    const L=n.lines?n.lines():[[n.id,n.first]];
+    if(n.join)L.push([n.id,n.join,()=>{n.fol=FOLLOW[n.id];}]);
+    if(n.after==='follow')L.push(['didou',"Viens avec nous, Léonie !",()=>{n.fol=FOLLOW[n.id];}]);
+    say(L);}
+  else say([[n.id,typeof n.again==='function'?n.again():n.again]]);
+}
+/* ---------- ce qu'on touche ---------- */
+function targets(){const L=[];for(const r of RONCES)if(!r.gone&&!r.burning)L.push({kind:'fire',x:r.x,y:r.y-14,tr:r.r+34,o:r});return L;}
+function spots(){
+  const L=[];resSpots(L);
+  for(let i=L.length-1;i>=0;i--)if(L[i].x===875&&L[i].y===150)L.splice(i,1);
+  for(const sh of SHOPS)L.push({x:sh.x,y:sh.y,tr:40,ax:sh.x,ay:118,reach:40,kind:'shop',opt:true,act:()=>{SFX.shop();bubble(sh.x,sh.y-60,sh.text);if(sh.x===875){S.cross=2;}}});
+  for(const a of HURT)if(a.hurt&&!a.healing)L.push({x:a.x,y:a.y,tr:50,ax:a.x+(P.x<a.x?-50:50),ay:a.y+10,reach:40,kind:'heal',act:()=>heal(a)});
+  if(!BUSH.open&&F.bibou.mode==='flair')L.push({x:BUSH.x,y:BUSH.y,tr:70,ax:BUSH.x,ay:BUSH.y-52,reach:40,kind:'paw',act:openBush});
+  return L;
+}
+function nearCar(){
+  const cars=[...ROADC.map(k=>({k,x:k.x,y:k.lane?58:22})),...AVC.map(k=>({k,x:k.lane?80:30,y:k.y})),...BLVC.map(k=>({k,x:k.x,y:k.y}))];
+  for(const q of cars)if(dist(P.x,P.y,q.x,q.y)<78)return q;return null;
+}
+function honk(q){const k=q.k;k.bounce=1;if(k.fire){k.siren=2.2;SFX.pinpon();bubble(q.x,q.y-40,'Pin-pon !');}else{SFX.honk();bubble(q.x,q.y-34,'Tut tut !');}}
+function actionAt(){
+  if(S.mode==='metro')return null;
+  for(const s of spots())if(!s.opt&&dist(P.x,P.y,s.ax,s.ay)<s.reach+70)return [s.kind,s.act];
+  const n=nearNpc();if(n)return ['talk',()=>talk(n)];
+  const q=nearCar();if(q)return ['horn',()=>honk(q)];
+  for(const s of spots())if(s.opt&&dist(P.x,P.y,s.ax,s.ay)<s.reach+40)return [s.kind,s.act];
+  if(inGal())return ['hush',hush];
+  const t=nearTarget();if(t)return [t.kind,()=>shoot(t.kind,t.x,t.y)];
+  return null;
+}
+function overlayTap(){}
+/* ---------- Sacha soigne, Bibou flaire, Didou se faufile ---------- */
+function heal(a){if(sachaBusy())return;a.healing=true;sachaDo(a,()=>finishHeal(a),'Câlin !');}
+function finishHeal(a){
+  a.hurt=false;a.healing=false;S.met.add(a.id);S.idle=0;
+  SFX.heal();burst(a.x,a.y-24,16,['#ff7ea8','#ffd25a','#ffffff']);
+  if(a.id==='herisson'){a.walk={x:-1010,y:-1250};a.face=1;
+    const L=[['herisson',"Merci Sacha ! Je me suis piqué la patte en courant derrière le dinosaure. La trottinette de Léonie est derrière moi !"]];
+    if(NPC('iris').fol)L.push(['iris',"Bravo Sacha !"]);say(L);}
+  else{a.fly=true;say([['oiseau',"Cui cui ! Merci Sacha ! Je vais chanter pour vous !"]]);}
+}
+function openBush(){
+  if(S.didouT)return;
+  BUSH.open=true;BUSH.rustle=1;S.didouT=.001;F.didou.mode='sneak';S.idle=0;S.arrow=null;ITEMS[1].lock=true;
+  SFX.yip();bubble(BUSH.x,BUSH.y-70,'Je me faufile !');
+}
+function updateDidou(dt){
+  if(!(S.didouT>0))return;
+  const d=F.didou,t=(S.didouT+=dt);
+  if(t<.9){followTo(d,BUSH.x,BUSH.y-8,dt,240);}
+  else if(t<2.8){d.hidden=true;BUSH.rustle=.8;
+    if(Math.floor(t/.7)!==Math.floor((t-dt)/.7)){bubble(BUSH.x-50+((t*70)%100),BUSH.y-50,'Hop hop !');SFX.yip();}
+    if(!reduceMotion&&rand()<dt*10)PARTS.push({x:BUSH.x-60+rand()*120,y:BUSH.y-10,vx:(rand()-.5)*60,vy:-40-rand()*40,life:.6,max:.6,color:'rgba(120,170,90,.8)',size:4,kind:'dust'});}
+  else if(!d.out){d.out=true;d.hidden=false;d.x=BUSH.x+30;d.y=BUSH.y-40;d.face=-1;const it=ITEMS[1];it.hidden=false;SFX.sparkle();burst(it.x,it.y-20,14,['#f08a4b','#ffd25a']);}
+  if(t>3.6){S.didouT=-1;F.didou.mode='follow';d.out=false;ITEMS[1].lock=false;collect(ITEMS[1],'didou');}
+}
+/* ---------- les trottinettes retrouvées, rendues à leur propriétaire ---------- */
+function collect(it,by){
+  if(it.found)return;
+  it.found=true;S.idle=0;
+  SFX.pickup();burst(it.x,it.y-20,28,['#ffd25a','#ff7a3d','#4fb0d6','#ef5b7a','#9fd18b']);
+  $('slot'+it.slot).classList.add('on');
+  S.rets.push({it,n:NPC(it.ownerId),t:0,fx:it.x,fy:it.y});
+  if(by==='didou')say([['didou',"Je l'ai trouvée ! Elle était coincée sous la haie !"],['ulysse','Merci Didou ! On la rend à Victorine !']]);
+  else say([['didou','Bravo Ulysse ! Tu as retrouvé la trottinette '+it.de+' ! On la lui rend !']]);
+}
+const THANKS={t1:"Merci Ulysse ! Ma trottinette violette ! Je vais faire le tour de la cour !",t2:"Ma trottinette orange ! Merci Didou, merci Sacha !",t3:"Ma trottinette rose ! Merci Ulysse, merci Sacha !"};
+function returned(it){
+  const k=ITEMS.filter(i=>i.back).length,n=NPC(it.ownerId);
+  const lines=[[it.ownerId,THANKS[it.key]]];
+  if(it.key==='t1')lines.push(['iris',"Je viens avec toi !",()=>{n.fol=FOLLOW.iris;n.scoot=it.color;}]);
+  if(it.key==='t3'){n.fol=0;n.home={x:n.x,y:n.y,dir:'down'};}
+  if(k===1)lines.push(['ninou','Encore deux trottinettes à trouver !']);
+  if(k===2)lines.push(['ninou',"Plus qu'une trottinette à trouver !"]);
+  if(k===3)say(lines,startEnding);else say(lines);
+}
+function updateReturns(dt){
+  for(const r of S.rets){r.t+=dt;
+    if(!r.done&&r.t>=1.2){r.done=true;r.it.back=true;const n=r.n;n.wave=1.6;SFX.sparkle();burst(n.x+24,n.y-14,16,[r.it.color,'#ffd25a','#ffffff']);returned(r.it);}}
+  S.rets=S.rets.filter(r=>!r.done);
+}
+/* ---------- la fin : Rex se montre, on prend nos trottinettes, la poursuite, le métro ---------- */
+function startEnding(){
+  S.mode='cut';S.arrow=null;stopGoal();
+  const viewW=vw/zoom;
+  REX.on=true;REX.state='enter';REX.x=P.x+viewW/2+90;REX.y=P.y+6;REX.tx=P.x+150;REX.face=-1;
+  P.dir='right';SFX.rex();
+}
+function startFetch(){
+  S.mode='cut';S.holdCut=true;S.arrow=null;stopGoal();
+  S.fade={t:0,fn:()=>{
+    teleportFamily(530,1326,'down');
+    for(const k of ['prune','iris']){const n=NPC(k);if(n.fol){const t=trailAt(n.fol);n.x=t.x;n.y=t.y;}}
+    S.fetch={t:0,said:false};
+    for(const id in CHEER){const n=NPC(id);n.fol=0;Object.assign(n,CHEER[id]);S.met.add(id);}
+    ['elisa','lucia'].forEach(id=>S.met.add(id));
+  }};
+}
+const FETCH_FROM={papa:[512,1362],maman:[548,1362]},FETCH_TO={papa:[468,1330],maman:[604,1330]};
+function fetchPos(k){const u=clamp(S.fetch.t/1.4,0,1),a=FETCH_FROM[k],b=FETCH_TO[k];return {x:a[0]+(b[0]-a[0])*u,y:a[1]+(b[1]-a[1])*u,moving:u<1};}
+function updateFetch(dt){
+  const f=S.fetch;f.t+=dt;
+  if(f.t>1.6&&!f.said&&!D.cur){f.said=true;
+    say([
+      ['maman',"Voilà vos trottinettes et vos casques !",()=>{S.scooter=true;SFX.pickup();burst(P.x,P.y-50,22,[SC_U,HE_U,'#ffd25a']);}],
+      ['ulysse',"Mon casque orange et ma trottinette verte ! C'est parti !"],
+      ['sacha',"Moi aussi je roule ! Je descends du dos de Ninou !",()=>{S.sachaDown=true;F.ninou.x=F.sacha.x+34;F.ninou.y=F.sacha.y+10;SFX.sparkle();burst(F.sacha.x,F.sacha.y-40,18,[SC_S,HE_S,'#ffffff']);}],
+      ['ulysse',"Bravo Sacha, tu roules comme un grand !"],
+      ['papa',"On reste ensemble. Et au feu, on s'arrête !"],
+      ['didou',"Regardez ! Rex est là-bas, sur l'allée ! On le suit !",()=>{REX.on=true;REX.state='wait';REX.x=CH_WP[0][0];REX.y=CH_WP[0][1];REX.face=1;REX.wi=0;SFX.rex();bubble(REX.x,REX.y-90,'Hi hi !');}]
+    ],startChase);}
+}
+function startChase(){
+  S.fetch=null;S.mode='play';S.holdCut=false;S.chase=true;S.idle=0;
+  Object.assign(F.papa,{x:FETCH_TO.papa[0],y:FETCH_TO.papa[1]});Object.assign(F.maman,{x:FETCH_TO.maman[0],y:FETCH_TO.maman[1]});
+  REX.state='chase';REX.wi=1;REX.acc=0;REX.tauntT=2;REX.side=1;REX.curbSaid=false;
+}
+/* Rex court devant, toujours visible : il attend si on est trop loin, et au feu rouge */
+function updateChase(dt){
+  REX.waiting=false;
+  if(REX.wi>=CH_WP.length)return;
+  const w=CH_WP[REX.wi],dP=dist(P.x,P.y,REX.x,REX.y);
+  let wait=dP>360||D.cur&&dP>220;
+  if(REX.wi===CH_CURB+1&&(S.ped!=='green'||dP>260)){wait=true;
+    if(!REX.curbSaid&&dP<300){REX.curbSaid=true;bubble(REX.x,REX.y-96,'Même moi, j\'attends le vert !');}}
+  if(wait){REX.waiting=true;REX.face=P.x<REX.x?-1:1;REX.tauntT-=dt;
+    if(REX.tauntT<=0&&dP>360){REX.tauntT=4;SFX.rex();bubble(REX.x,REX.y-96,'Hi hi ! Par ici !');}
+    return;}
+  const dx=w[0]-REX.x,dy=w[1]-REX.y,d=Math.hypot(dx,dy),sp=dP<140?340:280,st=Math.min(d,sp*dt);
+  if(d>.5){REX.x+=dx/d*st;REX.y+=dy/d*st;if(Math.abs(dx)>2)REX.face=dx<0?-1:1;
+    REX.acc+=st;if(REX.acc>=40){REX.acc=0;REX.side=-(REX.side||1);const a=Math.atan2(dy,dx);FOOT.push({x:REX.x-Math.sin(a)*9*REX.side,y:REX.y+Math.cos(a)*9*REX.side,a,t:0});}}
+  if(d<4){REX.wi++;
+    if(REX.wi>=CH_WP.length){
+      REX.on=false;REX.state='gone';S.chase=false;S.goMetro=true;S.idle=0;S.arrow={x:METRO.x,y:METRO.y,t:9999};
+      SFX.rex();burst(METRO.x,METRO.y-40,20,['#6cc36a','#ffd25a','#ffffff']);bubble(METRO.x,METRO.y-110,"Hi hi ! À la Tête d'Or !");
+      say([['didou',"Rex est descendu dans le métro ! On le suit, vite !"]]);
+    }}
+}
+function cheer(){
+  S.cheerT=(S.cheerT||0)-1/60;if(S.cheerT>0)return;
+  for(const id in CHEER_TXT){const n=NPC(id);if(!n||n.cheered)continue;
+    if(dist(P.x,P.y,n.x,n.y)<240){n.cheered=true;n.wave=2.2;S.cheerT=.8;bubble(n.x,n.y-(LOOK[id].s||1)*60-34,CHEER_TXT[id]);SFX.sparkle();return;}}
+}
+function updateJumps(dt){
+  if(!S.scooter)return;
+  for(const e of [P,F.sacha]){
+    if(e===F.sacha&&!S.sachaDown)continue;
+    if(e.ramp==null)e.ramp=-1;
+    if(e.jump>0){e.jump+=dt;if(e.jump>.62)e.jump=0;}
+    RAMPS.forEach((r,i)=>{if(e.moving&&!(e.jump>0)&&e.ramp!==i&&Math.abs(e.x-r.x)<34&&Math.abs(e.y-r.y)<18){e.jump=.001;e.ramp=i;SFX.boing();bubble(e.x,e.y-(e===P?96:84),e===P?'Youpi !':'Hiii !');}});
+    if(e.ramp>=0&&dist(e.x,e.y,RAMPS[e.ramp].x,RAMPS[e.ramp].y)>80)e.ramp=-1;
+  }
+}
+function jumpLift(e){if(!(e.jump>0))return 0;return Math.sin(Math.PI*clamp(e.jump/.62,0,1))*26;}
+function startMetro(){
+  S.mode='metro';S.metroT=0;S.metroScroll=0;S.metroV=0;S.arrow=null;S.metroK=0;S.metroPh='wait';stopGoal();
+  $('touch').hidden=true;$('hud').hidden=true;
+  say([
+    ['papa','Tout le monde dans le métro ! On plie les trottinettes. Ligne A, direction Perrache.'],
+    ['maman',"On descend à Masséna, dans quatre stations. Le parc de la Tête d'Or est tout près !"],
+    ['ninou','Le métro roule sous la terre, comme une taupe géante !']
+  ]);
+}
+function updateMetro(dt){
+  S.metroT+=dt;
+  if(S.metroPh==='wait'){S.metroV=0;if(S.metroT>1.2&&!D.cur){S.metroPh='move';S.metroT=0;SFX.rumble();}return;}
+  if(S.metroPh==='move'){
+    const u=clamp(S.metroT/2.6,0,1);S.metroScroll=S.metroK*MSEG+MSEG*(1-Math.cos(Math.PI*u))/2;S.metroV=MSEG*Math.PI/2/2.6*Math.sin(Math.PI*u);
+    if(u>=1){S.metroK++;S.metroPh='stop';S.metroT=0;S.metroV=0;SFX.ding();
+      if(S.metroK<MSTA.length-1)say([['metro',MSTA[S.metroK]+' !']]);
+      else say([['metro','Masséna ! Masséna !'],['didou',"Le parc de la Tête d'Or est tout près ! Rex est parti par là. À suivre..."]],showEnd);}
+    return;}
+  S.metroV=0;
+  if(S.metroK<MSTA.length-1&&S.metroT>1.4&&!D.cur){S.metroPh='move';S.metroT=0;SFX.rumble();}
+}
+function drawLinePlan(W,H){
+  const n=MSTA.length,x0=Math.max(46,W*.1),x1=W-x0,y=Math.max(150,H*.22);
+  ctx.save();rrect(ctx,x0-34,y-46,x1-x0+68,92,16);ctx.fillStyle='rgba(255,250,240,.94)';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=INK;ctx.stroke();
+  ctx.strokeStyle='#d8343c';ctx.lineWidth=8;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
+  const pos=clamp(S.metroScroll/MSEG,0,n-1);ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let i=0;i<n;i++){const x=x0+(x1-x0)*i/(n-1),on=i<=pos+.01;circ(ctx,x,y,on?9:7);fs(ctx,on?'#d8343c':'#fffaf0',2);
+    ctx.font='800 '+(W<640?10:13)+'px Grandstander, Trebuchet MS, sans-serif';ctx.fillStyle='#2b3a55';ctx.fillText(MSHORT[i],x,y-22);}
+  const tx=x0+(x1-x0)*pos/(n-1);rrect(ctx,tx-15,y+9,30,13,5);fs(ctx,'#f3f2ee',1.6);ctx.fillStyle='#d8343c';ctx.fillRect(tx-13,y+16,26,3);
+  ctx.font='700 '+(W<640?10:12)+'px Andika, Trebuchet MS, sans-serif';ctx.fillStyle='#56627c';ctx.textAlign='left';ctx.fillText('Ligne A, direction Perrache',x0-20,y+32);
+  ctx.restore();
+}
+/* ---------- la mise à jour de l'histoire, appelée à chaque image ---------- */
+function storyUpdate(dt){
+  /* les copines qui suivent la bande */
+  for(const n of NPCS){if(n.wave>0)n.wave-=dt;if(!n.fol)continue;const t=trailAt(n.fol),ox=n.x,oy=n.y;followTo(n,t.x,t.y,dt,Math.max(200,dist(n.x,n.y,t.x,t.y)*6));
+    n.fmoving=Math.hypot(n.x-ox,n.y-oy)>.3;if(n.fmoving){n.wph=(n.wph||0)+dt*11;const dx=n.x-ox,dy=n.y-oy;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');}}
+  updateDidou(dt);updateReturns(dt);updateJumps(dt);if(S.fetch)updateFetch(dt);
+  if(S.mode==='play'&&!D.cur){
+    /* on parle quand on approche */
+    for(const n of NPCS){if(n.fol||S.met.has(n.id))continue;if(n.id==='mahe'&&!S.gateOpen)continue;if(dist(P.x,P.y,n.x,n.y)<118){talk(n);break;}}
+    if(S.goMetro&&dist(P.x,P.y,METRO.x,METRO.y)<72)startMetro();
+    if(S.chase)cheer();
+    /* les feux : Papa et Maman expliquent */
+    const atCurb=curbWait();
+    if(!D.cur&&atCurb&&S.ped==='red'&&!S.redWarned){S.redWarned=true;say([['papa',"Stop ! Le bonhomme est rouge, les voitures passent. On attend qu'il devienne vert !"]]);}
+    if(!D.cur&&atCurb&&S.ped==='green'&&!S.greenTold){S.greenTold=true;say([['maman',"Le bonhomme est vert ! On regarde à gauche, à droite, et on traverse."]]);}
+    /* Prune encourage Ulysse devant les ronces */
+    if(!S.said.prune&&NPC('prune').fol&&!S.gateOpen&&dist(P.x,P.y,GATE.x,GATE.y)<300){S.said.prune=1;say([['prune',"Vas-y Ulysse !"]]);}
+  }
+  /* les animaux blessés */
+  for(const a of HURT){
+    a.phase+=dt;
+    if(a.hurt&&!a.healing&&S.mode==='play'){
+      const d=dist(P.x,P.y,a.x,a.y);
+      if(d<260){a.ouch-=dt;if(a.ouch<=0){a.ouch=3;bubble(a.x,a.y-44,'Aïe !');}}
+      if(d<190&&!a.noticed&&!D.cur&&!S.chase&&!S.goMetro){a.noticed=true;S.idle=0;say([['didou',a.id==='herisson'?'Oh ! Un hérisson blessé ! Appuie sur '+btnA()+', Sacha va lui faire un câlin guérisseur !':'Oh ! Un petit oiseau blessé ! Appuie sur '+btnA()+' pour le câlin guérisseur de Sacha !']]);}
+    }
+    if(a.walk){const ox=a.x;followTo(a,a.walk.x,a.walk.y,dt,70);if(Math.abs(a.x-ox)>.1)a.face=a.x<ox?-1:1;if(!a.moving)a.walk=null;}
+    if(a.fly===true){const dx=a.perch.x-a.x,dy=a.perch.y-a.y,d=Math.hypot(dx,dy);if(d>3){const st=Math.min(d,180*dt);a.x+=dx/d*st;a.y+=dy/d*st;a.face=dx<0?-1:1;}else a.fly='perched';}
+    if(a.fly==='perched'){a.sing-=dt;if(a.sing<=0){a.sing=6;if(S.mode==='play'&&dist(P.x,P.y,a.x,a.y)<500){SFX.chirp();bubble(a.x,a.y-30,'Cui cui !');}}}
+  }
+  /* Bibou flaire la haie : il y va d'abord, ensuite Didou dit ce qu'il a senti */
+  const B=F.bibou;
+  if(B.mode==='follow'&&S.mode==='play'&&!BUSH.open&&dist(P.x,P.y,BUSH.x,BUSH.y)<300)B.mode='flair';
+  if(B.mode==='flair'){
+    followTo(B,BUSH.x-48,BUSH.y-34,dt,270);
+    if(!B.moving){B.face=1;B.meowT-=dt;
+      if(B.meowT<=0){B.meowT=2.8;SFX.meow();bubble(B.x,B.y-46,'Miaou !');BUSH.rustle=.7;
+        PARTS.push({x:BUSH.x,y:BUSH.y-50,vx:0,vy:-30,life:1,max:1,color:'#ffd25a',size:9,kind:'spark'});
+        if(!S.flagFlair&&S.mode==='play'&&!D.cur){S.flagFlair=true;say([['didou','Bibou a senti quelque chose sous la haie ! C\'est trop petit pour toi, Ulysse. Va devant et appuie sur '+btnA()+' : je me faufile !']]);}}}
+    if(BUSH.open)B.mode='follow';
+  }
+  if(BUSH.rustle>0)BUSH.rustle=Math.max(0,BUSH.rustle-dt);
+  /* les ronces du portail */
+  if(!S.gateOpen&&RONCES.filter(r=>r.tag==='gate').every(r=>r.gone)){
+    S.gateOpen=true;burst(GATE.x,GATE.y-40,24,['#ffd25a','#ff9ec0','#4fb0d6']);SFX.sparkle();
+    say([['didou',"Bravo Ulysse ! Les ronces ont brûlé. L'école est ouverte !"]]);
+  }
+  /* les trottinettes à ramasser */
+  for(const it of ITEMS){if(it.found||it.hidden||it.lock)continue;if(S.mode==='play'&&dist(P.x,P.y,it.x,it.y)<46)collect(it);}
+  /* les voitures klaxonnées rebondissent ; la sirène des pompiers */
+  for(const k of [...ROADC,...AVC,...BLVC]){if(k.bounce>0)k.bounce=Math.max(0,k.bounce-dt*2);if(k.siren>0)k.siren-=dt;}
+  /* Rex */
+  if(REX.on){
+    REX.phase+=dt*12;
+    if(REX.state==='enter'){
+      REX.x-=320*dt;
+      if(REX.x<=REX.tx){
+        REX.x=REX.tx;REX.state='talk';
+        say([
+          ['rex','Hi hi hi ! Bravo les super-héros !',()=>SFX.rex()],
+          ['rex',"Mais j'ai encore plein de jouets dans mon sac ! Et le petit train de la Tête d'Or, je l'ai démonté !"],
+          ['rex',"Je file au métro Flachet ! Vous ne m'attraperez jamais, je cours trop vite ! Hi hi !"]
+        ],()=>{REX.state='leave';REX.face=1;SFX.rex();});
+      }
+    }else if(REX.state==='leave'){
+      REX.x+=420*dt;REX.face=1;
+      if(dist(REX.x,REX.y,P.x,P.y)>vw/zoom*.8){
+        REX.on=false;REX.state='gone';
+        say([
+          ['didou','Il court trop vite ! À pied, on ne le rattrapera jamais !'],
+          ['ulysse','Nos trottinettes ! Elles sont à la maison !'],
+          ['papa',"Bonne idée, Ulysse ! On file à la maison les chercher !"]
+        ],startFetch);
+      }
+    }else if(REX.state==='chase')updateChase(dt);
+  }
+  if(S.chase&&REX.on&&S.mode==='play')S.arrow={x:REX.x,y:REX.y,t:1};
+  for(const f of FOOT)f.t+=dt;FOOT=FOOT.filter(f=>f.t<40);
+  /* le fondu de la maison */
+  if(S.fade&&S.fade.fn){S.fade.t+=dt;if(S.fade.t>=.35&&!S.fade.done){S.fade.done=true;S.fade.fn();}if(S.fade.t>=.7){S.fade=null;}}
+}
+/* ---------- ce que l'histoire dessine dans le monde ---------- */
+function drawRampR(c,r){
+  c.save();c.translate(r.x,r.y);
+  ell(c,0,7,36,6);fill(c,'rgba(43,58,85,.16)');
+  c.beginPath();c.moveTo(-32,6);c.lineTo(32,6);c.lineTo(27,-7);c.lineTo(-27,-7);c.closePath();fsh(c,'#d9a066',-32,-7,64,13,1.8,.35,.15);
+  rrect(c,-27,-13,54,7,3);fsh(c,'#efc28a',-27,-13,54,7,1.6);
+  c.strokeStyle='#ffd25a';c.lineWidth=3;c.lineCap='round';c.lineJoin='round';
+  [-16,0,16].forEach(o=>{c.beginPath();c.moveTo(o-6,3);c.lineTo(o,-3);c.lineTo(o+6,3);c.stroke();});
+  c.restore();
+}
+function drawFootR(c){
+  for(const f of FOOT){const a=clamp((40-f.t)/6,0,1)*.42;if(a<=0)continue;
+    c.save();c.globalAlpha=a;c.translate(f.x,f.y);c.rotate(f.a);c.fillStyle='rgb(63,110,60)';ell(c,0,0,5,4);c.fill();
+    [-.55,0,.55].forEach(t=>{c.save();c.rotate(t);ell(c,8,0,4,1.8);c.fill();c.restore();});c.restore();}
+  c.globalAlpha=1;
+}
+function drawHedgeBush(c){const b=BUSH,sh=b.rustle>0&&!reduceMotion?Math.sin(S.t*40)*2:0;
+  for(let i=0;i<7;i++){const x=1556+i*22+sh,y=1572-(i%2)*6;circ(c,x,y,20);fsh(c,i%2?'#4f9a4a':'#3f8a4a',x-20,y-20,40,40,1.6,.35,.2);}
+  for(let i=0;i<6;i++){circ(c,1566+i*24+sh,1556,7);c.fillStyle='rgba(140,200,110,.55)';c.fill();}}
+function storyWorld(c,L,inView){
+  if(S.scooter)for(const r of RAMPS)if(inView(r.x,r.y,80))L.push({y:r.y-14,d:()=>drawRampR(c,r)});
+  L.push({y:-1e6,d:()=>drawFootR(c)});
+  if(inView(BUSH.x,BUSH.y,200))L.push({y:BUSH.y+16,d:()=>drawHedgeBush(c)});
+  if(inView(SLIDE_COUR.x,SLIDE_COUR.y,200))L.push({y:SLIDE_COUR.y,d:()=>drawSlideSmall(c,SLIDE_COUR.x,SLIDE_COUR.y,'#5fc06a')});
+  /* le portail de la cour */
+  if(inView(1500,2220,200))L.push({y:2244,d:()=>{for(const y of [2196,2282]){rrect(c,1496,y-40,10,42,3);fs(c,'#5d6378',1.4);}
+    if(S.gateOpen){c.strokeStyle='#5d6378';c.lineWidth=3;c.beginPath();c.moveTo(1506,2200);c.lineTo(1540,2186);c.stroke();}
+    else{c.strokeStyle='#5d6378';c.lineWidth=2.4;for(let y=2200;y<2280;y+=9){c.beginPath();c.moveTo(1500,y);c.lineTo(1500,y-26);c.stroke();}}}});
+  for(const it of ITEMS)if(!it.found&&!it.hidden&&inView(it.x,it.y,80))L.push({y:it.y,d:()=>drawScooter(c,it)});
+  for(const r of S.rets){const u=clamp(r.t/1.2,0,1),n=r.n,x=r.fx+(n.x+24-r.fx)*u,y=r.fy+(n.y-r.fy)*u-Math.sin(u*Math.PI)*120;L.push({y:y+400,d:()=>drawScooter(c,{x,y,color:r.it.color})});}
+  for(const it of ITEMS)if(it.back){const n=NPC(it.ownerId);if(n&&!n.scoot&&!n.fol)L.push({y:n.y-1,d:()=>drawScooterParked(c,n.x+24,n.y+2,it.color)});}
+  for(const a of HURT)if(inView(a.x,a.y,80)){
+    if(a.id==='herisson')L.push({y:a.y,d:()=>drawHedgehog(c,a.x,a.y,a.face,a.hurt,1)});
+    else L.push({y:a.fly?a.y+300:a.y,d:()=>drawRobin(c,a.x,a.y,a.face,a.hurt,1,a.fly===true)});}
+  if(REX.on)L.push({y:REX.y,d:()=>{drawRex(c,REX.x,REX.y,REX.face,REX.waiting?0:REX.phase,!REX.waiting,1.05);
+    c.save();c.translate(REX.x-REX.face*22,REX.y-40);ell(c,0,0,16,18);fs(c,'#c9a46a',1.6);c.restore();}});
+  /* les pompiers : un gyrophare */
+  for(const k of AVC)if(k.fire&&inView(k.lane?80:30,k.y,80))L.push({y:k.y+1,d:()=>{const x=k.lane?80:30,on=k.siren>0&&Math.floor(S.t*8)%2===0;circ(c,x-5,k.y-6,4);fill(c,on?'#4fb0ff':'#9fc9ee');circ(c,x+5,k.y-6,4);fill(c,on?'#ffe066':'#e8b4b0');}});
+  /* Papa et Maman sortent du hall avec les trottinettes */
+  if(S.fetch){[['papa',SC_U,HE_U,!S.scooter],['maman',SC_S,HE_S,!S.sachaDown]].forEach(([k,sc,he,carry])=>{const p=fetchPos(k);
+    L.push({y:p.y,d:()=>{drawPerson(c,p.x,p.y,LOOK[k],p.moving?'up':(k==='papa'?'right':'left'),S.t*11,p.moving,{seedT:k.length});
+      if(carry){const sd=k==='papa'?-1:1;c.save();c.translate(p.x+sd*22,p.y-6);drawTrott(c,1,sc,'right',0,false,'all');c.restore();
+        c.save();c.translate(p.x+sd*8,p.y-14);c.beginPath();c.arc(0,0,10,Math.PI,0);c.closePath();fsh(c,he,-10,-10,20,10,1.6);c.restore();}}});});}
+}
+/* ---------- départ et fin ---------- */
+function discover(){}
+function startGame(){
+  if(S.mode!=='title')return;
+  audioInit();startMusic();stopSpeech();pickVoice();showTouch();
+  $('title').hidden=true;$('hud').hidden=false;
+  S.mode='play';teleportFamily(START9.x,START9.y,'down');
+  say([
+    ['didou',"Ulysse ! Sacha ! C'est Didou ! Vite, venez voir !"],
+    ['ninou',"Et moi, c'est Ninou ! Cette nuit, Rex le Chipeur a pris les trottinettes des copains !"],
+    ['didou','Vite, les super-héros ! Mettez vos capes !'],
+    ['papa','Bonjour les super-héros ! Ulysse, appuie sur '+btnA()+' pour lancer ta boule de feu. Elle brûle les ronces !'],
+    ['maman','Et toi Sacha, ton câlin guérisseur soigne les animaux blessés ! Si vous êtes perdus, appuyez sur '+btnH()+'. On vient avec vous !'],
+    ['papa',"Vos trottinettes à vous, Rex ne les a pas trouvées : elles sont rangées à la maison."],
+    ['bibou','Miaou ! Je vais chercher avec vous !'],
+    ['didou','Il y a trois trottinettes à retrouver autour de la résidence. En route !']
+  ]);
+}
+function showEnd(){
+  S.mode='end';SFX.win();stopGoal();
+  const box=$('friends');box.innerHTML='';
+  const ALWAYS=new Set(['leonie','iris','victorine','elisa','lucia','nanou','prune']);
+  const order=['ulysse','sacha','papa','maman','bibou','didou','ninou','leonie','elisa','lucia','helena','maya','iris','prune','mahe','nanou','victorine','herisson','oiseau'];
+  const fam=new Set(['ulysse','sacha','papa','maman','bibou','didou','ninou']);
+  order.filter(id=>fam.has(id)||ALWAYS.has(id)||S.met.has(id)).forEach(id=>{
+    const d=document.createElement('div');d.className='friend';const c=document.createElement('canvas');c.width=116;c.height=116;drawPortrait(c,id);
+    const s=document.createElement('span');s.textContent=LOOK[id].name;d.appendChild(c);d.appendChild(s);box.appendChild(d);});
+  $('hud').hidden=true;$('touch').hidden=true;$('end').hidden=false;
+}
+
 /* pour les tests automatiques */
-window.__ch1={P,S,F,cam,goTo,findPath,blocked,teleportFamily,doAction,NPCS};
+window.__ch1={P,S,F,cam,goTo,findPath,blocked,teleportFamily,doAction,NPCS,ITEMS,HURT,BUSH,REX,RONCES,startMetro,actionAt,D};
 let last=performance.now();
 function loop(now){
   const dt=Math.min(.05,(now-last)/1000);last=now;
