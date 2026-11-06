@@ -3509,7 +3509,7 @@ function startGame(){
 }
 
 /* pour les tests automatiques */
-window.__ch1={PLAYS,startPlay,P,S,F,cam,goTo,findPath,blocked,teleportFamily,doAction,NPCS,ITEMS,HURT,BUSH,REX,RONCES,startMetro,actionAt,D};
+window.__ch1={showEnd,PLAYS,startPlay,P,S,F,cam,goTo,findPath,blocked,teleportFamily,doAction,NPCS,ITEMS,HURT,BUSH,REX,RONCES,startMetro,actionAt,D};
 let last=performance.now();
 function loop(now){
   const dt=Math.min(.05,(now-last)/1000);last=now;

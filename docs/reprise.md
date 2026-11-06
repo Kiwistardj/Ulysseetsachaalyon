@@ -111,3 +111,14 @@ Le portage est l'occasion de corriger les anciens chapitres :
 ## Ch1 v3 : chantier suivant (6 novembre 2026)
 - Cahier des charges validé avec Mich : `docs/cahier-ch1-v3.html`, publié ici : https://claude.ai/artifact/PMSgNjKwfRsYBAmzPq2jru
 - Sept lots, dans l'ordre : carte et décor (école, relais, C23) ; parc et château ; personnages, sacs à dos et bouclier ; flèche qui suit le chemin ; animations ; Rex, poursuite, 5 stations ; tests. Compter 4 à 5 sessions avec les finitions (pas, expressions, caméra, vibrations, etc.).
+
+## Ch1 v3 : lots du cahier des charges faits (6 novembre 2026, session autonome)
+- Lien de test (même lien) : https://claude.ai/artifact/LeuAv4ZfocjY77vYV4DZgw
+- Lot 1 carte et décor : fait (sans lampadaires ni fontaine, trottoir et haie le long de la rue, barre de Prune raccourcie, parking fermé vers l'école, jardin de Nanou agrandi avec portillon sur la rue et bac à sable, école refaite avec grande cour sud et toboggan au fond, relais au pied d'une tour, magasin de bricolage sans nom, arrêts et bus C23, trottoir d'en face).
+- Lot 2 château : fait (3 tours, mur d'escalade / rampe à tasseaux / échelle au choix, 2 toboggans inox vers le nord, sable rouge-brun, structure en métal des grands sur sol souple, ping-pong au nord-ouest).
+- Lots 3, 4, 6 : faits (trottinettes dès le départ, doudous dans les sacs, Bibou dans le chariot, ordre Victorine, Iris et Myriam, Sacha récupéré, Léonie ; boule de feu sur quelqu'un ; flèche qui suit le vrai chemin et empreintes vertes ; poursuite courte depuis le parc, feu qui passe au rouge quand on arrive ; 5 quais de métro dessinés).
+- Lot 5 finitions : expressions, cape, boule de feu, secousse, vibrations Android, gros bouton, voitures qui freinent, zoom, sac de Rex, écran titre, trottinettes sur l'écran de fin.
+- Testé : partie complète automatique jusqu'à l'écran de fin, marche au toucher (téléphone) et à la souris, captures PC et téléphone, aucune erreur.
+- Pas fait ou partiel : ombres harmonisées (pas touchées) ; animations de Didou et Bibou seulement améliorées (sortie du sac et du chariot, retour) ; partie complète à la main sur le Poco X6 à faire par Mich.
+- Répliques nouvelles à valider par Mich : Nanou « Sacha, tu restes jouer avec Victorine pendant qu'Ulysse va à l'école ? », Sacha « Oui ! Je joue avec Victorine ! », Didou « Maintenant, on va à l'école d'Ulysse ! », Victorine « On joue au sable avec Sacha ! », Léonie « Je viens avec vous ! » et « Bravo Sacha ! », Roman, Myriam (« Bonjour Ulysse ! Iris a besoin de ta boule de feu. »), Sanassy, Inaya, Ridha, Lucia « Areu ! », Didou « Il court trop vite ! Vite, sur nos trottinettes ! », Rex « Hi hi ! Trop tard ! », aides de la flèche (jardin de Nanou, Sacha, Léonie).
+- Hypothèses : portillon du jardin de Nanou sur la rue, place exacte des arrêts C23, vêtements des enfants, tours et accès du château, place de la structure en métal.
