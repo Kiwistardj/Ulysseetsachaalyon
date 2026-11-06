@@ -108,7 +108,7 @@ body.portrait .tools .tool{width:40px;height:40px}
 <canvas id="game" aria-label="La Perralière"></canvas>
 
 <div class="hud" id="hud" hidden aria-label="Les trottinettes retrouvées">
-  <div class="slot" id="slot0"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#a679d8" stroke-width="5"/><path d="M30 34l5-22" stroke="#a679d8" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
+  <div class="slot" id="slot0"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#4f9fd8" stroke-width="5"/><path d="M30 34l5-22" stroke="#4f9fd8" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
   <div class="slot" id="slot1"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#f08a4b" stroke-width="5"/><path d="M30 34l5-22" stroke="#f08a4b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
   <div class="slot" id="slot2"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34h22" stroke="#e4567b" stroke-width="5"/><path d="M30 34l5-22" stroke="#e4567b" stroke-width="4"/><path d="M30 11h10" stroke="#2b3a55" stroke-width="4"/></g><circle cx="10" cy="37" r="5" fill="#2b3a55"/><circle cx="35" cy="37" r="5" fill="#2b3a55"/></svg></div>
 </div>
@@ -2527,10 +2527,10 @@ NPCS.push(
   {id:'helena',x:720,y:1318,dir:'down',first:"Coucou Ulysse ! Le dinosaure avait un gros sac plein de jouets !",again:"On se voit demain en classe !"},
   {id:'maya',x:780,y:1334,dir:'left',first:"Fais une boule de feu, Ulysse ! Wouah !",again:"Encore une boule de feu !"},
   {id:'leonie',x:300,y:102,dir:'down',first:"Salut Ulysse ! Le dinosaure a pris ma trottinette rose ! Il est parti vers l'aire de jeux du parc, de l'autre côté de la route !",
-    again:()=>ITEMS[2].back?"Merci Ulysse ! J'ai retrouvé ma trottinette rose !":"Ma trottinette rose est à l'aire de jeux, derrière la haie !",after:'follow'},
-  {id:'prune',x:1202,y:1792,dir:'right',first:"Coucou Sacha ! Coucou Bibou ! Il est tout doux, Bibou !",again:"Je peux faire un câlin à Ninou ?",join:"Je viens avec vous !"},
-  {id:'iris',x:1462,y:1994,dir:'down',first:"Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
-    again:()=>ITEMS[0].back?"Merci Ulysse ! J'ai retrouvé ma trottinette violette !":S.gateOpen?"Ma trottinette est dans la cour, près du toboggan !":"Lance ta boule de feu sur les ronces du portail !"},
+    again:()=>ITEMS[2].back?"Merci Ulysse ! J'ai retrouvé ma trottinette rose !":"Ma trottinette rose est à l'aire de jeux, derrière la haie !"},
+  {id:'prune',x:1418,y:1924,dir:'right',first:"Coucou Sacha ! Coucou Bibou ! Il est tout doux, Bibou !",again:"Je peux faire un câlin à Ninou ?",join:"Je viens avec vous !"},
+  {id:'iris',x:1440,y:2000,dir:'down',first:"Ulysse ! Des ronces bloquent le portail de l'école, et ma trottinette est dans la cour ! Lance ta boule de feu sur les ronces !",
+    again:()=>ITEMS[0].back?"Merci Ulysse ! J'ai retrouvé ma trottinette bleue !":S.gateOpen?"Ma trottinette est dans la cour, près du toboggan !":"Lance ta boule de feu sur les ronces du portail !"},
   {id:'mahe',x:1560,y:2272,dir:'left',first:"Super-héros ! Tu as brûlé les ronces ! Trop fort !",again:"Tu reviens jouer dans la cour ?"},
   {id:'nanou',x:1566,y:1450,dir:'down',first:"Bonjour Ulysse ! Bonjour mon petit Sacha ! Regardez Bibou, il renifle sous la haie !",again:"Faites attention à vous, les super-héros !"},
   {id:'victorine',x:1640,y:1460,dir:'down',first:"Sacha ! Le dinosaure a caché ma trottinette orange sous la haie !",again:()=>ITEMS[1].back?"Merci Didou ! Ma trottinette orange !":"Ma trottinette est sous la haie !"}
@@ -2541,7 +2541,7 @@ RONCES.push({x:1492,y:2240,r:34,tag:'gate'},{x:1456,y:2222,r:30,tag:'gate'},{x:-
 RONCES.forEach(r=>{r.burning=0;r.gone=false;});
 const GATE={x:1475,y:2235};
 const ITEMS=[
-  {de:"d'Iris",key:'t1',x:1606,y:2284,color:'#a679d8',owner:'Iris',ownerId:'iris',slot:0,found:false,hidden:false},
+  {de:"d'Iris",key:'t1',x:1606,y:2284,color:'#4f9fd8',owner:'Iris',ownerId:'iris',slot:0,found:false,hidden:false},
   {de:'de Victorine',key:'t2',x:1622,y:1528,color:'#f08a4b',owner:'Victorine',ownerId:'victorine',slot:1,found:false,hidden:true},
   {de:'de Léonie',key:'t3',x:-888,y:-1236,color:'#e4567b',owner:'Léonie',ownerId:'leonie',slot:2,found:false,hidden:false}
 ];
@@ -2563,7 +2563,7 @@ const MSTA=['Flachet','Gratte-Ciel','République Villeurbanne','Charpennes Charl
 const SC_U='#3fa34d',HE_U='#f0862a',SC_S='#22407a',HE_S='#9fd4f2';
 Object.assign(S,{gateOpen:false,flagFlair:false,hintFlip:false,goMetro:false,rets:[],didouT:0,chase:false,sachaDown:false,fetch:null,metroK:0,metroPh:'wait',metroT:0,metroScroll:0,metroV:0});
 F.bibou.meowT=0;
-const FOLLOW={leonie:96,prune:108,iris:120};
+const FOLLOW={prune:96,iris:110};
 /* ---------- objectifs et aide ---------- */
 function objectives(){
   if(S.chase&&REX.on)return [{x:REX.x,y:REX.y,text:"Suis Rex sur ta trottinette ! Il file au métro Flachet !"}];
@@ -2573,6 +2573,7 @@ function objectives(){
   if(!S.gateOpen)list.push({x:GATE.x,y:GATE.y,text:"L'école est fermée par des ronces. Lance ta boule de feu dessus !"});
   else if(!ITEMS[0].found)list.push({x:ITEMS[0].x,y:ITEMS[0].y,text:"La trottinette d'Iris est dans la cour de l'école, près du toboggan !"});
   if(!ITEMS[1].found)list.push({x:BUSH.x,y:BUSH.y,text:"Va chez Nanou, à la haie. Bibou va renifler !"});
+  if(ITEMS[2].carry)list.push({x:NPC('leonie').x,y:NPC('leonie').y,text:"On rapporte sa trottinette rose à Léonie, à l'angle du Casino !"});
   if(!ITEMS[2].found)list.push(HURT[0].hurt?{x:HURT[0].x,y:HURT[0].y,text:"Va à l'aire de jeux. Un hérisson blessé a besoin d'un câlin de Sacha !"}:{x:ITEMS[2].x,y:ITEMS[2].y,text:"La trottinette de Léonie est derrière la haie, à l'aire de jeux !"});
   return list;
 }
@@ -2584,7 +2585,6 @@ function talk(n){
   if(!S.met.has(n.id)){S.met.add(n.id);SFX.sparkle();burst(n.x,n.y-60,10,['#ffd25a','#ff9ec0','#9fd18b']);
     const L=n.lines?n.lines():[[n.id,n.first]];
     if(n.join)L.push([n.id,n.join,()=>{n.fol=FOLLOW[n.id];}]);
-    if(n.after==='follow')L.push(['didou',"Viens avec nous, Léonie !",()=>{n.fol=FOLLOW[n.id];}]);
     say(L);}
   else say([[n.id,typeof n.again==='function'?n.again():n.again]]);
 }
@@ -2645,16 +2645,15 @@ function collect(it,by){
   it.found=true;S.idle=0;
   SFX.pickup();burst(it.x,it.y-20,28,['#ffd25a','#ff7a3d','#4fb0d6','#ef5b7a','#9fd18b']);
   $('slot'+it.slot).classList.add('on');
-  S.rets.push({it,n:NPC(it.ownerId),t:0,fx:it.x,fy:it.y});
+  if(it.key==='t3')it.carry=true;else S.rets.push({it,n:NPC(it.ownerId),t:0,fx:it.x,fy:it.y});
   if(by==='didou')say([['didou',"Je l'ai trouvée ! Elle était coincée sous la haie !"],['ulysse','Merci Didou ! On la rend à Victorine !']]);
   else say([['didou','Bravo Ulysse ! Tu as retrouvé la trottinette '+it.de+' ! On la lui rend !']]);
 }
-const THANKS={t1:"Merci Ulysse ! Ma trottinette violette ! Je vais faire le tour de la cour !",t2:"Ma trottinette orange ! Merci Didou, merci Sacha !",t3:"Ma trottinette rose ! Merci Ulysse, merci Sacha !"};
+const THANKS={t1:"Merci Ulysse ! Ma trottinette bleue ! Je vais faire le tour de la cour !",t2:"Ma trottinette orange ! Merci Didou, merci Sacha !",t3:"Ma trottinette rose ! Merci Ulysse, merci Sacha !"};
 function returned(it){
   const k=ITEMS.filter(i=>i.back).length,n=NPC(it.ownerId);
   const lines=[[it.ownerId,THANKS[it.key]]];
   if(it.key==='t1')lines.push(['iris',"Je viens avec toi !",()=>{n.fol=FOLLOW.iris;n.scoot=it.color;}]);
-  if(it.key==='t3'){n.fol=0;n.home={x:n.x,y:n.y,dir:'down'};}
   if(k===1)lines.push(['ninou','Encore deux trottinettes à trouver !']);
   if(k===2)lines.push(['ninou',"Plus qu'une trottinette à trouver !"]);
   if(k===3)say(lines,startEnding);else say(lines);
@@ -2774,6 +2773,7 @@ function storyUpdate(dt){
   /* les copines qui suivent la bande */
   for(const n of NPCS){if(n.wave>0)n.wave-=dt;if(!n.fol)continue;const t=trailAt(n.fol),ox=n.x,oy=n.y;followTo(n,t.x,t.y,dt,Math.max(200,dist(n.x,n.y,t.x,t.y)*6));
     n.fmoving=Math.hypot(n.x-ox,n.y-oy)>.3;if(n.fmoving){n.wph=(n.wph||0)+dt*11;const dx=n.x-ox,dy=n.y-oy;n.dir=Math.abs(dx)>Math.abs(dy)?(dx<0?'left':'right'):(dy<0?'up':'down');}}
+  {const it=ITEMS[2],n=NPC('leonie');if(it.carry&&S.mode==='play'&&dist(P.x,P.y,n.x,n.y)<150){it.carry=false;S.rets.push({it,n,t:0,fx:P.x,fy:P.y-40});}}
   updateDidou(dt);updateReturns(dt);updateJumps(dt);if(S.fetch)updateFetch(dt);
   if(S.mode==='play'&&!D.cur){
     /* on parle quand on approche */
