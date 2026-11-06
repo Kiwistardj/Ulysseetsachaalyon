@@ -1,0 +1,115 @@
+<title>Tête d'Or v6, cahier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Andika:wght@400;700&display=swap">
+<style>
+/* Mise en page : une colonne de lecture, des lots numérotés dans l'ordre de travail, chaque tâche avec son état. */
+:root{
+  --bg:#fbf7ef; --paper:#ffffff; --ink:#2b3a55; --muted:#5f6a80; --line:#e3dccd;
+  --flame:#e8642c; --leaf:#3f8a4a; --sky:#3f86d6; --chip:#fff1dc;
+  --f-display:'Grandstander','Trebuchet MS',sans-serif; --f-body:'Andika','Trebuchet MS',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:2rem}h2{font-size:1.4rem}h3{font-size:1.05rem}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--chip);border-radius:999px;padding:3px 12px;font-size:.85rem}
+section{display:flex;flex-direction:column;gap:12px}
+.lot{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.lot header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--f-display);color:var(--flame);font-size:1.3rem;font-variant-numeric:tabular-nums}
+.lot .why{color:var(--muted);font-size:.95rem}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+li{max-width:65ch}
+.tag{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;border-radius:6px;padding:1px 7px;margin-right:6px;white-space:nowrap}
+.t-new{background:color-mix(in srgb,var(--sky) 18%,transparent);color:var(--sky)}
+.t-fix{background:color-mix(in srgb,var(--flame) 18%,transparent);color:var(--flame)}
+.t-cut{background:color-mix(in srgb,var(--muted) 18%,transparent);color:var(--muted)}
+.t-idea{background:color-mix(in srgb,var(--leaf) 18%,transparent);color:var(--leaf)}
+blockquote{margin:0;border-left:3px solid var(--line);padding-left:12px;color:var(--muted);font-style:italic}
+.order{counter-reset:s;list-style:none;padding:0}
+.order li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:8px}
+.order li::before{content:counter(s);font-family:var(--f-display);color:var(--flame)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.85rem;color:var(--muted)}
+a{color:var(--sky)}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <h1>Chapitre 2, la Tête d'Or : cahier des charges de la v6</h1>
+  <p class="lead">Proposition à valider par Mich avant tout code. Histoire, répliques, quêtes et ordre : ceux de la v5. Moteur et systèmes : ceux du ch1 v3. Les points marqués « Proposé » attendent ta réponse.</p>
+  <div class="meta"><span class="chip">Base histoire : reference-html/ch2-tete-d-or.html (v5)</span><span class="chip">Base moteur : reference-html/ch1-perraliere-v3.html</span><span class="chip">Résultat : reference-html/ch2-tete-d-or-v6.html</span></div>
+  <div class="legend"><span><span class="tag t-new">Nouveau</span>à ajouter</span><span><span class="tag t-fix">Corriger</span>existe mais faux</span><span><span class="tag t-cut">Retirer</span>à enlever</span><span><span class="tag t-idea">Proposé</span>idée de Claude, à valider</span></div>
+</header>
+
+<section>
+<h2>L'histoire, une étape à la fois</h2>
+<ol class="order">
+  <li><span><span class="tag t-new">Nouveau</span>Quai Masséna (métro A), sortie, trottoir, passage piéton à feux, grille dorée de la porte des Enfants du Rhône. Répliques du feu reprises de la v5 (« Stop ! Le bonhomme est rouge… »).</span></li>
+  <li><span><span class="tag t-idea">Proposé</span>Juste après la grille : on voit Rex filer dans le parc avec son sac, ses empreintes vertes démarrent. Un grand panneau du parc montre le petit train et ses 4 pièces manquantes : l'intro de la v5 parle alors de choses visibles.</span></li>
+  <li><span>Plaine des daims : petite porte ouverte, tas de terre qui brille, pelle d'Ulysse, seau de Sacha, la lanterne.</span></li>
+  <li><span>Couloir des tortues : Sacha soigne Grand-Mousse, la roue.</span></li>
+  <li><span>Manèges : carrousel (bonus). Près du banc, Sacha soigne l'écureuil, qui ouvre la barrière.</span></li>
+  <li><span>Girafes : boule de feu sur les ronces, la girafe donne la cheminée.</span></li>
+  <li><span>Plaine africaine : chats des sables, flamants. Bibou creuse le buisson, le sifflet.</span></li>
+  <li><span>Gare du petit train : le conducteur répare, balade (le lac n'est vu que depuis le train).</span></li>
+  <li><span>Rex reparaît, file vers les Gratte-Ciel. Transport vers le ch3 à trancher (voir questions). Écran de fin.</span></li>
+</ol>
+</section>
+
+<section>
+<h2>Les lots de travail</h2>
+<div class="lot"><header><span class="num">1</span><h3>Carte au vrai plan</h3></header>
+  <p class="why">Après tes réponses et tes photos. Rien n'est dessiné avant.</p>
+  <ul>
+    <li><span class="tag t-new">Nouveau</span>Plan réel du parc, orientation comprise : entrée, zoo, manèges, aire de jeux, gare, lac en fond.</li>
+    <li><span class="tag t-new">Nouveau</span>Rue de Masséna à la porte : trottoirs, pas d'herbe, pas de lampadaires, voitures qui freinent.</li>
+    <li><span class="tag t-fix">Corriger</span>Barrières de la v5 remplacées par des grilles et portillons crédibles du zoo, ouverts un par un.</li>
+    <li><span class="tag t-cut">Retirer</span>Lampadaires de la v5, restes du ch1 (haie à trou, hérisson, rouge-gorge non utilisés).</li>
+  </ul></div>
+<div class="lot"><header><span class="num">2</span><h3>Moteur du ch1 v3 branché</h3></header>
+  <ul>
+    <li>Toucher pour marcher avec contournement, flèche qui suit le vrai chemin (discrète, grande avec l'ampoule), empreintes vertes de Rex.</li>
+    <li>Bouton unique contextuel (feu, câlin, pelle, patte, étoile Jouer, parler), « Chut » à l'intérieur, pas de joystick.</li>
+    <li>Boule de feu sans visée sur les gens : « Aïe ! », règle dite une fois par Papa (répliques du ch1 v3).</li>
+    <li>Vibrations Android, expressions, zoom sur les moments clés, trottinettes, sacs à dos, chariot de Bibou.</li>
+  </ul></div>
+<div class="lot"><header><span class="num">3</span><h3>Le parc vivant et jouable</h3></header>
+  <ul>
+    <li><span class="tag t-new">Nouveau</span>Aire de jeux du parc fidèle aux photos, structures jouables (toboggans, balançoires), rejouables, étoile « Jouer ».</li>
+    <li><span class="tag t-new">Nouveau</span>Animaux qui bougent, cygnes et barques sur le lac, promeneurs, plus de ronces à brûler pour le plaisir.</li>
+    <li><span class="tag t-fix">Corriger</span>Une seule étape mise en avant à la fois, PNJ placés avant leur quête, aucun ne suit la bande.</li>
+  </ul></div>
+<div class="lot"><header><span class="num">4</span><h3>Balades et fin</h3></header>
+  <ul>
+    <li>Métro A à l'arrivée (quai Masséna dessiné, sans logo), petit train avec « encore un tour », transport final vers les Gratte-Ciel.</li>
+    <li>Écran de fin avec portraits et trottinettes, lien vers le ch3.</li>
+  </ul></div>
+<div class="lot"><header><span class="num">5</span><h3>Tests et publication</h3></header>
+  <ul><li>Partie complète au toucher et à la souris jusqu'à l'écran de fin, marche réelle partout, captures téléphone et PC, liste des dialogues relue. Lien privé pour le Poco X6. Mise à jour de reprise.md.</li></ul></div>
+</section>
+
+<section>
+<h2>Répliques que je propose de changer</h2>
+<p class="lead">Rien ne change sans ton accord. Tout le reste est repris mot pour mot.</p>
+<ul>
+  <li><span class="tag t-idea">Proposé</span>Papa : « Heureusement, on a pris vos trottinettes, la pelle et le seau ! Les casques sur la tête, et en route ! » → « Heureusement, on a pris la pelle et le seau ! En route ! » (trottinettes et casques déjà là depuis le ch1).</li>
+  <li><span class="tag t-idea">Proposé</span>Didou : « La barrière s'ouvre ! On continue tout droit ! » → « … On continue ! » (au vrai plan, l'allée tourne).</li>
+  <li><span class="tag t-idea">Proposé</span>Didou : « Allez, on continue vers les girafes ! » et « On continue vers les girafes ! » → « On continue ! » (girafes pas encore visibles).</li>
+  <li><span class="tag t-idea">Proposé</span>Maman : « …sur la presqu'île du vélodrome » → selon le vrai lieu de la gare, avec un mot qu'Ulysse connaît.</li>
+  <li><span class="tag t-idea">Proposé</span>Rex, Papa, Maman (« en bus », « dans le bus ») : selon le transport choisi vers les Gratte-Ciel.</li>
+  <li><span class="tag t-new">Nouveau</span>Répliques ajoutées : Rex à la grille, doudous qui sortent des sacs, aire de jeux. Je te les liste avant de les mettre.</li>
+</ul>
+</section>
+
+<section>
+<h2>Durée</h2>
+<p class="lead">Le ch1 v3 a pris 4 à 5 sessions. Compter pareil : lot 1 (une session), lots 2 et 3 (deux), lots 4 et 5 (une à deux). Commit et push après chaque lot validé.</p>
+</section>
+</div>
