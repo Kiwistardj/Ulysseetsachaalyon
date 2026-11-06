@@ -1,0 +1,209 @@
+<title>Gratte-Ciel refonte, cahier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@700;800&family=Andika:wght@400;700&display=swap">
+<style>
+/* Mise en page : une colonne de lecture ; questions numérotées pour que Mich réponde « Q3 : ... » ; répliques en avant/après. */
+:root{
+  --bg:#fbf7ef; --paper:#ffffff; --ink:#2b3a55; --muted:#5f6a80; --line:#e3dccd;
+  --flame:#e8642c; --leaf:#3f8a4a; --sky:#3f86d6; --chip:#fff1dc; --violet:#5a4aa8;
+  --f-display:'Grandstander','Trebuchet MS',sans-serif; --f-body:'Andika','Trebuchet MS',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;--violet:#a99cf0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171c28;--paper:#202736;--ink:#eef1f7;--muted:#a9b2c4;--line:#333c50;--flame:#ff8a52;--leaf:#6cc07a;--sky:#7fb2ee;--chip:#3a2f22;--violet:#a99cf0;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:2rem}h2{font-size:1.4rem}h3{font-size:1.05rem}
+p{margin:0}
+.lead{color:var(--muted);max-width:65ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--chip);border-radius:999px;padding:3px 12px;font-size:.85rem}
+section{display:flex;flex-direction:column;gap:12px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+li{max-width:65ch}
+.q{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
+.q li{display:grid;grid-template-columns:3rem 1fr;gap:8px}
+.q b.n{font-family:var(--f-display);color:var(--flame);font-variant-numeric:tabular-nums}
+.q .hyp{display:block;color:var(--muted);font-size:.92rem}
+.order{counter-reset:s;list-style:none;padding:0}
+.order li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:8px}
+.order li::before{content:counter(s);font-family:var(--f-display);color:var(--flame)}
+.rep{display:flex;flex-direction:column;gap:14px}
+.rep > div{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:10px}
+.rep > div:first-child{border-top:0;padding-top:0}
+.who{font-weight:700}
+.old{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--flame) 60%,transparent)}
+.new{color:var(--leaf);font-weight:700}
+.why{color:var(--muted);font-size:.9rem}
+.tag{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;border-radius:6px;padding:1px 7px;margin-right:6px;white-space:nowrap}
+.t-r{background:color-mix(in srgb,var(--sky) 18%,transparent);color:var(--sky)}
+.t-d{background:color-mix(in srgb,var(--leaf) 18%,transparent);color:var(--leaf)}
+.plan{overflow-x:auto}
+.plan svg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}
+.plan text{font-family:var(--f-body);font-size:13px;fill:var(--ink)}
+.plan .road{fill:color-mix(in srgb,var(--muted) 35%,var(--paper))}
+.plan .walk{fill:var(--chip)}
+.plan .bld{fill:color-mix(in srgb,var(--sky) 22%,var(--paper));stroke:var(--line)}
+.plan .spot{fill:var(--flame)}
+.plan .bus{fill:var(--violet)}
+.plan .water{fill:color-mix(in srgb,var(--sky) 55%,var(--paper))}
+</style>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <h1>Chapitre 3, les Gratte-Ciel : la refonte</h1>
+  <p class="lead">Base : histoire, répliques et ordre de la v5. Moteur : celui du ch1 v3 (repris tel quel). Rien n'est construit tant que tu n'as pas validé cette page.</p>
+  <div class="meta"><span class="chip">6 novembre 2026</span><span class="chip">Fichier : reference-html/ch3-gratte-ciel-refonte.html</span><span class="chip">Environ 4 sessions</span></div>
+</header>
+
+<section>
+  <h2>L'histoire de la v5, gardée telle quelle</h2>
+  <ol class="order">
+    <li>Arrivée en bus 69, arrêt Gratte-Ciel, devant le métro. Ninou explique : 4 sujets du manège volés (fusée, camion de pompier, avion, scooter).</li>
+    <li>Ferme des producteurs (chèvre qui fait « Bêêê ! ») : on ramasse 6 pommes dans le seau de Sacha. Sous la cagette : le scooter. 1re barrière de chantier ouverte.</li>
+    <li>Passage piéton à feux, papa « Stop ! », maman « Le bonhomme est vert ! ».</li>
+    <li>Avenue piétonne, jardinières, tremplins. Roman en terrasse avec ses parents : « Désolé, on n'a pas le temps aujourd'hui ». Bonus : petit chien soigné.</li>
+    <li>Boulangerie : four éteint, boule de feu d'Ulysse. Derrière le four : le camion de pompier. 2e barrière.</li>
+    <li>Librairie : Bibou flaire sous les livres. La fusée. 3e barrière.</li>
+    <li>Le monsieur du manège, puis le McDo (Ulysse : « On n'a pas le temps d'y aller »), le manège arrêté.</li>
+    <li>Place de la mairie, fontaines : pigeon blessé, câlin de Sacha, il va chercher l'avion en haut de la tour à l'horloge.</li>
+    <li>Retour au manège, réparation, tour de manège (Ulysse camion de pompier, Sacha avion), gros bouton rouge.</li>
+    <li>Rex surgit, file vers le métro. Métro A Gratte-Ciel jusqu'à Vaulx-en-Velin La Soie. Écran de fin.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Ce que j'ajoute ou corrige d'office</h2>
+  <div class="box"><ul>
+    <li><b>Moteur du ch1 v3</b> : toucher pour marcher, flèche qui suit le vrai chemin, empreintes vertes de Rex, bouton unique, ampoule, voix, expressions, cape, zoom, vibrations, secousse, écran titre et écran de fin.</li>
+    <li><b>Bus 69 avec son numéro</b>, bleu violet foncé, en balade courte (environ 12 s) : on voit défiler les arrêts jusqu'à Gratte-Ciel.</li>
+    <li><b>Rex vu au début</b> : depuis le bus, on le voit filer avec son sac. Entre les deux, ses empreintes vertes. Il revient à la fin.</li>
+    <li><b>Une étape à la fois</b> : une seule mise en avant (étoiles, flèche), barrières de chantier comme en v5.</li>
+    <li><b>Jour sans lampadaires</b>, trottoirs partout, passages piétons à feux comme au ch1 v3 (Ulysse s'arrête au rouge).</li>
+    <li><b>Aucune enseigne écrite</b> : ni Bettant, ni Fantasio, ni McDo, ni Peycelon sur les façades. Des pictos (pain, livre, burger, fleurs). Le McDo se reconnaît à sa forme et ses couleurs, sans logo.</li>
+    <li><b>Prune à la table de Roman</b>, avec Claire et Florent (leurs parents du ch1 v3). Personne ne suit la bande.</li>
+    <li><b>Jeux rejouables</b> : manège « encore un tour », tremplins, chèvre, pigeons qui s'envolent, tram qui passe.</li>
+    <li><b>Métro A en balade</b> : les 5 quais du ch1 v3 (Flachet, Cusset, Laurent Bonnevay, puis le terminus).</li>
+  </ul></div>
+</section>
+
+<section>
+  <h2>Mon plan de départ, à corriger</h2>
+  <p class="lead">Nord en haut, comme en v5. C'est ce que je crois savoir : dis-moi ce qui est faux, et les photos remplaceront ce schéma.</p>
+  <div class="plan box">
+    <svg viewBox="0 0 520 560" role="img" aria-label="Schéma du quartier : cours au nord, avenue nord-sud, mairie et place au sud">
+      <rect class="road" x="0" y="70" width="520" height="56"/>
+      <text x="12" y="104">cours (métro Gratte-Ciel dessous)</text>
+      <rect class="bus" x="330" y="74" width="86" height="22" rx="5"/><text x="338" y="90" style="fill:#fff">bus 69</text>
+      <rect class="bld" x="40" y="10" width="140" height="56"/><text x="50" y="42">Ferme + chèvre ?</text>
+      <rect class="spot" x="196" y="38" width="22" height="22" rx="4"/><text x="224" y="54">bouche métro ?</text>
+      <rect class="walk" x="190" y="126" width="140" height="300"/>
+      <text x="206" y="150">avenue piétonne</text>
+      <rect class="bld" x="40" y="140" width="140" height="280"/>
+      <text x="56" y="200">ouest :</text><text x="56" y="220">boulangerie</text><text x="56" y="240">fleurs, pharmacie</text><text x="56" y="260">glaces</text>
+      <rect class="bld" x="340" y="140" width="140" height="280"/>
+      <text x="352" y="200">est :</text><text x="352" y="220">chocolats, jouets</text><text x="352" y="240">librairie</text><text x="352" y="280">McDo (fin)</text>
+      <circle class="spot" cx="260" cy="240" r="8"/><text x="200" y="270">table de Roman</text>
+      <circle class="spot" cx="290" cy="400" r="14"/><text x="214" y="404">manège</text>
+      <rect class="walk" x="40" y="430" width="440" height="110"/>
+      <rect class="bld" x="200" y="440" width="120" height="60"/><text x="214" y="474">mairie + tour</text>
+      <ellipse class="water" cx="120" cy="515" rx="40" ry="14"/><ellipse class="water" cx="400" cy="515" rx="40" ry="14"/>
+      <text x="170" y="530">place, fontaines, tram T6 ?</text>
+    </svg>
+  </div>
+</section>
+
+<section>
+  <h2>Questions sur les lieux</h2>
+  <p class="lead">Réponds par numéro. Une photo vaut mieux qu'une longue réponse.</p>
+  <div class="box"><ol class="q">
+    <li><b class="n">Q1</b><span>Le bus 69 : où la famille monte-t-elle en sortant de la Tête d'Or, et dans quel sens arrive-t-il aux Gratte-Ciel ? Je n'ai que ces arrêts : Maisons Neuves, Marengo, Verlaine - Racine, Mairie de Villeurbanne, Gratte-Ciel, Rue de France - IUT.<span class="hyp">Hypothèse : on montre seulement la fin du trajet (Mairie de Villeurbanne puis Gratte-Ciel), et depuis le bus on voit le manège arrêté et Rex qui court.</span></span></li>
+    <li><b class="n">Q2</b><span>L'arrêt Gratte-Ciel du 69 : sur le cours, de quel côté (nord ou sud), à gauche ou à droite de l'avenue ?</span></li>
+    <li><b class="n">Q3</b><span>Le métro Gratte-Ciel : combien de bouches, et où ? Laquelle prend-on pour La Soie ?</span></li>
+    <li><b class="n">Q4</b><span>La Ferme des producteurs et la chèvre : même côté que le métro, mais à l'ouest ou à l'est de l'avenue ? La chèvre est-elle sur le trottoir ou contre la vitrine ?</span></li>
+    <li><b class="n">Q5</b><span>L'avenue : toujours piétonne et nord-sud, de la mairie (sud) au cours (nord) ? Le côté au nord du cours (le nouveau quartier) compte-t-il pour nous ?</span></li>
+    <li><b class="n">Q6</b><span>Les commerces de l'avenue, dans l'ordre réel, côté ouest puis côté est. La v5 avait : boulangerie, fleurs, pharmacie, glaces, presse, café (ouest) ; chocolats, jouets, librairie, café, opticien, McDo (est). Qu'est-ce qu'Ulysse remarque, lui ?</span></li>
+    <li><b class="n">Q7</b><span>Le manège : où exactement (devant la mairie, au bout de l'avenue, à côté du McDo) ? Quels sujets en vrai, et y a-t-il un étage ?</span></li>
+    <li><b class="n">Q8</b><span>La mairie et la place : la façade et la tour à l'horloge regardent-elles l'avenue (nord) ? Les fontaines : bassins, jets au sol où les enfants jouent, ou décor seulement ? Où est le théâtre par rapport à la mairie ?</span></li>
+    <li><b class="n">Q9</b><span>Le tram T6 : passe-t-il bien devant le McDo, et où est l'arrêt Hôtel de Ville - TNP ? Couleur du tram ?</span></li>
+    <li><b class="n">Q10</b><span>Les tours de l'avenue : combien d'étages à peu près, et y a-t-il des arcades ou des arbres au pied ?</span></li>
+    <li><b class="n">Q11</b><span>Les terrasses de street food : en vrai, des tables de pique-nique en bois au milieu de l'avenue ? Où dans l'avenue ?</span></li>
+  </ol></div>
+  <div class="box">
+    <h3>Photos utiles</h3>
+    <ul>
+      <li>Depuis l'arrêt du 69 : vers le métro, puis vers l'avenue.</li>
+      <li>La Ferme des producteurs et la chèvre.</li>
+      <li>L'avenue depuis le cours (vue longue), puis depuis la mairie.</li>
+      <li>Le manège de près (sujets, toit, bouton) et sa place par rapport au McDo.</li>
+      <li>La façade de la mairie et la place avec les fontaines.</li>
+      <li>La boulangerie et la librairie (vitrine, et l'intérieur si tu veux qu'on y entre, Q14).</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Questions sur le jeu</h2>
+  <div class="box"><ol class="q">
+    <li><b class="n">Q12</b><span>Prune : que fait-elle ? <span class="hyp">Proposition : elle est à la table avec Roman, et c'est elle qui montre le petit chien (Roman garde ses répliques). Nouvelle réplique : Prune « Le petit chien s'est fait mal à la patte ! ».</span></span></li>
+    <li><b class="n">Q13</b><span>Roman et Prune se représentent-ils (« C'est Roman ! ») ou non, puisqu'on les connaît depuis le ch1 ? <span class="hyp">Proposition : non. Seuls Claire et Florent se présentent, comme au ch1 v3, s'ils parlent.</span></span></li>
+    <li><b class="n">Q14</b><span>On entre dans la boulangerie et la librairie, ou on reste dehors comme en v5 ? À l'intérieur, la règle est « Chut », jamais de feu. <span class="hyp">Proposition : boulangerie dehors (le four se voit par le fournil ouvert sur la rue, Ulysse lance depuis le trottoir) ; librairie à l'intérieur, une salle pleine, bouton « Chut », Bibou flaire sous la pile.</span></span></li>
+    <li><b class="n">Q15</b><span>Ronces : Ulysse n'a qu'une boule de feu (le four). <span class="hyp">Proposition : des ronces ont poussé autour du bassin où est coincé le pigeon. Ulysse les brûle, puis Sacha fait le câlin (suite d'une action d'Ulysse, plus de Sacha seul).</span></span></li>
+    <li><b class="n">Q16</b><span>Didou n'a pas de moment à lui. <span class="hyp">Proposition : 2 pommes ont roulé sous l'étal ; Didou se faufile d'abord, puis dit ce qu'il a trouvé (réplique nouvelle ci-dessous).</span></span></li>
+    <li><b class="n">Q17</b><span>Le gros bouton rouge : en v5, Sacha appuie seul pendant qu'Ulysse regarde. <span class="hyp">Proposition : ils appuient ensemble (répliques à changer ci-dessous).</span></span></li>
+    <li><b class="n">Q18</b><span>Fontaines : Sacha adore l'eau. Bonus « Sacha joue dans l'eau avec Ulysse » si les jets sont des jeux d'eau en vrai, sinon décor (Q8).</span></li>
+    <li><b class="n">Q19</b><span>Dans le métro, Ulysse voit passer Flachet, sa station. On ajoute une réplique ? <span class="hyp">Proposition : Ulysse « Flachet ! C'est notre station ! »</span></span></li>
+  </ol></div>
+</section>
+
+<section>
+  <h2>Répliques à changer (ton accord, une par une)</h2>
+  <div class="box rep">
+    <div><span class="tag t-r">Règle</span><span class="who">Pigeon</span>
+      <span class="old">« J'ai vu l'avion du manège tout en haut du beffroi. »</span>
+      <span class="new">« J'ai vu l'avion du manège tout en haut de la grande tour avec l'horloge. »</span>
+      <span class="why">La bible interdit « beffroi ».</span></div>
+    <div><span class="tag t-r">Règle</span><span class="who">Didou, intro</span>
+      <span class="old">« Regardez ! En courant, Rex a perdu des choses du manège des Gratte-Ciel ! »</span>
+      <span class="new">Gardée, mais dite dans le bus quand on voit Rex courir devant le manège.</span>
+      <span class="why">Aujourd'hui elle parle d'un Rex et d'un manège invisibles. Aucun mot changé.</span></div>
+    <div><span class="tag t-r">Règle</span><span class="who">Forain, puis Sacha</span>
+      <span class="old">« Sacha, c'est toi qui démarres le manège : appuie sur le gros bouton rouge ! » / Sacha « J'ai appuyé ! Le manège démarre ! »</span>
+      <span class="new">« Ulysse et Sacha, appuyez ensemble sur le gros bouton rouge ! » / Sacha « On a appuyé ! Le manège démarre ! »</span>
+      <span class="why">Sacha n'agit jamais seul pendant qu'Ulysse regarde (Q17).</span></div>
+    <div><span class="tag t-r">Marque</span><span class="who">Aides de la flèche</span>
+      <span class="old">« … puis va chez Bettant. » / « … devant la librairie Fantasio … » / « À la librairie Fantasio, … »</span>
+      <span class="new">« … puis va à la boulangerie. » / « … devant la librairie … » / « À la librairie, … »</span>
+      <span class="why">Pas de nom de marque. « McDo » reste dans la bouche d'Ulysse (c'est son mot), sauf si tu préfères « le restaurant ».</span></div>
+    <div><span class="tag t-r">Cohérence</span><span class="who">Aide</span>
+      <span class="old">« Toutes les pièces sont là ! Va au manège, devant le McDo ! »</span>
+      <span class="new">« Tous les sujets sont là ! Va au manège, devant le McDo ! »</span>
+      <span class="why">Partout ailleurs on dit « sujets ».</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Répliques nouvelles (ton accord)</h2>
+  <div class="box rep">
+    <div><span class="tag t-d">Prune</span><span>« Le petit chien s'est fait mal à la patte ! » (Q12)</span></div>
+    <div><span class="tag t-d">Didou</span><span>Après s'être faufilé : « J'ai trouvé deux pommes sous l'étal ! » (Q16)</span></div>
+    <div><span class="tag t-d">Didou</span><span>Devant les ronces : « Des ronces autour du pigeon ! Ta boule de feu, Ulysse ! » (Q15)</span></div>
+    <div><span class="tag t-d">Ulysse</span><span>Dans le métro : « Flachet ! C'est notre station ! » (Q19)</span></div>
+    <div><span class="tag t-d">Forain</span><span>Après le tour : « Encore un tour ? Appuyez sur l'étoile ! » (pour rejouer)</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Les lots</h2>
+  <div class="box"><ol class="order">
+    <li><b>Carte et décor</b> au vrai plan, après tes photos : cours, bus 69, Ferme, avenue, commerces sans enseigne, manège, McDo, mairie, place, tram. Commit et lien de test.</li>
+    <li><b>Moteur du ch1 v3 branché</b> sur la carte : marche, collisions, flèche, empreintes, feux, bouton, voix. Commit.</li>
+    <li><b>Quêtes et répliques</b> dans l'ordre de la v5, avec les changements validés ici. Commit.</li>
+    <li><b>Balades et jeux</b> : bus 69, manège rejouable, métro A, fontaines si oui. Finitions (expressions, vibrations, zoom). Tests complets, captures Poco X6 et PC, reprise.md. Commit.</li>
+  </ol>
+  <p class="why">Chaque lot tient dans une session. Le ch1 v3 en a pris 4 à 5 : je te préviens si un lot déborde.</p></div>
+</section>
+</div>
