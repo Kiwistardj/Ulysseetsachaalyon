@@ -85,3 +85,12 @@ Le portage est l'occasion de corriger les anciens chapitres :
 - « Ne génère rien » ou « réponds d'abord » : répondre seulement.
 - Poser des questions avant de construire ; il ne lance une étape que si le plan est parfait.
 - Tout doit ressembler au maximum à la réalité. Pas de logos, pas de personnages protégés, pas d'adresse.
+
+## Assemblage (6 novembre 2026)
+- Décision : on garde les 9 chapitres en entier (histoire, scènes, répliques). Pas de Unity, pas de pixel art : style album, HTML.
+- `app/` : le jeu complet en une app. `app/index.html` = carte de Lyon (menu), sauvegarde dans le navigateur, enchaînement des chapitres. `app/chapitres/` = les chapitres copiés tels quels depuis `reference-html/` (ch1 = v2 jouable), avec un petit relais ajouté à la fin (liens internes, détection de l'écran de fin).
+- Régénérer : `python3 -I tools/assemble/build.py`.
+- Lien de test : https://claude.ai/artifact/C7o38JdvU7MYijXW3CFHSg
+- Vérifié : chapitres 2 à 6 du dépôt identiques aux versions publiées ; 7 et 8 non vérifiés un par un.
+- Cahier des charges (refonte des décors au vrai plan, harmonisation, enrichissements) : https://claude.ai/artifact/4Z2ikyhGQEyjND8HVoNEdb
+- Prochaines étapes : app Android installable et .exe ; puis décors chapitre par chapitre (ch1 sur la carte du ch9 d'abord).

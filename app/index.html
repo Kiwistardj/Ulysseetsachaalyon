@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ulysse, Sacha et Bibou</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Grandstander:wght@600;800&display=swap">
+<style>
+/* Carte de Lyon dessinée façon album jeunesse, cartes de papier posées par-dessus : le même univers que les chapitres (jour clair, volontairement un seul thème). */
+:root{
+  --sky:#bfe1ef; --ink:#2b3a55; --ink-soft:#56627c; --paper:#fffaf0; --paper-edge:#ead9bf;
+  --flame:#ff7a3d; --flame-deep:#d9532a; --gold:#ffd25a; --grass:#a9d690; --water:#7cc4e8;
+  --display:'Grandstander','Trebuchet MS','Comic Sans MS',system-ui,sans-serif;
+  --text:'Andika','Trebuchet MS',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%;margin:0}
+body{background:var(--grass);color:var(--ink);font-family:var(--text);overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+#map{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.paper{background:var(--paper);border:3px solid var(--paper-edge);border-radius:24px;box-shadow:0 6px 0 rgba(43,58,85,.16)}
+.title{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:max(10px,env(safe-area-inset-left,0px));padding:6px 16px;text-align:left;
+  max-width:calc(100% - 32px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));box-sizing:border-box}
+.title h1{margin:0;font:800 clamp(17px,2.6vw,24px)/1.05 var(--display)}
+.title p{margin:2px 0 0;font:700 14px var(--text);color:var(--ink-soft)}
+.sheet{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  width:min(560px,calc(100% - 24px - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px)));box-sizing:border-box;
+  padding:14px 18px 18px;display:grid;gap:8px;text-align:center}
+@media (orientation:landscape) and (min-width:620px){.sheet{left:auto;transform:none;right:max(12px,env(safe-area-inset-right,0px));bottom:auto;top:50%;translate:0 -50%;width:min(340px,40%)}}
+.sheet .chap{margin:0;font:800 15px var(--display);color:var(--flame-deep);letter-spacing:.06em;text-transform:uppercase}
+.sheet h2{margin:0;font:800 clamp(24px,5vw,34px)/1.05 var(--display);text-wrap:balance}
+.sheet p{margin:0;font:700 16px/1.35 var(--text);color:var(--ink-soft)}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.big{font:800 24px var(--display);background:var(--flame);color:#fff;border:0;border-radius:999px;padding:12px 40px;cursor:pointer;box-shadow:0 6px 0 var(--flame-deep)}
+.big:active{transform:translateY(3px);box-shadow:0 3px 0 var(--flame-deep)}
+.big.ghost{background:var(--paper);color:var(--flame-deep);border:2px solid var(--paper-edge);box-shadow:0 6px 0 var(--paper-edge)}
+.big:focus-visible,.mapbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+#game{position:fixed;inset:0;width:100%;height:100%;border:0;background:var(--sky)}
+.mapbtn{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:5;
+  height:34px;padding:0 12px;opacity:.85;display:flex;gap:6px;align-items:center;border-radius:999px;border:2px solid var(--paper-edge);
+  background:rgba(255,250,240,.85);font:800 15px var(--display);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 rgba(43,58,85,.15)}
+.mapbtn svg{width:20px;height:20px}
+.modal{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:rgba(43,58,85,.25);
+  padding-block:calc(16px + env(safe-area-inset-top,0px)) calc(16px + env(safe-area-inset-bottom,0px));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
+.modal .paper{padding:18px 22px 22px;text-align:center;display:grid;gap:10px;max-width:460px;width:100%;box-sizing:border-box}
+.modal h2{margin:0;font:800 26px/1.1 var(--display);text-wrap:balance}
+.next-bar{position:fixed;z-index:6;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);flex-wrap:wrap;justify-content:center;
+  display:flex;gap:10px;align-items:center;padding:8px 10px 8px 18px;max-width:calc(100% - 24px);box-sizing:border-box}
+.next-bar span{font:800 16px var(--display);min-width:0}
+.next-bar .big{font-size:18px;padding:8px 20px}
+@media (prefers-reduced-motion:no-preference){.next-bar{animation:pop .35s ease-out}}
+@keyframes pop{from{transform:translateX(-50%) translateY(12px);opacity:0}}
+</style>
+</head>
+<body>
+<canvas id="map" aria-label="Carte de Lyon : touche un lieu pour jouer son chapitre"></canvas>
+
+<div class="title paper" id="title">
+  <h1>Ulysse, Sacha et Bibou à Lyon</h1>
+  <p id="progress">Touche un endroit de la carte</p>
+</div>
+
+<div class="sheet paper" id="sheet" hidden>
+  <p class="chap" id="sChap"></p>
+  <h2 id="sName"></h2>
+  <p id="sText"></p>
+  <div class="row">
+    <button class="big" id="playBtn" type="button">Jouer</button>
+    <button class="big ghost" id="closeBtn" type="button">Fermer</button>
+  </div>
+</div>
+
+<iframe id="game" hidden title="Chapitre" allow="fullscreen; autoplay; gamepad; screen-wake-lock"></iframe>
+<button class="mapbtn" id="mapBtn" type="button" hidden aria-label="Revenir à la carte">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 4v14M15 6v14" stroke="currentColor" stroke-width="2"/></svg>Carte
+</button>
+<div class="next-bar paper" id="nextBar" hidden>
+  <span id="nextText"></span>
+  <button class="big" id="nextBtn" type="button">Continuer</button>
+  <button class="big ghost" id="nextMap" type="button">Carte</button>
+</div>
+
+<div class="modal" id="leave" hidden>
+  <div class="paper">
+    <h2>Revenir à la carte ?</h2>
+    <p style="margin:0;font:700 16px var(--text);color:var(--ink-soft)">Le chapitre en cours s'arrête.</p>
+    <div class="row"><button class="big" id="leaveYes" type="button">Oui</button><button class="big ghost" id="leaveNo" type="button">Non</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+/* Les 9 chapitres, placés sur la carte (coordonnées sur une carte de 1000 x 700) */
+const CH=[
+  {n:1,name:'La Perralière',x:745,y:350,text:"Rex le Chipeur a pris les trottinettes des copains !",file:'chapitres/ch1.html'},
+  {n:2,name:"Le parc de la Tête d'Or",x:505,y:285,text:"Il faut réparer le petit train du parc.",file:'chapitres/ch2.html'},
+  {n:3,name:'Les Gratte-Ciel',x:640,y:390,text:"Rex a pris les sujets du manège.",file:'chapitres/ch3.html'},
+  {n:4,name:'Mini World',x:910,y:420,text:"Le passeport d'explorateur, dans les maquettes.",file:'chapitres/ch4.html'},
+  {n:5,name:'Le Raptor Parc',x:575,y:70,text:"Les 4 œufs du grand nid, avec Isao et Elea.",file:'chapitres/ch5.html'},
+  {n:6,name:'Anse',x:135,y:85,text:"Les 3 tickets dorés de la fête foraine, avec Lola et Zoé.",file:'chapitres/ch6.html'},
+  {n:7,name:'Le musée des Confluences',x:395,y:590,text:"Rex est triste. Et s'il devenait notre ami ?",file:'chapitres/ch7.html'},
+  {n:8,name:'Chez Julien',x:600,y:490,text:"Rex découvre la bibliothèque.",file:'chapitres/ch8.html'},
+  {n:9,name:'La grande fête',x:820,y:280,text:"La grande fête à la Perralière, avec tous les copains !",file:'chapitres/ch9.html'}
+];
+/* Sauvegarde : chapitres finis et dernier chapitre ouvert, dans ce navigateur */
+const KEY='ulysse-sacha-bibou';
+let SAVE={done:[],last:1};
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&Array.isArray(s.done))SAVE=s;}catch(e){}
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(SAVE));}catch(e){}};
+const isDone=n=>SAVE.done.includes(n);
+const nextCh=()=>{for(const c of CH)if(!isDone(c.n))return c.n;return 9;};
+
+/* ---------- la carte ---------- */
+const cv=$('map');let ctx=cv.getContext('2d'),W=0,H=0,dpr=1,sc=1,sx=1,sy=1,ox=0,oy=0,sel=null,t=0;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;
+  const top=Math.min(80,H*.14),bot=24,side=(sel&&W>H&&W>=620)?Math.min(360,W*.42):0;sx=Math.min((W-side-24)/1000,(H-top-bot)/700*1.9);sy=(H-top-bot)/700;sc=Math.min(sx,sy);ox=(W-side-1000*sx)/2;oy=top;}
+addEventListener('resize',resize);
+const P=(x,y)=>[ox+x*sx,oy+y*sy];
+function river(pts,w){ctx.lineCap='round';ctx.lineJoin='round';
+  for(const [lw,col] of [[w+8,'rgba(43,58,85,.18)'],[w,'#7cc4e8'],[w*.35,'rgba(255,255,255,.35)']]){ctx.beginPath();pts.forEach((p,i)=>{const [x,y]=P(p[0],p[1]);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.lineWidth=lw*sc;ctx.strokeStyle=col;ctx.stroke();}}
+function label(txt,x,y,size,col){const [px,py]=P(x,y);ctx.font='800 '+Math.max(11,size*sc)+'px Grandstander, Trebuchet MS, sans-serif';ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,px,py);}
+function draw(){
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle='#a9d690';ctx.fillRect(0,0,W,H);
+  /* taches d'herbe */
+  let s=5;const r=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646;};
+  for(let i=0;i<160;i++){const x=r()*W,y=r()*H,rr=20+r()*60;ctx.beginPath();ctx.ellipse(x,y,rr,rr*.6,0,0,Math.PI*2);ctx.fillStyle=r()<.5?'rgba(140,195,115,.3)':'rgba(195,230,165,.35)';ctx.fill();}
+  /* la ville */
+  const [cx,cy]=P(560,400);ctx.beginPath();ctx.ellipse(cx,cy,330*sx,200*sy,-.15,0,Math.PI*2);ctx.fillStyle='rgba(232,225,212,.75)';ctx.fill();
+  label('Lyon',470,430,22,'rgba(43,58,85,.35)');label('Villeurbanne',720,420,18,'rgba(43,58,85,.35)');
+  /* la Saône (du nord-ouest) et le Rhône (du nord-est), qui se rejoignent au Confluent */
+  river([[60,20],[150,150],[250,250],[330,330],[380,430],[400,520],[405,600]],22);
+  river([[980,180],[800,230],[620,240],[460,330],[430,420],[420,520],[405,600],[420,700]],30);
+  /* le chemin de l'histoire, d'un chapitre au suivant */
+  ctx.setLineDash([2*sc,10*sc]);ctx.lineWidth=4*sc;ctx.strokeStyle='rgba(43,58,85,.45)';ctx.lineCap='round';ctx.beginPath();
+  CH.forEach((c,i)=>{const [x,y]=P(c.x,c.y);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();ctx.setLineDash([]);
+  /* les lieux */
+  const nx=nextCh();
+  for(const c of CH){const [x,y]=P(c.x,c.y),R=Math.max(18,26*sc),done=isDone(c.n),next=c.n===nx,on=sel===c;
+    if(next||on){const pu=1+.12*Math.sin(t*4);ctx.beginPath();ctx.arc(x,y,R*1.45*pu,0,Math.PI*2);ctx.fillStyle='rgba(255,122,61,.25)';ctx.fill();}
+    ctx.beginPath();ctx.arc(x+2,y+4,R,0,Math.PI*2);ctx.fillStyle='rgba(43,58,85,.2)';ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.fillStyle=done?'#ffd25a':(next||on)?'#ff7a3d':'#fffaf0';ctx.fill();
+    ctx.lineWidth=3;ctx.strokeStyle='#2b3a55';ctx.stroke();
+    ctx.font='800 '+Math.round(R*1.05)+'px Grandstander, Trebuchet MS, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle=(next||on)&&!done?'#ffffff':'#2b3a55';ctx.fillText(String(c.n),x,y+1);
+    if(done){ctx.font='800 '+Math.round(R*.8)+'px Grandstander, sans-serif';ctx.fillStyle='#d9532a';ctx.fillText('★',x+R*.85,y-R*.8);}
+    if(!(next||on))continue;
+    const fs=Math.max(13,16*sc);ctx.font='800 '+fs+'px Grandstander, Trebuchet MS, sans-serif';const w=ctx.measureText(c.name).width+14;
+    ctx.fillStyle='rgba(255,250,240,.92)';const ly=y+R+6;ctx.beginPath();ctx.roundRect?ctx.roundRect(x-w/2,ly,w,fs+8,8):ctx.rect(x-w/2,ly,w,fs+8);ctx.fill();
+    ctx.fillStyle='#2b3a55';ctx.fillText(c.name,x,ly+fs/2+4);}
+}
+function loop(now){t=now/1000;if(!$('map').hidden)draw();requestAnimationFrame(loop);}
+
+function pick(e){const r=cv.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=1e9;
+  for(const c of CH){const [px,py]=P(c.x,c.y),d=Math.hypot(px-x,py-y);if(d<bd){bd=d;best=c;}}
+  return bd<44?best:null;}
+cv.addEventListener('pointerdown',e=>{const c=pick(e);if(c)openSheet(c);});
+function openSheet(c){sel=c;$('sChap').textContent='Chapitre '+c.n+(isDone(c.n)?' · terminé':'');$('sName').textContent=c.name;$('sText').textContent=c.text;
+  $('playBtn').textContent=isDone(c.n)?'Rejouer':'Jouer';$('sheet').hidden=false;resize();$('playBtn').focus();}
+function closeSheet(){sel=null;$('sheet').hidden=true;resize();}
+$('closeBtn').addEventListener('click',closeSheet);
+$('playBtn').addEventListener('click',()=>{if(sel)play(sel.n);});
+
+/* ---------- jouer un chapitre ---------- */
+let cur=0;
+function play(n){const c=CH[n-1];cur=n;SAVE.last=n;persist();closeSheet();
+  $('nextBar').hidden=true;$('game').src=c.file;$('game').hidden=false;$('mapBtn').hidden=false;$('map').hidden=true;$('title').hidden=true;}
+function backToMap(){$('game').src='about:blank';$('game').hidden=true;$('mapBtn').hidden=true;$('nextBar').hidden=true;$('leave').hidden=true;
+  $('map').hidden=false;$('title').hidden=false;cur=0;updateProgress();resize();}
+$('mapBtn').addEventListener('click',()=>{$('leave').hidden=false;$('leaveNo').focus();});
+$('leaveYes').addEventListener('click',backToMap);
+$('leaveNo').addEventListener('click',()=>{$('leave').hidden=true;});
+$('nextMap').addEventListener('click',backToMap);
+$('nextBtn').addEventListener('click',()=>{const n=+$('nextBtn').dataset.ch;if(n)play(n);else backToMap();});
+
+addEventListener('message',e=>{const m=e.data;if(!m||!m.ulysse||e.source!==$('game').contentWindow)return;
+  if(m.type==='fin'){if(!isDone(m.ch)){SAVE.done.push(m.ch);persist();}
+    if(m.ch<9){$('nextText').textContent='Suite : '+CH[m.ch].name;$('nextBtn').textContent='Continuer';$('nextBtn').dataset.ch=m.ch+1;}
+    else{$('nextText').textContent="Toute l'histoire est finie, bravo !";$('nextBtn').textContent='La carte';$('nextBtn').dataset.ch='';}
+    $('nextBar').hidden=false;$('mapBtn').hidden=true;}
+  if(m.type==='goto'&&m.ch)play(m.ch);
+});
+function updateProgress(){const k=SAVE.done.length;$('progress').textContent=k===0?'Touche le 1 pour commencer':k>=9?"Toute l'histoire est finie !":k+' chapitre'+(k>1?'s':'')+' sur 9 · le '+nextCh()+' t\'attend';}
+
+resize();updateProgress();requestAnimationFrame(loop);
+document.fonts&&document.fonts.ready.then(()=>draw());
+})();
+</script>
+</body>
+</html>
