@@ -6,7 +6,7 @@ Le jeu est complet en HTML (9 chapitres). Le travail en cours est le portage dan
 
 | Ch | Lieu | Version de référence | Plan |
 |---|---|---|---|
-| 1 | La Perralière | v2 jouable ; v3 en chantier (résidence seule) | plan-ch1-v3.md |
+| 1 | La Perralière | v3 jouable (6 novembre 2026), v2 en référence | dans reprise.md |
 | 2 | Parc de la Tête d'Or | v5 | dans la bible |
 | 3 | Les Gratte-Ciel | v5 | dans la bible |
 | 4 | Mini World | v3, passes 1 à 3 | plan-mini-world-v3.md |
@@ -29,7 +29,6 @@ Le jeu est complet en HTML (9 chapitres). Le travail en cours est le portage dan
 
 ## Ce qui reste côté HTML (hors Unity)
 - Lien du ch8 vers le ch9 : pas encore publié (l'écran de fin du ch8 dit « À suivre » sans lien).
-- Ch1 v3 : résidence dessinée (aperçu), passes 2 (histoire) et 3 (nord, galerie, parc, métro) à faire. Plan validé dans plan-ch1-v3.md.
 - Ch6 : écran de fin à refaire ; vérifier le lien vers le ch7.
 - Chapitre « bords de Saône » (chez Judith à Fontaines-sur-Saône) envisagé entre Mini World et le Raptor Parc. Pas décidé.
 - Mini-jeux à part : Paris, Champagne-en-Valromey.
@@ -94,3 +93,15 @@ Le portage est l'occasion de corriger les anciens chapitres :
 - Vérifié : chapitres 2 à 6 du dépôt identiques aux versions publiées ; 7 et 8 non vérifiés un par un.
 - Cahier des charges (refonte des décors au vrai plan, harmonisation, enrichissements) : https://claude.ai/artifact/4Z2ikyhGQEyjND8HVoNEdb
 - Prochaines étapes : app Android installable et .exe ; puis décors chapitre par chapitre (ch1 sur la carte du ch9 d'abord).
+
+## Ch1 v3 (6 novembre 2026)
+- Fichier : `reference-html/ch1-perraliere-v3.html`. Lien de test : https://claude.ai/artifact/LeuAv4ZfocjY77vYV4DZgw
+- Base : moteur et résidence du ch9 (sans la fête, sans les intérieurs des commerces, sans le mp3). Histoire, répliques et ordre : ceux de la v2.
+- Nord ajouté (Mich) : carrefour du Casino (passage sur la route, puis sur la rue), parc de l'Espace des Droits de l'Homme au nord-ouest, en diagonale du Casino. Entrée au sud : zone des petits avec sable à l'ouest, bateau (tronc, pont de corde, grand toboggan) à l'est, 3 balançoires nord-sud au sud-est du bateau, esplanade, kiosque, zone du fond à gauche sans sable (toboggan, 2 balançoires). Passage au nord sur la rue, puis le cours (2 voies, parallèle à la route du Casino) avec un passage : bouche Flachet direction Perrache au sud du cours, direction Vaulx-en-Velin La Soie au nord, sur le trottoir est. En face du Casino : la crèche et le relais assistantes maternelles.
+- Feux : rouge 7 s, vert vite quand on attend au bord ; Ulysse s'arrête au rouge ; les voitures s'arrêtent au vert.
+- Quêtes : Iris (Prune devant sa porte, Iris en haut de l'allée ouest de l'école, ronces du portail de la cour, trottinette près du toboggan, Mahé dans la cour) ; Victorine (haie de la placette devant chez Nanou à la place du local à vélos : Bibou flaire, Didou se faufile) ; Léonie (à l'angle du Casino, elle vient au parc ; hérisson dans la zone du fond, trottinette derrière la haie). Puis Rex, trottinettes au hall, poursuite (couloir, galerie, passage, trottoir est, tremplins), métro A jusqu'à Masséna.
+- Répliques modifiées (validées) : « local à vélos » devient « haie » (Nanou, Victorine, Didou, aide) ; Léonie : « vers l'aire de jeux du parc, de l'autre côté de la route ». Ajouts validés : Prune « Je viens avec vous ! », « Vas-y Ulysse ! » ; Iris « Je viens avec toi ! », « Bravo Sacha ! ».
+- Retouches à faire valider par Mich : Didou « trois trottinettes à retrouver autour de la résidence » (au lieu de « dans la résidence ») ; « la trottinette d'Iris » (au lieu de « de Iris ») ; nouvelle réplique de Didou « Viens avec nous, Léonie ! ».
+- Hypothèses : fontaine, araucaria, ping-pong placés par Claude ; tremplins et cheminement de Rex inventés.
+- Testé : partie complète automatique jusqu'à l'écran de fin (clavier), toucher pour marcher sur téléphone, captures PC et téléphone, aucune erreur.
+- À faire : partie complète à la main sur téléphone ; toit de la galerie qui cache le bas du passage du Casino ; toit gris uni de la crèche ; brancher la v3 dans `app/` (build.py copie encore la v2).
